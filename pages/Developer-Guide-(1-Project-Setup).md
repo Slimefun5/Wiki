@@ -1,4 +1,4 @@
-This is the **first Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide).
+﻿This is the **first Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 ## 1. The necessary tools
 In order to start developing, you will need to make sure that the following software is installed correctly on your system.
@@ -179,7 +179,7 @@ To build against RC-15 for example, simply replace your version like this:
 `<version>master-SNAPSHOT</version>` -> `<version>RC-15</version>`
 
 You can find a full list of versions to build against in the "Releases" section on Slimefun's github repository:<br>
-https://github.com/Slimefun/Slimefun4/releases
+https://github.com/Slimefun5/Slimefun5/releases
 
 You can also find a "Maven dependency reference" for every released version. Simply copy & paste/replace the version tag into your `pom.xml` to update your dependency.
 
@@ -196,4 +196,4 @@ Full example:<br>
 
 **Note that your addon should still work on any development version released after the RC version you are building against. API changes are usually only done ater a new RC build has been released, so you can safely build against the RC version while still using the development versions of Slimefun for your server.**
 
-[**> Continue with Part 2**](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide-(2-Creating-the-Addon))
+[**> Continue with Part 2**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(2-Creating-the-Addon))

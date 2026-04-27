@@ -1,4 +1,4 @@
-# Contributing to Slimefun
+﻿# Contributing to Slimefun
 This document outlines various ways how you can help contribute to the Slimefun wiki and make this a bigger and better project.<br>
 All contributions must be inline with our [Code of Conduct](https://github.com/Slimefun/Slimefun-Wiki/blob/master/.github/CODE_OF_CONDUCT.md) and [License](https://github.com/Slimefun/Slimefun-Wiki/blob/master/LICENSE).
 Please also follow the templates for Issues and Pull Requests we provide.
@@ -11,7 +11,7 @@ It helps us improve the wiki as a whole.
 You wanna help by contributing to the Wiki? Awesome!<br>
 We have written a detailed guide on how to submit changes to the wiki on the wiki :kappa:<br>
 You can find our guide for wiki submissions right here:<br>
-https://github.com/Slimefun/Slimefun4/wiki/Expanding-the-Wiki
+https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki
 
 
 ### Discord

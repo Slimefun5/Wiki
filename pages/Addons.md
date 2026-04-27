@@ -1,4 +1,4 @@
-Want to spice up your Slimefun4-Server? Then you have come to the right place!<br>
+﻿Want to spice up your Slimefun4-Server? Then you have come to the right place!<br>
 Here is a list of all Slimefun Addons (that we currently know of). You can install these addons to add even more content to your Slimefun-based Minecraft Servers!
 
 ### Table of contents
@@ -114,7 +114,7 @@ Name | Author(s) | Description | More info | Source Code | Download
 ------------- | --------- | ----------------------------------------------- | --------- | --------- | --------- |
 SensibleToolbox (WIP) | desht, TheBusyBiscuit | <details><summary>expand</summary>SensibleToolbox is a plugin very similar to Slimefun, it was originally developed by desht in 2014. TheBusyBiscuit took over it in late 2014 and continued to update it. We are currently updating it once more, it pairs and integrates into Slimefun pretty well!</details> | N/A | [GitHub](https://github.com/Slimefun/SensibleToolbox) | [Builds](https://thebusybiscuit.github.io/builds/Slimefun/SensibleToolbox/master/)
 Brewery | Sn0wStorm and others | <details><summary>expand</summary>Brewery is a Bukkit / Spigot plugin for an alternate brewing process, including alcoholic Potions. It allows you to customize recipes, add your own beverages and more. Brewery supports the usage of items from Slimefun and any of its addons (including ExoticGarden) in their recipes.</details> | [Wiki](https://github.com/DieReicheErethons/Brewery/wiki) | [GitHub](https://github.com/DieReicheErethons/Brewery) | [Releases](https://github.com/DieReicheErethons/Brewery/releases)
-PlaceholderAPI | extended_clip, Glare | <details><summary>expand</summary>Slimefun adds placeholders that can be used with PlaceholderAPI, you can find more Info on the Wiki link.</details> | [Wiki](https://github.com/Slimefun/Slimefun4/wiki/PlaceholderAPI) | [GitHub](https://github.com/PlaceholderAPI/PlaceholderAPI) | [SpigotMC](https://www.spigotmc.org/resources/placeholderapi.6245/)
+PlaceholderAPI | extended_clip, Glare | <details><summary>expand</summary>Slimefun adds placeholders that can be used with PlaceholderAPI, you can find more Info on the Wiki link.</details> | [Wiki](https://github.com/Slimefun5/Slimefun5/wiki/PlaceholderAPI) | [GitHub](https://github.com/PlaceholderAPI/PlaceholderAPI) | [SpigotMC](https://www.spigotmc.org/resources/placeholderapi.6245/)
 WhatIsThis | steve4744 | <details><summary>expand</summary>WhatIsThis is a plugin inspired by the Minecraft mod WAILA, it adds a little info display to give you information about the block you are looking at. Later versions also support this feature for Slimefun blocks.</details> | N/A | [GitHub](https://github.com/steve4744/WhatIsThis) | [SpigotMC](https://www.spigotmc.org/resources/whatisthis-identify-the-block-you-are-looking-at-multi-language-support.65050/)
 GSFH | LZ5509 | <details><summary>expand</summary>GSFH is a Slimefun4 and Geyser-Spigot addon with quite simple code to register heads from Slimefun4 to Geyser-Spigot</details> | [Readme](https://github.com/Hahaa13/Geyser-Slimefun-Heads/blob/master/README.md) | [Github](https://github.com/Hahaa13/Geyser-Slimefun-Heads) | [Releases](https://github.com/Hahaa13/Geyser-Slimefun-Heads/releases)
 
@@ -123,13 +123,13 @@ In 2020 we started hosting our very first "Slimefun Addon Jam" on our discord se
 We hope to make this a re-occurring thing. The basic premise is the following: At the start of the Jam we will announce a theme and every developer has a limited time frame to create a Slimefun Addon - from scratch - based on that theme. When the Jam has ended we will review their submissions, rate them and hand out prizes to the addons that performed the best.<br>
 Here is a list of all Addon Jams that have been hosted so far:
 
-1. [Addon Jam 2020](https://github.com/Slimefun/Slimefun4/wiki/Addon-Jam-2020)
-2. [Addon Jam 2021](https://github.com/Slimefun/Slimefun4/wiki/Addon-Jam-2021)
+1. [Addon Jam 2020](https://github.com/Slimefun5/Slimefun5/wiki/Addon-Jam-2020)
+2. [Addon Jam 2021](https://github.com/Slimefun5/Slimefun5/wiki/Addon-Jam-2021)
 
 ## :black_nib: Create your own addons!
-Do you want to create your own Slimefun Addon? Check out this [Developer Guide](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide).
+Do you want to create your own Slimefun Addon? Check out this [Developer Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 If you have made an Addon for Slimefun and want it to be listed on here, simply make a new pull request on our wiki repository. You can find a tutorial here:
-https://github.com/Slimefun/Slimefun4/wiki/Expanding-the-Wiki.  
+https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki.  
 If a pull request is not possible, then just create an Issue and select the "Addition" template:  
 https://github.com/Slimefun/Wiki/issues

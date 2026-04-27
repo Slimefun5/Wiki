@@ -1,7 +1,7 @@
-An Android that specializes in automating the farming process..
+﻿An Android that specializes in automating the farming process..
 
 ## Obtaining
-Farmer Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun/Slimefun4/wiki/Enhanced-Crafting-Table).
+Farmer Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).
 
 ## Usage
 Farmer Androids can be programmed to harvest or/and plant crops.
@@ -14,7 +14,7 @@ Supported crops are listed below.
 - Netherwart
 - Sweet Berry Bush
 
-Androids need fuel in order to work, you have to fill them with the [Required Fuel](https://github.com/Slimefun/Slimefun4/wiki/Normal-Androids#power-source) before booting!
+Androids need fuel in order to work, you have to fill them with the [Required Fuel](https://github.com/Slimefun5/Slimefun5/wiki/Normal-Androids#power-source) before booting!
 
 ## Tiers
 There are two tiers on the Farmer Android, each with different modifiers listed below.

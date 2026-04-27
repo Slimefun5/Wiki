@@ -1,6 +1,6 @@
-The Animal Growth Accelerator is an [Electric Machine](https://github.com/Slimefun/Slimefun4/wiki/Electric-Machines) which can be used to speed up the growth of baby animals.
+﻿The Animal Growth Accelerator is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to speed up the growth of baby animals.
 
-It runs on [Organic Food](https://github.com/Slimefun/Slimefun4/wiki/Miscellaneous-Items) which is made in the [Food Fabricator](https://github.com/Slimefun/Slimefun4/wiki/Food-Fabricator).  
+It runs on [Organic Food](https://github.com/Slimefun5/Slimefun5/wiki/Miscellaneous-Items) which is made in the [Food Fabricator](https://github.com/Slimefun5/Slimefun5/wiki/Food-Fabricator).  
 
 ## Animal Growth Accelerator Tiers
 

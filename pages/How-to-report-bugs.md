@@ -1,5 +1,5 @@
-Reporting bugs is crucial to this open-source project.<br>
-So please consider reporting bugs on our [Issue Tracker](https://github.com/Slimefun/Slimefun4/issues)
+﻿Reporting bugs is crucial to this open-source project.<br>
+So please consider reporting bugs on our [Issue Tracker](https://github.com/Slimefun5/Slimefun5/issues)
 
 But before reporting a bug, you should read through the following Troubleshooting Guide.<br>
 Many issues you come across can be solved on your side and save us a lot of time and effort.
@@ -9,7 +9,7 @@ Many issues you come across can be solved on your side and save us a lot of time
 This guide aims to help you at identifying issues and informing you on what **you** can do to prevent these issues.<br>
 If everything fails, we will also help you how to make detailed and efficient bug reports, so that we can give you the best help possible.
 
-_Also see: [Common Issues](https://github.com/Slimefun/Slimefun4/wiki/Common-Issues)_
+_Also see: [Common Issues](https://github.com/Slimefun5/Slimefun5/wiki/Common-Issues)_
 
 **But first off:**<br>
 Always remember that Slimefun4 is open-source and community-developed.<br>
@@ -52,7 +52,7 @@ This is not a joke. Try turning it off and on again, often times it can work and
 
 ### 4. See if it is a known issue
 
-Take a look at our [Issue Tracker](https://github.com/Slimefun/Slimefun4/issues).<br>
+Take a look at our [Issue Tracker](https://github.com/Slimefun5/Slimefun5/issues).<br>
 Maybe your issue has already been reported, please don't post it again in that case.
 But you are encouraged to comment on that issue and give some information on how you were able to reproduce the problem.
 
@@ -95,7 +95,7 @@ The narrower and detailed you can get, the better.
 
 ### 8. Posting the Issue via GitHub
 
-If updating or restarting did not help, then please report your issue via our [Issue Tracker](https://github.com/Slimefun/Slimefun4/issues/).
+If updating or restarting did not help, then please report your issue via our [Issue Tracker](https://github.com/Slimefun5/Slimefun5/issues/).
 
 * We will need all the version information you gathered in Step 1.
 * Please give a detailed description of the issue

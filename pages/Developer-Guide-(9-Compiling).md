@@ -1,4 +1,4 @@
-This is a part of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide).
+﻿This is a part of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 This guide assumes you are using Maven for your project. 
 
@@ -57,4 +57,4 @@ As always, if you have any questions, you can ask them in `#programming-help` in
 
 ## Publishing
 
-If you wish, you can now [publish](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide-(Publishing)) your addon.
+If you wish, you can now [publish](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(Publishing)) your addon.

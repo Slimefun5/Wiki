@@ -1,8 +1,8 @@
-The Elemental Staves are five kinds of [Magical Gadgets](https://github.com/Slimefun/Slimefun4/wiki/Magical-Gadgets).
+﻿The Elemental Staves are five kinds of [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets).
 
 ## Obtaining
 
-Elemental staves can be crafted in a [Magic Workbench](https://github.com/Slimefun/Slimefun4/wiki/Magic-Workbench).
+Elemental staves can be crafted in a [Magic Workbench](https://github.com/Slimefun5/Slimefun5/wiki/Magic-Workbench).
 
 ## Usage
 

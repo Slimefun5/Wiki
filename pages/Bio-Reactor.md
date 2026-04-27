@@ -1,10 +1,10 @@
-The Bio Reactor is a type of [Energy Generator](https://github.com/Slimefun/Slimefun4/wiki/Electric-Machines#energy-generation). 
+﻿The Bio Reactor is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation). 
 
 ## Obtaining
-A Bio Reactor can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun/Slimefun4/wiki/Enhanced-Crafting-Table).
+A Bio Reactor can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).
 
 ## Usage
-A Bio Reactor must be placed within 7 blocks of an [Energy Regulator](https://github.com/Slimefun/Slimefun4/wiki/Energy-Regulator), an [Energy Connector](https://github.com/Slimefun/Slimefun4/wiki/Energy-Connector), or an [Energy Capacitor](https://github.com/Slimefun/Slimefun4/wiki/Energy-Capacitors) in a cross format (not diagonally), and provided with the appropriate fuel.  
+A Bio Reactor must be placed within 7 blocks of an [Energy Regulator](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Regulator), an [Energy Connector](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Connector), or an [Energy Capacitor](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Capacitors) in a cross format (not diagonally), and provided with the appropriate fuel.  
 
 ## Tiers
 The Bio Reactor only has one tier.

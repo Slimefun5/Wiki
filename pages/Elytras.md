@@ -1,11 +1,11 @@
-This page contains information regarding following items:
+﻿This page contains information regarding following items:
 - Elytra Scale
 - Elytra
 - Infused Elytra
 - Soulbound Elytra
 
 ## Obtaining & Usage
-These items can be found in the [Magical Gadgets](https://github.com/Slimefun/Slimefun4/wiki/Magical-Gadgets) category. Their exact recipes can be found in-game.  
+These items can be found in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category. Their exact recipes can be found in-game.  
 The Elytra Scale is a crafting component, while the other three are usable elytras.
 
 | Item | Specialities |

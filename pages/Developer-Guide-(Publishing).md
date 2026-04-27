@@ -1,4 +1,4 @@
-This is the **last part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide).
+﻿This is the **last part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 ## Prerequisites
 To start publishing and distributing your addon, you don't really need much.<br>
@@ -44,9 +44,9 @@ Alternatively you can also use our [main service for releasing automatic develop
 ## Spreading the word
 Once your project has been uploaded, tell others about it!
 
-We recommend all addon developers to feature their addon on our public [Addons page](https://github.com/Slimefun/Slimefun4/wiki/Addons).<br>
+We recommend all addon developers to feature their addon on our public [Addons page](https://github.com/Slimefun5/Slimefun5/wiki/Addons).<br>
 Simply make a new pull request on our wiki repository, you can find a tutorial here:<br>
-https://github.com/Slimefun/Slimefun4/wiki/Expanding-the-Wiki
+https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki
 
 You can also share your project by posting about it on our [Discord server](https://discord.gg/slimefun).<br>
 Upload videos or screenshots to get people excited! But please don't tag anyone.

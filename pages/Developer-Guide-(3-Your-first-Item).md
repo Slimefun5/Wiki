@@ -1,5 +1,5 @@
-This is the **third Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide).<br>
-If you haven't checked out the [second Part of this Guide](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide-(2-Creating-the-Addon)), then please do that.
+﻿This is the **third Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+If you haven't checked out the [second Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(2-Creating-the-Addon)), then please do that.
 
 ## 1. A little recap
 In the last part we went over the main class of your plugin.<br>
@@ -223,4 +223,4 @@ SeasonalItemGroup group = new SeasonalItemGroup(categoryId, categoryItem, tier, 
 LockedItemGroup category = new LockedItemGroup(categoryId, categoryItem, tier, parentItemGroupA.getKey(), parentItemGroupB.getKey());
 ```
 
-[**> Continue with Part 4a**](https://github.com/Slimefun/Slimefun4/wiki/Developer-Guide-(4a-Right-Clicks))
+[**> Continue with Part 4a**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(4a-Right-Clicks))

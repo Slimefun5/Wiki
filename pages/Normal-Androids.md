@@ -1,11 +1,11 @@
-A Normal Android is used as a base to create a specialized Android.
+﻿A Normal Android is used as a base to create a specialized Android.
 
 ## Obtaining
-Normal Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun/Slimefun4/wiki/Enhanced-Crafting-Table).
+Normal Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).
 
 ## Usage
 Normal Androids can only be programmed to move.
-Androids need fuel in order to work, you have to fill them with the [Required Fuel](https://github.com/Slimefun/Slimefun4/wiki/Normal-Androids#power-source) before booting!
+Androids need fuel in order to work, you have to fill them with the [Required Fuel](https://github.com/Slimefun5/Slimefun5/wiki/Normal-Androids#power-source) before booting!
 
 ## Tiers
 There are three tiers on the Normal Android, each with different modifiers listed below.

@@ -1,4 +1,4 @@
-The Freezer is an [Electric Machine](https://github.com/Slimefun/Slimefun4/wiki/Electric-Machines) which can be used to freeze a lot of items.  
+﻿The Freezer is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to freeze a lot of items.  
 This can be a very useful machine, for example, to create blue ice in the long-run.
 
 ## Freezer Tiers
