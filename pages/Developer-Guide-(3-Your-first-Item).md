@@ -1,4 +1,4 @@
-﻿This is the **third Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **third Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [second Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(2-Creating-the-Addon)), then please do that.
 
 ## 1. A little recap
@@ -61,7 +61,7 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 
 ### Our item
 Now onto the `item` of our new ItemGroup.<br>
-We will use the class CustomItemStack for this. (import `io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack` for this)<br>
+We will use the class CustomItemStack for this. (import `io.github.thebusybiscuit.slimefun5.libraries.dough.items.CustomItemStack` for this)<br>
 You can create a new named Item like this:
 ```java
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
@@ -70,7 +70,7 @@ You can even use Color Codes in your item's name.<br>
 For a complete list of Materials, consult [Spigot's Javadocs](https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html).
 
 ### Full assembly
-Finally, create a new ItemGroup (`io.github.thebusybiscuit.slimefun4.api.items.ItemGroup`) like this (inside your `onEnable()` method):
+Finally, create a new ItemGroup (`io.github.thebusybiscuit.slimefun5.api.items.ItemGroup`) like this (inside your `onEnable()` method):
 ```java
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 ```
@@ -98,7 +98,7 @@ Now that we have an ItemGroup set up, we can start to create our actual item.<br
 In this part we will only create a very simple item that has no actual logic behind it, we will add mechanics in Part 4.<br>
 But let's focus on items itself for now.
 
-Creating items in Slimefun isn't rocket science but you should still pay attention. We will need to create a new `SlimefunItem` (`io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem`).<br>
+Creating items in Slimefun isn't rocket science but you should still pay attention. We will need to create a new `SlimefunItem` (`io.github.thebusybiscuit.slimefun5.api.items.SlimefunItem`).<br>
 
 The constructor takes in 4 parameters:
 * `itemGroup` is the ItemGroup this Item is in, for this we will simply use the ItemGroup we created earlier.
@@ -224,3 +224,4 @@ LockedItemGroup category = new LockedItemGroup(categoryId, categoryItem, tier, p
 ```
 
 [**> Continue with Part 4a**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(4a-Right-Clicks))
+

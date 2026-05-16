@@ -98,7 +98,7 @@ It should look like this:
 name: SlimefunAddon
 version: ${project.version}
 author: CHANGEME
-description: A generic Slimefun4-Addon
+description: A generic Slimefun5-Addon
 website: https://github.com/Slimefun/Addon-Template
 
 main: me.CHANGEME.slimefunaddon.SlimefunAddon
@@ -165,7 +165,7 @@ Search for the section in your `pom.xml` file which defines the Slimefun version
 ```xml
 <dependency>
   <groupId>com.github.Slimefun</groupId>
-  <artifactId>Slimefun4</artifactId>
+  <artifactId>Slimefun5</artifactId>
   <version>master-SNAPSHOT</version>
   <scope>provided</scope>
   <!-- ... -->
@@ -187,7 +187,7 @@ Full example:<br>
 ```xml
 <dependency>
   <groupId>com.github.TheBusyBiscuit</groupId>
-  <artifactId>Slimefun4</artifactId>
+  <artifactId>Slimefun5</artifactId>
   <version>RC-15</version>
   <scope>provided</scope>
   <!-- ... -->

@@ -5,7 +5,7 @@ The Pressure Chamber is a multiblock structure, it consists of a dispenser, 2 sm
 
 A complete setup should look like this:
 
-![Pressure Chamber Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun4-Wiki/master/images/multiblock-pressure-chamber.png)
+![Pressure Chamber Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-pressure-chamber.png)
 
 You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest) next to the dispenser to collect your items. If there is no [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest), then it will be put in the dispenser.
 

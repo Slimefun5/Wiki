@@ -24,7 +24,7 @@
 
 ## How can I download / install Slimefun or its Addons?
 To download and install Slimefun you can refer to [this guide here](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun).  
-You can find Addons for Slimefun4 on our ["Addons" - page](https://github.com/Slimefun5/Slimefun5/wiki/Addons).<br>
+You can find Addons for Slimefun5 on our ["Addons" - page](https://github.com/Slimefun5/Slimefun5/wiki/Addons).<br>
 You can install these just like you did with Slimefun, putting them in the `/plugins/` folder of your Server.
 
 ## Can I install Slimefun on a Singleplayer world?

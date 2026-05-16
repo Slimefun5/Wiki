@@ -1,4 +1,4 @@
-﻿![Different stages of an energy capacitor](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun4-Wiki/master/images/item-capacitor.gif)
+﻿![Different stages of an energy capacitor](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/item-capacitor.gif)
 
 Energy Capacitors are [Electric Components](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can store and transfer energy in an energy network.  
 There are five "tiers" of capacitors, each with an increasing capacity.

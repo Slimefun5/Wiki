@@ -4,7 +4,7 @@ If you are looking for a guide on how to use Slimefun, start [here](https://gith
 
 ## What does Slimefun do?
 Slimefun adds Items to Minecraft without the need to install mods.
-Slimefun4 alone contains far over 400 new Items and Blocks.
+Slimefun5 alone contains far over 400 new Items and Blocks.
 Some of these include:
 * Backpacks
 * Nuclear Reactors
@@ -25,9 +25,9 @@ It enhances any Survival Experience, no matter the gamemode.
 ## Will there be constant updates?
 Yes and no.
 
-You will find very frequent (automatically uploaded) updates on [TheBusyBiscuit's Website](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/).
+You will find very frequent (automatically uploaded) updates on [TheBusyBiscuit's Website](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/).
 These are most often just bug fixes and minor tweaks.
-Keep in mind that Slimefun4 is maintained by the community, not a single person or group of people.
+Keep in mind that Slimefun5 is maintained by the community, not a single person or group of people.
 So these updates can be very irregular.
 
 But if you are looking for even more Slimefun-content, then you should check out some of [Slimefun's Addons](https://github.com/Slimefun5/Slimefun5/wiki/Addons).
@@ -44,15 +44,15 @@ Many Servers jumped onto the hype, adapting this plugin for their Survival, Town
 Slimefun3 was around for quite a while.
 
 In **mid-2015**, mrCookieSlime opened his own Minecraft Server: "Cookie's Realm".
-At the end of the year, the fourth iteration of Slimefun (Slimefun4) was available for Beta-Testing, exclusive for Cookie's Realm at first.
-Slimefun4 added tons of new elements: item transportation, energy networks, nuclear reactors, GPS and satellite systems, little programmable androids that can mine or farm.
+At the end of the year, the fourth iteration of Slimefun (Slimefun5) was available for Beta-Testing, exclusive for Cookie's Realm at first.
+Slimefun5 added tons of new elements: item transportation, energy networks, nuclear reactors, GPS and satellite systems, little programmable androids that can mine or farm.
 There is just too much to list.
 This version of Slimefun was released to the public in **April of 2016**.
-The source code to Slimefun4 was also made publicly available on GitHub, it is now open-source!
+The source code to Slimefun5 was also made publicly available on GitHub, it is now open-source!
 
 In late **2016** mrCookieSlime announced his retirement.
 He now goes by the name of TheBusyBiscuit and pursued his interests in video game development.
-Slimefun4 is still available for download and well-maintained by the public community that has been built around the plugin over the years.
+Slimefun5 is still available for download and well-maintained by the public community that has been built around the plugin over the years.
 TheBusyBiscuit still reviews code proposed by community contributors and does a little maintenance on the plugin here and there.
 The project remained somewhat active and was maintained this way for years. [Many people](https://github.com/Slimefun5/Slimefun5/graphs/contributors) have contributed to the project during this time. 
 

@@ -5,7 +5,7 @@ The Compressor is a multiblock structure, it consists of a dispenser, a nether b
 
 A complete setup should look like this:
 
-![Compressor Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun4-Wiki/master/images/multiblock-compressor.png)
+![Compressor Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-compressor.png)
 
 You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest) next to the dispenser to collect your compressed items. If there is no [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest), then it will be put in the dispenser.
 

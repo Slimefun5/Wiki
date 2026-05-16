@@ -1,5 +1,5 @@
 This page contains information about Slimefun's commands.
-While there are not a lot of commands in Slimefun4, it is still important to know about these.
+While there are not a lot of commands in Slimefun5, it is still important to know about these.
 You can use the prefix /slimefun or /sf. Both will work.
 But for simplicity, we will list commands as /sf.
 
@@ -10,7 +10,7 @@ But for simplicity, we will list commands as /sf.
 ## Commands for Plugin-Users
 | Command | Description | Required Permission |
 | ----------- | ------------------- | --------- |
-| /sf help | Gives you a list of all commands in Slimefun4 | None |
+| /sf help | Gives you a list of all commands in Slimefun5 | None |
 | /sf guide | Gives you a copy of the Slimefun Guide | slimefun.command.guide |
 | /sf open_guide | Opens the Slimefun Guide directly | slimefun.command.open_guide |
 | /sf versions | Shows the currently installed Version of Slimefun and it's addons | slimefun.command.versions |

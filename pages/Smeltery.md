@@ -6,7 +6,7 @@ It is not only used to smelt dusts into Ingots but also for making Alloys.
 ## How to build a Smeltery
 The recipe is already found in your Slimefun Guide, but here is the final version:
 
-![Smeltery Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun4-Wiki/master/images/multiblock-smeltery.png)
+![Smeltery Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-smeltery.png)
 
 You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest) next to the dispenser to catch your crafted Items.
 Without an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki/Output-Chest), the items will just land back in the dispenser.

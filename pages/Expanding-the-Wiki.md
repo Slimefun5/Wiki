@@ -110,7 +110,7 @@ Then click on the next "New pull request" button and fill out the description fo
 Please use and follow our template.
 
 After that you click "Create pull request" and you are done!<br>
-Thanks for contributing to the Slimefun4 wiki!
+Thanks for contributing to the Slimefun5 wiki!
 
 ## Step 5: Making changes to your Pull Request
 If you have already submitted a pull request but want to make a change to your files, you can do that.

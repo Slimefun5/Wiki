@@ -1,4 +1,4 @@
-﻿This is the **second Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **second Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [first Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(1-Project-Setup)), then please do that.
 
 ## 1. Your main class
@@ -45,7 +45,7 @@ public class SlimefunAddon extends JavaPlugin implements SlimefunAddon {
 ```
 
 The `package` token at the top simply describes the package this file is in.<br>
-The `import` token tells Java to import classes from other projects, you will probably see a lot of those importing from `io.github.thebusybiscuit.slimefun4...` or `org.bukkit...`.<br>
+The `import` token tells Java to import classes from other projects, you will probably see a lot of those importing from `io.github.thebusybiscuit.slimefun5...` or `org.bukkit...`.<br>
 This is because you are referencing those classes, as you will work with them.
 
 After that your own class will start it should have the same name as its file (without the file ending) and is followed by `extends JavaPlugin`.<br>
@@ -80,7 +80,8 @@ cfg.getString("path.to.your.string");
 
 You can use your Config to set up values that Server Owners should be able to configure.
 
-**Important hint: If your IDE nags about not being able to find `Config`, then make sure to import the Config class from the `io.github.thebusybiscuit.slimefun4.libraries.dough.config` package.**<br>
+**Important hint: If your IDE nags about not being able to find `Config`, then make sure to import the Config class from the `io.github.thebusybiscuit.slimefun5.libraries.dough.config` package.**<br>
 You will need to import each external class you will use.
 
 [**> Continue with Part 3**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(3-Your-first-Item))
+

@@ -1,4 +1,4 @@
-﻿Welcome to Slimefun4's new and improved Wiki!
+﻿Welcome to Slimefun5's new and improved Wiki!
 The old Wiki was abandoned for obvious reasons, this one is centered around you, the community.
 Contributions to the Wiki are therefore much appreciated!
 

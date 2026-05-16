@@ -13,7 +13,7 @@ This provides an easy way to add Fuel/Coolant or take some of the byproduct.
 | Nether Star Reactor  | 1024 J/Sf Tick |  3.0x  | Nether Stars                        | Nether Ice Coolant Cells | Nearby Entities get Withered |
 
 ## Example Setup
-![Reactor Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun4-Wiki/master/images/multiblock-reactor.png)  
+![Reactor Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-reactor.png)  
 In the center you see the Reactor, surrounded by water. Three blocks above you can see the Reactor Access Port.
 
 **Note:** The quartz and glass blocks are entirely there for decoration (and to keep the water from spilling), they're not necessary for the setup.

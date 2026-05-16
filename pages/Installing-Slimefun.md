@@ -3,16 +3,16 @@ To install Slimefun, you will need a Spigot or Paper Server (most preferabbly th
 Forks of either of these should work too, though we only test against Paper and Spigot.
 
 ### Slimefun 4 Downloads
-You can choose between two branches of slimefun, the ["stable" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/stable/) or the [main "development" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/).
+You can choose between two branches of slimefun, the ["stable" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/stable/) or the [main "development" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/).
 Stable builds have been around for quite a while and were thoroughly tested, development builds are the latest builds of Slimefun you can get.
 If your Server is very reliant on a working build of Slimefun, choose a stable build.
-But if you want to help contribute to Slimefun4 by reporting issues and helping us identify those more quickly, please consider using a development build (Bug Reports from "stable" builds may be ignored since they are outdated).
+But if you want to help contribute to Slimefun5 by reporting issues and helping us identify those more quickly, please consider using a development build (Bug Reports from "stable" builds may be ignored since they are outdated).
 You can click on any Slimefun build to see all compatible Minecraft Versions for that build.
 
 **We generally recommend development builds over stable builds, as they are the most recent versions of Slimefun. The stable branch is only updated once a month or even less frequent, so fixes may take quite a while to make it into these builds.**
 
 ## How to install
-Drag and drop the Slimefun4 jar file into your server's */plugins/* directory.
+Drag and drop the Slimefun5 jar file into your server's */plugins/* directory.
 Then, restart your server.<br>
 ***Do not use /reload, as it can cause intense memory leaks.***
 
@@ -46,8 +46,8 @@ just stop and restart the server, since this fixes most issues.
 Here is a full article on how to [Optimize your Slimefun Server](https://github.com/Slimefun5/Slimefun5/wiki/Server-Optimizations)
 
 # Additional Addons
-If you wish to install additional addons, refer to [this page](https://github.com/Slimefun5/Slimefun5/wiki/Addons) to see all the addons that are compatible with your version of Slimefun4.
+If you wish to install additional addons, refer to [this page](https://github.com/Slimefun5/Slimefun5/wiki/Addons) to see all the addons that are compatible with your version of Slimefun5.
 
-These additional addons require Slimefun4 and will create their own independent folders within your /plugins folder.
+These additional addons require Slimefun5 and will create their own independent folders within your /plugins folder.
 Configuration should be very straight forward for these plugins as well.
 Remember that you can also disable any Items from Addons in Slimefun's Items.yml file.

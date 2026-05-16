@@ -12,7 +12,7 @@ If everything fails, we will also help you how to make detailed and efficient bu
 _Also see: [Common Issues](https://github.com/Slimefun5/Slimefun5/wiki/Common-Issues)_
 
 **But first off:**<br>
-Always remember that Slimefun4 is open-source and community-developed.<br>
+Always remember that Slimefun5 is open-source and community-developed.<br>
 But most importantly: It is free...<br>
 So do **not** expect us to magically fix everything for you and be available 24/7.<br>
 If you really enjoy this plugin, then please follow this guide, it'd make our lives a lot easier and would help us focus on important issues.<br>
@@ -39,7 +39,7 @@ It's like finding a nail in a pile of hay, but the pile is on fire and on an ent
 The next step is to compare the versions you acquired in step 1 to the most recent versions.
 
 * **Is your Server Software up to date?** *(Check if there has been an update to Spigot, Paper, Bukkit or whatever you are using)*
-* **Is Slimefun up to date?** *(You can check whether there are newer versions than yours [on the download page](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun4/master/))*
+* **Is Slimefun up to date?** *(You can check whether there are newer versions than yours [on the download page](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/))*
 * **Are you using a DEV build?** *(Stable builds are, well "stable" but far from bug-free)*
 
 To add on to the last point: We will not be accepting bug reports from "stable" versions, switch to a much later development version and see if your issue persists first.
