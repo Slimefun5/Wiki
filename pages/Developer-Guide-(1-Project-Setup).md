@@ -1,4 +1,4 @@
-﻿This is the **first Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
+This is the **first Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 ## 1. The necessary tools
 In order to start developing, you will need to make sure that the following software is installed correctly on your system.
@@ -12,8 +12,8 @@ Once you have installed everything successfully, continue with Step 2.
 
 ## 2. Create a new GitHub Repository
 You will need a GitHub Account for this step.
-We made a nifty Repository-template for Slimefun Addons for you.<br>
-Go to the [Repository template](https://github.com/Slimefun/Addon-Template) and click the bright green button on the right side that says "Use this template".
+We made a nifty Repository-template for Slimefun5 Addons for you.<br>
+Go to the [Repository template](https://github.com/Slimefun5/Addon-Template) and click the bright green button on the right side that says "Use this template".
 You will then be prompted to come up with a name and description for your Addon.<br>
 When you are finished just click "Create repository from template".
 
@@ -74,7 +74,7 @@ The beginning of your pom.xml should look like this:
 ```xml
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.CHANGEME</groupId>
-  <artifactId>SlimefunAddon</artifactId>
+  <artifactId>Slimefun5Addon</artifactId>
   <version>1.0.0</version>
 ```
 Change out the groupId and artifactId for your groupId and projectId that we defined earlier.<br>
@@ -95,14 +95,14 @@ You can find it under `src/main/resources/plugin.yml`.<br>
 It should look like this:
 
 ```yaml
-name: SlimefunAddon
+name: Slimefun5Addon
 version: ${project.version}
 author: CHANGEME
 description: A generic Slimefun5-Addon
-website: https://github.com/Slimefun/Addon-Template
+website: https://github.com/Slimefun5/Addon-Template
 
-main: me.CHANGEME.slimefunaddon.SlimefunAddon
-depend: [Slimefun]
+main: me.CHANGEME.Slimefun5addon.Slimefun5Addon
+depend: [Slimefun5]
 
 api-version: 1.14
 ```
@@ -132,7 +132,7 @@ description: This is a very awesome addon that I made
 website: https://github.com/TheBusyBiscuit/MyAwesomeAddon
 
 main: me.thebusybiscuit.myawesomeaddon.MyAwesomeAddon
-depend: [Slimefun]
+depend: [Slimefun5]
 
 api-version: 1.14
 ```
@@ -144,27 +144,27 @@ Now we will start touching some code files.<br>
 We won't write any actual code yet, but we will still have to configure it to follow what we did earlier.
 
 Navigate to `src/main/java`.<br>
-You should see a package there that looks like this: `me.CHANGEME.slimefunaddon`.<br>
+You should see a package there that looks like this: `me.CHANGEME.Slimefun5addon`.<br>
 Rename this package to your groupId, followed by your projectId (all in lower case again).<br>
 Your package may look like this now: `me.thebusybiscuit.myawesomeaddon`.
 
-Now open this package, you should see a file called `SlimefunAddon.java`, rename that file to your projectId but keep the file ending.<br>
+Now open this package, you should see a file called `Slimefun5Addon.java`, rename that file to your projectId but keep the file ending.<br>
 The file name should look like this now: 'MyAwesomeAddon.java'.
 
 If you set up Git correctly, you should now be able to **commit** your changes and **push** them to your repository.<br>
 Look up online guides on how to do that, remember to always **commit** and **push** whenever you change a file, this will keep your workspace and your GitHub repository in-sync, so you can work on your project from anywhere you want. It also allows others to contribute to your project easily.
 
-And you are done! You now successfully configured and set up your first Slimefun Addon.<br>
+And you are done! You now successfully configured and set up your first Slimefun5 Addon.<br>
 We know this was all very complicated, so feel free to ask any questions on discord.
 
 ## 5. Locking your dependency versions
 Our default `pom.xml` file from the template uses self-updating versions.<br>
 But we **highly recommend** using explicit versions for your dependencies, it simply is good practice as it prevents things from suddenly breaking whenever you open up your IDE.
 
-Search for the section in your `pom.xml` file which defines the Slimefun version:
+Search for the section in your `pom.xml` file which defines the Slimefun5 version:
 ```xml
 <dependency>
-  <groupId>com.github.Slimefun</groupId>
+  <groupId>com.github.Slimefun5</groupId>
   <artifactId>Slimefun5</artifactId>
   <version>master-SNAPSHOT</version>
   <scope>provided</scope>
@@ -172,13 +172,13 @@ Search for the section in your `pom.xml` file which defines the Slimefun version
 </dependency>
 ```
 
-To build your addon against a specific version of Slimefun, simply override the `<version>` tag.<br>
-It is best to build against an `RC` - version of Slimefun, simply set the version to `RC-` followed by the version.<br>
+To build your addon against a specific version of Slimefun5, simply override the `<version>` tag.<br>
+It is best to build against an `RC` - version of Slimefun5, simply set the version to `RC-` followed by the version.<br>
 To build against RC-15 for example, simply replace your version like this:
 
 `<version>master-SNAPSHOT</version>` -> `<version>RC-15</version>`
 
-You can find a full list of versions to build against in the "Releases" section on Slimefun's github repository:<br>
+You can find a full list of versions to build against in the "Releases" section on Slimefun5's github repository:<br>
 https://github.com/Slimefun5/Slimefun5/releases
 
 You can also find a "Maven dependency reference" for every released version. Simply copy & paste/replace the version tag into your `pom.xml` to update your dependency.
@@ -194,6 +194,6 @@ Full example:<br>
 </dependency>
 ```
 
-**Note that your addon should still work on any development version released after the RC version you are building against. API changes are usually only done ater a new RC build has been released, so you can safely build against the RC version while still using the development versions of Slimefun for your server.**
+**Note that your addon should still work on any development version released after the RC version you are building against. API changes are usually only done ater a new RC build has been released, so you can safely build against the RC version while still using the development versions of Slimefun5 for your server.**
 
 [**> Continue with Part 2**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(2-Creating-the-Addon))

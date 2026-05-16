@@ -1,4 +1,4 @@
-﻿This page contains information regarding following items:
+This page contains information regarding following items:
 - Elytra Scale
 - Elytra
 - Infused Elytra

@@ -1,4 +1,4 @@
-﻿The Grappling Hook is a useful [tool](https://github.com/Slimefun5/Slimefun5/wiki/Tools) which provides great mobility, allowing you to access otherwise hard-to-reach places.
+The Grappling Hook is a useful [tool](https://github.com/Slimefun5/Slimefun5/wiki/Tools) which provides great mobility, allowing you to access otherwise hard-to-reach places.
 
 ## Obtaining
 The Grappling Hook can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

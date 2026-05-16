@@ -1,4 +1,4 @@
-﻿The Electric Ingot Factory is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which smelts [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) into their corresponding [Ingots](https://github.com/Slimefun5/Slimefun5/wiki/Ingots).  
+The Electric Ingot Factory is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which smelts [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) into their corresponding [Ingots](https://github.com/Slimefun5/Slimefun5/wiki/Ingots).  
 It cannot smelt [Alloys](https://github.com/Slimefun5/Slimefun5/wiki/Ingots#alloys) from [Ingots](https://github.com/Slimefun5/Slimefun5/wiki/Ingots).
 
 The [Electric Ingot Pulverizer](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ingot-Pulverizer) is the opposite of this machine.

@@ -1,4 +1,4 @@
-﻿The Tome of Knowledge Sharing is part of the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
+The Tome of Knowledge Sharing is part of the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
 
 ## Obtaining
 This item can be crafted in the [Magic Workbench](https://github.com/Slimefun5/Slimefun5/wiki/Magic-Workbench).

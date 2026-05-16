@@ -1,4 +1,4 @@
-﻿Aluminum Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun.
+Aluminum Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun5.
 
 ## Obtaining
 
@@ -18,4 +18,4 @@ It is also used in the following [alloys](https://github.com/Slimefun5/Slimefun5
 * [Duct Tape](https://github.com/Slimefun5/Slimefun5/wiki/Miscellaneous-Items)
 * [Synthetic Emerald](https://github.com/Slimefun5/Slimefun5/wiki/Synthetic-Emerald)
 
-Aluminum is one of the most used dusts in Slimefun recipes, either as dust or as [Aluminum Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Aluminum-Ingot).
+Aluminum is one of the most used dusts in Slimefun5 recipes, either as dust or as [Aluminum Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Aluminum-Ingot).

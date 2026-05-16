@@ -1,4 +1,4 @@
-﻿Coolant Cells are a set of [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that are used as coolant for the [Nuclear Reactor](https://github.com/Slimefun5/Slimefun5/wiki/Reactors) and [Nether Star Reactor](https://github.com/Slimefun5/Slimefun5/wiki/Reactors).
+Coolant Cells are a set of [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that are used as coolant for the [Nuclear Reactor](https://github.com/Slimefun5/Slimefun5/wiki/Reactors) and [Nether Star Reactor](https://github.com/Slimefun5/Slimefun5/wiki/Reactors).
 
 ## Obtaining
 ### Reactor Coolant Cell

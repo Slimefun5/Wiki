@@ -1,4 +1,4 @@
-﻿Radiation is an effect of radioactive items in Slimefun.
+Radiation is an effect of radioactive items in Slimefun5.
 
 More specifically, it is a deadly combination of status effects you receive when carrying such items: Wither III, Blindness IV, Confusion IV, Weakness III, Slowness II, and Mining Fatigue II, for a duration of 20 seconds.
 

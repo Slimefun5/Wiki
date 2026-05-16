@@ -1,4 +1,4 @@
-﻿Neptunium is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to power [Nuclear Reactors](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation) or to create better even better radioactive fuels.
+Neptunium is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to power [Nuclear Reactors](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation) or to create better even better radioactive fuels.
 
 ## Obtaining
 Neptunium is a byproduct of using [Uranium](https://github.com/Slimefun5/Slimefun5/wiki/Uranium) as a fuel for [Nuclear Reactors](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation).

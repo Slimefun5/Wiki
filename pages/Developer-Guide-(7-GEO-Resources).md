@@ -1,4 +1,4 @@
-﻿This is the **seventh Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **seventh Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [sixth Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(6-Custom-Heads)), then please do that.
 
 ## 1. A recap
@@ -11,8 +11,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(SkullItem.fromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0="), "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
@@ -34,7 +34,7 @@ research.register();
 
 ## 2. Creating a new Item
 GEO Resources obviously need an Item form too, so we will start with that.<br>
-Right below our previous code we will start to create a new SlimefunItem. As usual we are gonna start with the ItemStack.
+Right below our previous code we will start to create a new Slimefun5Item. As usual we are gonna start with the ItemStack.
 
 But wait... first we will need to come up with a resource.<br>
 How about an ore that is exclusive to the End dimension? An Ender Ore? Yeah let's go with that.<br>
@@ -42,7 +42,7 @@ We are still inside our `onEnable()` method and right below the code from earlie
 ```java
 // ...
 
-SlimefunItemStack enderOreItem = new SlimefunItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
 ```
 
 We will also use a custom head texture for this but I am gonna shorten the long String for the texture to make it more readable.<br>
@@ -50,8 +50,8 @@ Now that we have our ItemStack we can also create the Item, we will use the Item
 
 ```java
 // ...
-SlimefunItemStack enderOreItem = new SlimefunItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
-SlimefunItem enderOre = new SlimefunItem(itemGroup, enderOreItem, ..., ...);
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, ..., ...);
 enderOre.register();
 ```
 
@@ -64,8 +64,8 @@ But we will still need to pass a Recipe Array with the length 9, so we will just
 
 ```java
 // ...
-SlimefunItemStack enderOreItem = new SlimefunItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
-SlimefunItem enderOre = new SlimefunItem(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
 enderOre.register();
 ```
 
@@ -92,7 +92,7 @@ public class EnderOreResource implements GEOResource {
 ```
 
 Your IDE will probably start warning you about missing methods at this point.<br>
-Whenever you implement an interface you will also have to implement its methods. You can see all methods from GEOResource on our [Javadocs](https://slimefun.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/slimefun5/api/geo/GEOResource.html).
+Whenever you implement an interface you will also have to implement its methods. You can see all methods from GEOResource on our [Javadocs](https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/api/geo/GEOResource.html).
 We are gonna start simple, the first method we need to implement is `getName()`, so we implement that method and return the name of our resource.
 
 ```java
@@ -257,12 +257,12 @@ public class EnderOreResource implements GEOResource {
 ```
 
 ## 4. Final registration
-Now we created a new SlimefunItem and a new GEOResource. We only need to register the resource now, so we head back to our main class and into our `onEnable()` method.
+Now we created a new Slimefun5Item and a new GEOResource. We only need to register the resource now, so we head back to our main class and into our `onEnable()` method.
 
 ```java
 // ...
-SlimefunItemStack enderOreItem = new SlimefunItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
-SlimefunItem enderOre = new SlimefunItem(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
 enderOre.register();
 ```
 
@@ -270,15 +270,15 @@ We will now create a new instance of our `EnderOreResource` class and register i
 
 ```java
 // ...
-SlimefunItemStack enderOreItem = new SlimefunItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
-SlimefunItem enderOre = new SlimefunItem(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack("ENDER_ORE", "eyJ0ZXh...", "&5Ender Ore", "", "&rThis is a cool Ore", "&rGEO-Mine me in the End");
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
 enderOre.register();
 
 EnderOreResource enderOreResource = new EnderOreResource(this, enderOreItem);
 enderOreResource.register();
 ```
 
-As defined earlier, we pass two arguments to the constructor, `this` which refers to our Plugin in this context and the ItemStack / SlimefunItemStack.<br>
+As defined earlier, we pass two arguments to the constructor, `this` which refers to our Plugin in this context and the ItemStack / Slimefun5ItemStack.<br>
 And we are done! Our resource is now generated and can be mined inside "The End" using a GEO-Miner.<br>
 Here is the full `EnderOreResource` class:
 

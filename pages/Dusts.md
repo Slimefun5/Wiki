@@ -1,4 +1,4 @@
-﻿Slimefun adds the following 9 dusts as [resources](https://github.com/Slimefun5/Slimefun5/wiki/Resources):
+Slimefun5 adds the following 9 dusts as [resources](https://github.com/Slimefun5/Slimefun5/wiki/Resources):
 * [Iron Dust](https://github.com/Slimefun5/Slimefun5/wiki/Iron-Dust)
 * [Gold Dust](https://github.com/Slimefun5/Slimefun5/wiki/Gold-Dust)
 * [Copper Dust](https://github.com/Slimefun5/Slimefun5/wiki/Copper-Dust)

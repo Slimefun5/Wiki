@@ -1,4 +1,4 @@
-﻿The GPS Marker Tool is a tool in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The GPS Marker Tool is a tool in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The GPS Marker Tool can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

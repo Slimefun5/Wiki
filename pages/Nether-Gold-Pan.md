@@ -1,4 +1,4 @@
-﻿The Nether Gold Pan is an item in the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
+The Nether Gold Pan is an item in the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
 
 ## How to use the Nether Gold Pan
 Right-click a block of Soul Sand while holding a Nether Gold Pan in your main hand.<br>

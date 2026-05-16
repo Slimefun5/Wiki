@@ -1,4 +1,4 @@
-﻿Plutonium is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to power 
+Plutonium is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to power 
 [Nuclear Reactors](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation) or to create even better radioactive fuels.
 
 ## Obtaining

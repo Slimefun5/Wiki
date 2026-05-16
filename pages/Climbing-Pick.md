@@ -1,4 +1,4 @@
-﻿The Climbing Pick is part of the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.  
+The Climbing Pick is part of the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.  
 This tool can be used to climb up walls more easily.
 By default, you need to have two of these in order for it to work, one in both your main-hand and your off-hand.  
 It can be enchanted with the **Efficiency** enchantment to speed up the climbing process! 

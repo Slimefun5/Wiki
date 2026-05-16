@@ -1,4 +1,4 @@
-﻿Copper Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun.
+Copper Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun5.
 
 ## Obtaining
 
@@ -16,4 +16,4 @@ It is also used in the following [alloys](https://github.com/Slimefun5/Slimefun5
 * [Nickel Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Nickel-Ingot)
 * [Cobalt Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Cobalt-Ingot)
 
-Copper is one of the most used dusts in Slimefun recipes, either as dust or as [Copper Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Copper-Ingot).
+Copper is one of the most used dusts in Slimefun5 recipes, either as dust or as [Copper Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Copper-Ingot).

@@ -1,8 +1,8 @@
-﻿The Enhanced Crafting Table is an essential [Basic Machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) in Slimefun.<br>
-It is used to craft many Slimefun items, from the most basic to the most complex.
+The Enhanced Crafting Table is an essential [Basic Machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) in Slimefun5.<br>
+It is used to craft many Slimefun5 items, from the most basic to the most complex.
 
 ## How to build an Enhanced Crafting Table
-The recipe can be found in your Slimefun Guide. To build it, you need to place a Crafting Table on top of a Dispenser.<br>
+The recipe can be found in your Slimefun5 Guide. To build it, you need to place a Crafting Table on top of a Dispenser.<br>
 A complete Enhanced Crafting Table looks like this:
 
 ![Enhanced Crafting Table Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-enhanced-crafting-table.png)

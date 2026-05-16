@@ -1,4 +1,4 @@
-﻿The Auto Anvil is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can repair your tools and weapons.  
+The Auto Anvil is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can repair your tools and weapons.  
 It achieves this by using [Duct Tape](https://github.com/Slimefun5/Slimefun5/wiki/Miscellaneous-Items) to repair your items based on the Repairing Efficiency of the machine.
 
 ## Auto Anvil Tiers

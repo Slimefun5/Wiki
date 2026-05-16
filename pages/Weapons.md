@@ -1,4 +1,4 @@
-﻿The Weapons category contains various items which can be used as weapons.
+The Weapons category contains various items which can be used as weapons.
 
 ## Table of contents
 * [Grandmas Walking Stick](https://github.com/Slimefun5/Slimefun5/wiki/Walking-Sticks)

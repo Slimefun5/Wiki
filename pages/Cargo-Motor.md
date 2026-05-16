@@ -1,4 +1,4 @@
-﻿A Cargo Motor is an item in the [Cargo Management](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) category.<br>
+A Cargo Motor is an item in the [Cargo Management](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) category.<br>
 It is a crafting ingredient in cargo-related and [electric machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) recipes.
 
 ## Obtaining

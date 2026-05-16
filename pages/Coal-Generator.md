@@ -1,4 +1,4 @@
-﻿The Coal Generator is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation).
+The Coal Generator is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation).
 
 ## Obtaining
 All tiers of coal generators can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

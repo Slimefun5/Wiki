@@ -1,4 +1,4 @@
-﻿Wither-Proof Blocks are a set of [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that have special properties and can be used to craft the [Wither Assembler](https://github.com/Slimefun5/Slimefun5/wiki/Wither-Assembler).
+Wither-Proof Blocks are a set of [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that have special properties and can be used to craft the [Wither Assembler](https://github.com/Slimefun5/Slimefun5/wiki/Wither-Assembler).
 
 ## Obtaining
 Both the Wither-Proof Obsidian and Wither-Proof Glass can be crafted in the [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table)

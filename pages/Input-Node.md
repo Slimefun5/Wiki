@@ -1,4 +1,4 @@
-﻿An Input Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which filters and distributes items to be received by [output nodes](https://github.com/Slimefun5/Slimefun5/wiki/Output-Node) (or [advanced output nodes](https://github.com/Slimefun5/Slimefun5/wiki/Advanced-Output-Node)).
+An Input Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which filters and distributes items to be received by [output nodes](https://github.com/Slimefun5/Slimefun5/wiki/Output-Node) (or [advanced output nodes](https://github.com/Slimefun5/Slimefun5/wiki/Advanced-Output-Node)).
 
 ## Obtaining
 Input nodes can be crafted in groups of two in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

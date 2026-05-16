@@ -1,4 +1,4 @@
-﻿The Hercules' Pickaxe is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
+The Hercules' Pickaxe is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
 
 ## Obtaining
 The Hercules' Pickaxe can be crafted in a [Magic Workbench](https://github.com/Slimefun5/Slimefun5/wiki/Magic-Workbench).

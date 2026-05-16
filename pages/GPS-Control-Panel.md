@@ -1,4 +1,4 @@
-﻿GPS Control Panel is a placeable tool in [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+GPS Control Panel is a placeable tool in [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 GPS Control Panel can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

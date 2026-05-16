@@ -1,4 +1,4 @@
-﻿If you join our [Discord Server](https://discord.gg/fsD4Bkh), then we want you to follow these rules.<br>
+If you join our [Discord Server](https://discord.gg/fsD4Bkh), then we want you to follow these rules.<br>
 Not following this ruleset can result in us kicking or banning you from the server.
 
 **These rules can change at any time, so please check these regularly. Large changes will be announced of course.**
@@ -31,13 +31,13 @@ But arguing with our staff will be a waste of time for both of you, they are the
 
 ### 5. Stay on-topic!
 Every channel has a specified topic.
-* Questions about Slimefun? `#questions`
+* Questions about Slimefun5? `#questions`
 * You have a suggestion? `#suggestions`
 * You wanna make an addon or talk about programming in general? `#programming-help`
-* Wanna promote your Slimefun server? `#server-showcase`
-* You want to talk about a Slimefun Addon? Try to go to one of the addons' channels or `#other-addons`
+* Wanna promote your Slimefun5 server? `#server-showcase`
+* You want to talk about a Slimefun5 Addon? Try to go to one of the addons' channels or `#other-addons`
 * Found a weird bug that you wanna discuss to see if others experience the same? `#bug-discussions`
-* For any conversations that are not directly related to Slimefun, go to `#offtopic`
+* For any conversations that are not directly related to Slimefun5, go to `#offtopic`
 
 ### 6. Don't tag people
 Do **NOT** tag someone to just to get their attention.<br>
@@ -91,11 +91,11 @@ This channel is **ONLY** for saying "hi" and "welcome" to people.<br>
 Any other form of conversation should move to the appropriate channel as soon as possible.
 
 ### #general-chat
-This channel is for general discussions around Slimefun, questions should still go to `#questions`.<br>
+This channel is for general discussions around Slimefun5, questions should still go to `#questions`.<br>
 Any discussions about addons should rather be moved to their respective channel.
 
 ### #offtopic
-This channel is for any conversations that are not about Slimefun.
+This channel is for any conversations that are not about Slimefun5.
 
 ### #sensitive-topics
 This channel is no exception from our rules, all rules still apply!<br>
@@ -105,7 +105,7 @@ Topics that are sensitive and should only ever be mentioned in this channel only
 * Mature content (nudity, racism or sexism is not allowed anywhere, see rules 1 - 3)
 
 ### #suggestions
-This channel is for suggesting stuff that should be added to Slimefun or for addon ideas.<br>
+This channel is for suggesting stuff that should be added to Slimefun5 or for addon ideas.<br>
 If your suggestion reaches a certain amount of upvotes within a week, or one of our admins really likes your idea, then it will be moved to `#approved`.
 If your suggestion is too broadly worded or reaches a lot of downvotes, it will be automatically deleted.
 
@@ -119,7 +119,7 @@ Do **NOT** post follow-up suggestions, each suggestion should be independent of 
 
 ### #server-showcase
 This channel is for advertising your Minecraft Server.<br>
-Your server must be publicly accessible (no whitelist) and must have Slimefun installed.<br>
+Your server must be publicly accessible (no whitelist) and must have Slimefun5 installed.<br>
 Your post must include an IP address/Domain Name of the server.<br>
 The same Server must not be posted again within 14 days, otherwise, we will delete your post as a duplicate.<br>
 You are NOT allowed to post a link to your discord server.
@@ -134,9 +134,9 @@ Before posting here, please follow this short guide:<br>
 1. Run `/sf versions`
 2. Capture the output of that command and include it in your message.
 3. Are there any errors? If so, then post them via https://pastebin.com (Posting an error in the chat will result in auto-deletion)
-4. See if there are newer versions of Slimefun and CS-CoreLib available. (https://thebusybiscuit.github.io/builds/)
+4. See if there are newer versions of Slimefun5 and CS-CoreLib available. (https://thebusybiscuit.github.io/builds/)
 5. Try to be as clear as possible, the minimum is two sentences. ("X does not work" is not helpful)
-6. Double-check that you are using a "DEV - ..." build of Slimefun and CS-CoreLib, other builds are considered old or unofficial. **We will not accept bug reports from old or unofficial versions, RC versions will also be rejected since they are outdated.**
+6. Double-check that you are using a "DEV - ..." build of Slimefun5 and CS-CoreLib, other builds are considered old or unofficial. **We will not accept bug reports from old or unofficial versions, RC versions will also be rejected since they are outdated.**
 
 For more info on how to debug your issues and make proper bug reports, please read [How to report bugs](https://github.com/Slimefun5/Slimefun5/wiki/How-to-report-bugs).
 
@@ -150,8 +150,8 @@ You can assign yourself the role `@helpful` by writing `!helpful`.<br>
 This will mark you as a helpful person but also gives everyone the explicit permission to tag you when they need help, so be warned.
 
 ### #programming-help
-This channel is for anyone who is interested in developing Slimefun, addons or any other sort of programs.<br>
-You can ask for help on your addon, ask about Slimefun's API or how to do stuff in Java.<br>
+This channel is for anyone who is interested in developing Slimefun5, addons or any other sort of programs.<br>
+You can ask for help on your addon, ask about Slimefun5's API or how to do stuff in Java.<br>
 We may even help you with your private programming questions if we are in the mood for it.
 
 ## Punishment
@@ -195,10 +195,10 @@ Here is a complete list
 | **Admin** | **Staff member** | **Everything** |
 | **Moderator** | **Staff member** | **Warnings, mutes and kicks** |
 | **Helper** | **Staff member on trial** | **Warnings** |
-| Artist | You contributed to Slimefun via Artwork | - |
-| Contributor | You contributed to Slimefun via Code | - |
-| Translator | You contributed to Slimefun via Translations | - |
-| Wiki Editor | You contributed to Slimefun via Wiki Articles | - |
+| Artist | You contributed to Slimefun5 via Artwork | - |
+| Contributor | You contributed to Slimefun5 via Code | - |
+| Translator | You contributed to Slimefun5 via Translations | - |
+| Wiki Editor | You contributed to Slimefun5 via Wiki Articles | - |
 | *Nitro Booster* | *You boosted our Server with Nitro* | *Custom Emojis and Reactions* |
 | *Helpful* | *You can mark yourself as helpful by doing `!helpful`* | *Everyone is allowed to tag you* |
 

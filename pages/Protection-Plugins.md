@@ -1,5 +1,5 @@
 Slimefun5 supports a lot of protection plugins out of the box.<br>
-This is done in order to prevent players from abusing Slimefun Items to grief other people.<br>
+This is done in order to prevent players from abusing Slimefun5 Items to grief other people.<br>
 This article contains a list of all supported protection plugins as well as instructions on how to add support for your plugin.
 
 ## Supported Protection Plugins
@@ -41,7 +41,7 @@ If it does not, then feel free to link them this article as we will walk over ho
 
 ## Supported Protection Loggers
 Slimefun5 also supports a few protection loggers.<br>
-These loggers can for example allow you to rollback certain actions, such as blocks destroyed in an unusual manner by Slimefun Items.<br>
+These loggers can for example allow you to rollback certain actions, such as blocks destroyed in an unusual manner by Slimefun5 Items.<br>
 Here is a list of all plugins we support by default.
 
 | Plugin | Support for broken Blocks | Support for placed Blocks |

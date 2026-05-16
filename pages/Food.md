@@ -1,4 +1,4 @@
-﻿The Food category contains a variety of foods and [juices](https://github.com/Slimefun5/Slimefun5/wiki/Juices)
+The Food category contains a variety of foods and [juices](https://github.com/Slimefun5/Slimefun5/wiki/Juices)
 
 ## Table of Contents
 * [Fortune Cookie](https://github.com/Slimefun5/Slimefun5/wiki/Fortune-Cookie)
@@ -18,4 +18,4 @@
 * [Sweet Berry Juice](https://github.com/Slimefun5/Slimefun5/wiki/Juices)
 * [Golden Apple Juice](https://github.com/Slimefun5/Slimefun5/wiki/Juices)
 
-*If you are looking for more Food, check out the Slimefun Addon [ExoticGarden](https://github.com/Slimefun5/Slimefun5/wiki/Addons#official-addons).*
+*If you are looking for more Food, check out the Slimefun5 Addon [ExoticGarden](https://github.com/Slimefun5/Slimefun5/wiki/Addons#official-addons).*

@@ -1,4 +1,4 @@
-﻿The Auto Disenchanter is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) can be used to disenchant enchanted tools and weapons.  
+The Auto Disenchanter is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) can be used to disenchant enchanted tools and weapons.  
 It will then put these enchantments on a book that you have to provide when you want to disenchant something.
 
 ## Auto Disenchanter Tiers

@@ -1,8 +1,8 @@
-﻿The Table Saw is a very straightforward [machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines).<br>
+The Table Saw is a very straightforward [machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines).<br>
 You can use it to turn logs into 8 planks instead of the normal 4 you would get when using a Crafting Table.
 
 ## How to build a Table Saw
-The recipe is already found in your Slimefun Guide, but here is the final version:
+The recipe is already found in your Slimefun5 Guide, but here is the final version:
 
 ![Table Saw Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-table-saw.png)
 

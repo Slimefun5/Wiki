@@ -1,4 +1,4 @@
-﻿The Resources category contains many natural and man-made resources which are used extensively in Slimefun recipes.
+The Resources category contains many natural and man-made resources which are used extensively in Slimefun5 recipes.
 
 ## Table of contents
 ### [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts)

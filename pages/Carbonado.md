@@ -1,4 +1,4 @@
-﻿Carbonado is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to craft a variety of other, high-tier endgame items.  
+Carbonado is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to craft a variety of other, high-tier endgame items.  
 Before you can craft Carbonado, you have to craft Raw Carbonado.
 
 ## Obtaining

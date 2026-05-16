@@ -1,4 +1,4 @@
-﻿The Portable Geo-Scanner is a tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category. It is a portable version of the [GPS Geo-Scanner](https://github.com/Slimefun5/Slimefun5/wiki/GPS-Geo-Scanner).
+The Portable Geo-Scanner is a tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category. It is a portable version of the [GPS Geo-Scanner](https://github.com/Slimefun5/Slimefun5/wiki/GPS-Geo-Scanner).
 
 ## Obtaining
 The Portable Geo-Scanner can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

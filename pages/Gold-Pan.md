@@ -1,4 +1,4 @@
-﻿The Gold Pan is a very important item that is part of the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
+The Gold Pan is a very important item that is part of the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.
 There are two variants, the normal Gold Pan and the [Nether Gold Pan](https://github.com/Slimefun5/Slimefun5/wiki/Nether-Gold-Pan).<br>
 This page will only cover the standard Gold Pan.
 
@@ -6,7 +6,7 @@ This page will only cover the standard Gold Pan.
 You right-click a block of gravel while holding a Gold Pan in your main hand.<br>
 The block will break and drop Flint, Clay, [Sifted Ore](https://github.com/Slimefun5/Slimefun5/wiki/Sifted-Ore) or an Iron Nugget.
 
-You can read more about [Sifted Ore](https://github.com/Slimefun5/Slimefun5/wiki/Sifted-Ore) and how to use it in Slimefun's ["Getting Started" Guide](https://github.com/Slimefun5/Slimefun5/wiki/Getting-Started).
+You can read more about [Sifted Ore](https://github.com/Slimefun5/Slimefun5/wiki/Sifted-Ore) and how to use it in Slimefun5's ["Getting Started" Guide](https://github.com/Slimefun5/Slimefun5/wiki/Getting-Started).
 
 ## Drop chances
 Each item you can get with a Gold Pan has a different probability to drop, listed below.

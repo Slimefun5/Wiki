@@ -1,4 +1,4 @@
-﻿The Infused Hopper can be found in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.
+The Infused Hopper can be found in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.
 
 It is an upgraded version of the Hopper, it picks up all items in a 7x7x7 area around itself.
 

@@ -1,4 +1,4 @@
-﻿The Cooler is an [Item](https://github.com/Slimefun5/Slimefun5/wiki/Items) that has a unique use.<br>
+The Cooler is an [Item](https://github.com/Slimefun5/Slimefun5/wiki/Items) that has a unique use.<br>
 It allows you to carry Juices and automatically consume them when your Player gets hungry.
 
 ## Obtaining

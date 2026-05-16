@@ -1,19 +1,19 @@
-﻿If you have just started using Slimefun it may seem overwhelming or very complicated.
+If you have just started using Slimefun5 it may seem overwhelming or very complicated.
 You may not know where to start.
 If that sounds familiar then you have come to the right place!
 
-This guide assumes that you have already installed Slimefun, otherwise start by reading [How to install Slimefun](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun)
+This guide assumes that you have already installed Slimefun5, otherwise start by reading [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5)
 
-## 1. Slimefun Guide
-The very first Item you will need on your journey is the Slimefun Guide.
+## 1. Slimefun5 Guide
+The very first Item you will need on your journey is the Slimefun5 Guide.
 Do `/sf guide` to obtain it and Right-Click the Book to open it.
-You will now be presented with all Categories Slimefun can offer.
-In each Category you will find Items that Slimefun (or Addons) have added.
+You will now be presented with all Categories Slimefun5 can offer.
+In each Category you will find Items that Slimefun5 (or Addons) have added.
 You can click on any Item to see it's Recipe.
 Take a moment to browse through the guide.
 
 ## 2. Researching
-You will notice that a lot of Slimefun Items could be locked (depending on your Server Setup).
+You will notice that a lot of Slimefun5 Items could be locked (depending on your Server Setup).
 This means that you will either need a certain permission to use the item or that you have to research the Item first.
 To research an Item, simply click on an Item in your Guide that says "LOCKED".
 Researching Items will cost you XP levels, so make sure to stock up on Experience.
@@ -27,7 +27,7 @@ The 3rd row of the recipe are your bottom blocks, then build above them accordin
 ## 4. Enhanced Crafting Table
 This is the first machine you will need to build.
 You have to place a Crafting Table on top of a Dispenser.
-Most Slimefun Recipes are crafted by putting the recipe into the Dispenser, then right-clicking the Crafting Table.
+Most Slimefun5 Recipes are crafted by putting the recipe into the Dispenser, then right-clicking the Crafting Table.
 You can read more about this Machine [here](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).
 
 ## 5. Collecting Dust
@@ -43,5 +43,5 @@ Start by building a [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smelt
 You can then use these Ingots and Alloys in a ton of recipes.
 
 ## 7. Enjoy the plugin
-Now we should have covered everything you need to know in order to start playing with Slimefun.
+Now we should have covered everything you need to know in order to start playing with Slimefun5.
 Have fun and enjoy your adventure!

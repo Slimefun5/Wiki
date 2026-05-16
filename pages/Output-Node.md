@@ -1,4 +1,4 @@
-﻿An Ouput Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which receives items sent by an [input node](https://github.com/Slimefun5/Slimefun5/wiki/Input-Node).<br>
+An Ouput Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which receives items sent by an [input node](https://github.com/Slimefun5/Slimefun5/wiki/Input-Node).<br>
 An output node takes every available item sent through the selected channel. To filter specific items, use [advanced output nodes](https://github.com/Slimefun5/Slimefun5/wiki/Advanced-Output-Node), which use a whitelist/blacklist system.
 
 ## Obtaining

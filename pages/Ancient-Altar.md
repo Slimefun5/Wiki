@@ -1,4 +1,4 @@
-﻿The Ancient Altar is a block in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category, as well as a Multiblock structure.  
+The Ancient Altar is a block in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category, as well as a Multiblock structure.  
 It is used to craft other [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) and gadgets, and to repair [Broken Spawners](https://github.com/Slimefun5/Slimefun5/wiki/Broken-Spawner) so they become [Reinforced Spawners](https://github.com/Slimefun5/Slimefun5/wiki/Reinforced-Spawner).
 
 ## Obtaining

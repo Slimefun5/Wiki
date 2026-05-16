@@ -1,4 +1,4 @@
-﻿A Connector Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which connects the different parts of the network.
+A Connector Node is the component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which connects the different parts of the network.
 
 ## Obtaining
 Connector nodes can be crafted in groups of four in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

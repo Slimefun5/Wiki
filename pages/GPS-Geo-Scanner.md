@@ -1,4 +1,4 @@
-﻿The GPS Geo-Scanner is a placeable tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The GPS Geo-Scanner is a placeable tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The GPS Geo-Scanner can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

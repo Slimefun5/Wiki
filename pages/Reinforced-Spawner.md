@@ -1,4 +1,4 @@
-﻿The Reinforced Spawner is an item in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
+The Reinforced Spawner is an item in the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
 They are the working counterpart of [Broken Spawners](https://github.com/Slimefun5/Slimefun5/wiki/Broken-Spawner).
 
 ## Obtaining

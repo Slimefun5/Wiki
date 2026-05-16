@@ -1,4 +1,4 @@
-﻿There are two types of Lumps, Ender and Magical. They're both used to craft a lot of [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) and [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets).
+There are two types of Lumps, Ender and Magical. They're both used to craft a lot of [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) and [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets).
 
 ## Obtaining
 They each come in three tiers, each tier using 4 of the previous to craft.  

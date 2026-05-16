@@ -1,4 +1,4 @@
-﻿The Lumber Axe is a [tool](https://github.com/Slimefun5/Slimefun5/wiki/Tools) added in Slimefun.<br>
+The Lumber Axe is a [tool](https://github.com/Slimefun5/Slimefun5/wiki/Tools) added in Slimefun5.<br>
 It is a Diamond Axe which allows you to cut down entire trees at once.<br>
 
 ## Obtaining

@@ -1,8 +1,8 @@
-﻿This is the **fifth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **fifth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the previous parts, then please do that now.
 
 ## 1. A little recap
-The last three parts were all about creating our Slimefun items.<br>
+The last three parts were all about creating our Slimefun5 items.<br>
 We covered a lot of concept that can be quite overwhelming at first. So let's step down a bit again.<br>
 Today we cover Researches.
 
@@ -13,8 +13,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
@@ -51,7 +51,7 @@ Just keep in mind that this will be removed at some point, as it is a really bad
 That being said, your integer id **must be unique**. And it must be unique across all addons.<br>
 Try to come up with a random number that noone else has picked yet. This is really not a good way of doing this and stems from a time before Addons existed.<br>
 We are working hard on removing this but for the time being... You will need that id. And it is important that you do not change it at anytime.<br>
-For this example we will simply choose 123 as our id. (Note that 123 is already taken by Slimefun, so don't use that. Pick a very large number instead.)
+For this example we will simply choose 123 as our id. (Note that 123 is already taken by Slimefun5, so don't use that. Pick a very large number instead.)
 ```java
 NamespacedKey researchKey = new NamespacedKey(this, "our_custom_research");
 Research research = new Research(researchKey, 123, ?, ?);
@@ -79,13 +79,13 @@ All that is left to do is to add our items to that Research.
 ## 3. Adding items to our Research
 Now we still need to add our items to this Research.<br>
 We can do that by calling `Research#addItems(...)`.<br>
-This method has a variable amount of parameters, you can add as many Slimefun items as you want.
+This method has a variable amount of parameters, you can add as many Slimefun5 items as you want.
 
 ```java
 NamespacedKey researchKey = new NamespacedKey(this, "our_custom_research");
 Research research = new Research(researchKey, 123, "This is an example message", 10);
 
-// Slimefun items are seperated via a comma
+// Slimefun5 items are seperated via a comma
 research.addItems(item1, item2, item3, ...);
 ```
 
@@ -126,8 +126,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {

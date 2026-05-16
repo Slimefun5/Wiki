@@ -1,4 +1,4 @@
-﻿A Cargo Manager is the core part of a [cargo management system](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management). It allows items to be moved within a cargo network.
+A Cargo Manager is the core part of a [cargo management system](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management). It allows items to be moved within a cargo network.
 
 ## Obtaining
 A cargo manager can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

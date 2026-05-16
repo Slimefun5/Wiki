@@ -1,4 +1,4 @@
-﻿This is the **last part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
+This is the **last part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).
 
 ## Prerequisites
 To start publishing and distributing your addon, you don't really need much.<br>
@@ -13,7 +13,7 @@ If you need help on choosing a license, check out [ChooseALicense.com](https://c
 
 ### 2. You know how to compile your project
 In order to upload your project anywhere, you need to distribute the compiled `.jar` file of your addon.<br>
-If you chose to use Maven for your project (as we suggested in [Part 1](https://github.com/Slimefun/Wiki/blob/master/pages/Developer-Guide-(1-Project-Setup).md)), you can simply run the following command:
+If you chose to use Maven for your project (as we suggested in [Part 1](https://github.com/Slimefun5/Wiki/blob/master/pages/Developer-Guide-(1-Project-Setup).md)), you can simply run the following command:
 
 ```
 $ mvn clean package
@@ -48,5 +48,5 @@ We recommend all addon developers to feature their addon on our public [Addons p
 Simply make a new pull request on our wiki repository, you can find a tutorial here:<br>
 https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki
 
-You can also share your project by posting about it on our [Discord server](https://discord.gg/slimefun).<br>
+You can also share your project by posting about it on our [Discord server](https://discord.gg/Slimefun5).<br>
 Upload videos or screenshots to get people excited! But please don't tag anyone.

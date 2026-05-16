@@ -1,4 +1,4 @@
-﻿This is a category that contains a bunch of items to craft [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) with.
+This is a category that contains a bunch of items to craft [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) with.
 
 ## Table of contents
 ----

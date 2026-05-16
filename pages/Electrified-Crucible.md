@@ -1,7 +1,7 @@
-﻿The Electrified Crucible is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which smelts items into liquid form.
+The Electrified Crucible is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which smelts items into liquid form.
 
 As the name suggests, it is the electrical variant of the [Crucible](https://github.com/Slimefun5/Slimefun5/wiki/Crucible).  
-If you want to know all the recipes, just open the [Crucible](https://github.com/Slimefun5/Slimefun5/wiki/Crucible)'s page in the Slimefun guide.
+If you want to know all the recipes, just open the [Crucible](https://github.com/Slimefun5/Slimefun5/wiki/Crucible)'s page in the Slimefun5 guide.
 
 ## Electrified Crucible Tiers
 

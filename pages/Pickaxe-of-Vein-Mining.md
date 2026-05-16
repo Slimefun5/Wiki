@@ -1,4 +1,4 @@
-﻿The Pickaxe of Vein Mining is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
+The Pickaxe of Vein Mining is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
 It is an unenchanted Diamond Pickaxe which can mine entire ore veins at once.
 
 ## Obtaining

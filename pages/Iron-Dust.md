@@ -1,9 +1,9 @@
-﻿Iron Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun.
+Iron Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun5.
 
 ## Obtaining
 - Crushing Raw Iron in an [Ore Crusher](https://github.com/Slimefun5/Slimefun5/wiki/Ore-Crusher) or an [Electric Ore Grinder](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ore-Grinder) yields one piece of Iron Dust.
 - Crushing Iron Ore in an [Ore Crusher](https://github.com/Slimefun5/Slimefun5/wiki/Ore-Crusher) or an [Electric Ore Grinder](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ore-Grinder) yields two pieces of Iron Dust, effectively doubling it.
-- If you are using the [SlimefunOreChunks](https://github.com/Slimefun5/Slimefun5/wiki/Addons#official-addons) addon, you can use the same machines to turn Iron Ore Chunks from the [GEO Miner](https://github.com/Slimefun5/Slimefun5/wiki/GEO-Miner) into Iron Dust.
+- If you are using the [Slimefun5OreChunks](https://github.com/Slimefun5/Slimefun5/wiki/Addons#official-addons) addon, you can use the same machines to turn Iron Ore Chunks from the [GEO Miner](https://github.com/Slimefun5/Slimefun5/wiki/GEO-Miner) into Iron Dust.
 - Iron Dust has a ~11.11% chance of being extracted from [Sifted Ore](https://github.com/Slimefun5/Slimefun5/wiki/Sifted-Ore), by processing it through an [Ore Washer](https://github.com/Slimefun5/Slimefun5/wiki/Ore-Washer) or an [Electric Dust Washer](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Dust-Washer).
 - Additionally, crushing an [Iron Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Iron-Ingot) in an [Electric Ingot Pulverizer](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ingot-Pulverizer) produces one piece of Iron Dust.
 
@@ -22,4 +22,4 @@ It is also used in the following [alloys](https://github.com/Slimefun5/Slimefun5
 
 * [Magnet](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components)
 
-Iron is one of the most used dusts in Slimefun recipes, either as dust or as [Iron Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Iron-Ingot).
+Iron is one of the most used dusts in Slimefun5 recipes, either as dust or as [Iron Ingot](https://github.com/Slimefun5/Slimefun5/wiki/Iron-Ingot).

@@ -1,4 +1,4 @@
-﻿Welcome to our Developer Guide!<br>
+Welcome to our Developer Guide!<br>
 This page is still under construction, as this is a huge topic and will most likely take a long time to complete.
 
 Anyway, let's get started!
@@ -14,7 +14,7 @@ We will do our best to try to explain as much as we can though, but please read 
 You can of course also always questions on our Discord Server in the channel `#programming-help`.<br>
 You can click on the discord badge at the bottom of the page to join.
 
-You can also check out our [Javadocs](https://slimefun.github.io/javadocs/Slimefun5/docs/) to get some more technical information about how the API is structured. But we would advise you to check this guide first.
+You can also check out our [Javadocs](https://Slimefun5.github.io/javadocs/Slimefun5/docs/) to get some more technical information about how the API is structured. But we would advise you to check this guide first.
 
 ## Table of Contents
 1. [Setting up your project](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(1-Project-Setup))

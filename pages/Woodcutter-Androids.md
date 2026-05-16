@@ -1,4 +1,4 @@
-﻿An Android that specializes in automating the process of harvesting and replanting trees.
+An Android that specializes in automating the process of harvesting and replanting trees.
 This Android will work with all types of wood.
 
 ## Obtaining

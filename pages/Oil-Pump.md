@@ -1,4 +1,4 @@
-﻿The Oil Pump is a placeable machine added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The Oil Pump is a placeable machine added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The Oil Pump can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

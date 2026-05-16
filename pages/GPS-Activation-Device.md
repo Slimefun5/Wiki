@@ -1,4 +1,4 @@
-﻿The GPS Activation Device is a placeable tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The GPS Activation Device is a placeable tool added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The GPS Activation Device can be crafted in groups of eight in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

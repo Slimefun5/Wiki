@@ -1,4 +1,4 @@
-﻿The Bio Reactor is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation). 
+The Bio Reactor is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines#energy-generation). 
 
 ## Obtaining
 A Bio Reactor can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

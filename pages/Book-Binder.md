@@ -1,4 +1,4 @@
-﻿The Book Binder is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to combine different books together (much like an anvil would).  
+The Book Binder is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to combine different books together (much like an anvil would).  
 
 ## Book Binder Tiers
 The Book Binder currently only has one tier.  

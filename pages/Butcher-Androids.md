@@ -1,4 +1,4 @@
-﻿An Android that specializes in killing hostile mobs or/and animals.
+An Android that specializes in killing hostile mobs or/and animals.
 
 ## Obtaining
 Butcher Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

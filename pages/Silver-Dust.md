@@ -1,4 +1,4 @@
-﻿Silver Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun.
+Silver Dust is one of the nine [dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts) added in Slimefun5.
 
 ## Obtaining
 

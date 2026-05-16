@@ -1,4 +1,4 @@
-﻿The Automated Panning Machine is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
+The Automated Panning Machine is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
 It's an automated version of the [Gold Pan](https://github.com/Slimefun5/Slimefun5/wiki/Gold-Pan) and the [Nether Gold Pan](https://github.com/Slimefun5/Slimefun5/wiki/Nether-Gold-Pan).
 
 ## Obtaining

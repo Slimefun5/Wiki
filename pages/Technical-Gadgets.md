@@ -1,4 +1,4 @@
-﻿The Technical Gadgets category has a variety of gadgets that are useful when playing Slimefun.  
+The Technical Gadgets category has a variety of gadgets that are useful when playing Slimefun5.  
 
 ## Table of contents
 * [Electric Jetpack - I](https://github.com/Slimefun5/Slimefun5/wiki/Jetpacks)

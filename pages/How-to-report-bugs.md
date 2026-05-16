@@ -1,4 +1,4 @@
-﻿Reporting bugs is crucial to this open-source project.<br>
+Reporting bugs is crucial to this open-source project.<br>
 So please consider reporting bugs on our [Issue Tracker](https://github.com/Slimefun5/Slimefun5/issues)
 
 But before reporting a bug, you should read through the following Troubleshooting Guide.<br>
@@ -25,10 +25,10 @@ It is absolutely **crucial** that you check your versions, 90% of issues can alr
 Gather the following information:
 * **Your Server Software** *(Are you running Bukkit, Spigot, Paper or something else?)*
 * **Your Minecraft Version** *(Is it 1.8, is it 1.14, 1.9001? You should know that.)*
-* **Your Slimefun Version** *(What version have you installed? Is it a DEV build or a "stable" version?)*
+* **Your Slimefun5 Version** *(What version have you installed? Is it a DEV build or a "stable" version?)*
 
 You can quickly gather all this info at once by running the command `/sf versions`.<br>
-If your Server Owner has not given you access to this command, then Shift and Right-Click your Slimefun Guide, there should be a Book and Quill there that will at least tell you your Minecraft and Slimefun Version. That is already very helpful!
+If your Server Owner has not given you access to this command, then Shift and Right-Click your Slimefun5 Guide, there should be a Book and Quill there that will at least tell you your Minecraft and Slimefun5 Version. That is already very helpful!
 
 If you are reporting a bug on us, then we will need this info, otherwise we have absolutely no chance to figure out what we're dealing with.<br>
 It's like finding a nail in a pile of hay, but the pile is on fire and on an entirely different planet than the nail.<br>
@@ -39,7 +39,7 @@ It's like finding a nail in a pile of hay, but the pile is on fire and on an ent
 The next step is to compare the versions you acquired in step 1 to the most recent versions.
 
 * **Is your Server Software up to date?** *(Check if there has been an update to Spigot, Paper, Bukkit or whatever you are using)*
-* **Is Slimefun up to date?** *(You can check whether there are newer versions than yours [on the download page](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/))*
+* **Is Slimefun5 up to date?** *(You can check whether there are newer versions than yours [on the download page](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/))*
 * **Are you using a DEV build?** *(Stable builds are, well "stable" but far from bug-free)*
 
 To add on to the last point: We will not be accepting bug reports from "stable" versions, switch to a much later development version and see if your issue persists first.
@@ -60,24 +60,24 @@ But you are encouraged to comment on that issue and give some information on how
 
 Before you venture off and hunt down those error-reports and stacktraces, keep in mind that those things should always be posted via [pastebin](https://pastebin.com/) when reporting via our Issue Tracker.
 
-1. Navigate to the directory `/plugins/Slimefun/error-reports/` and check if any error-reports have been generated there.<br>
+1. Navigate to the directory `/plugins/Slimefun5/error-reports/` and check if any error-reports have been generated there.<br>
 Please post them along with your issue if they correlate with the problem.
 
 2. Open your server's console and check if you can see any stacktraces.<br>
 (Stacktraces are those things that look really scary and you cannot wrap your mind around how to read them)
-See if the phrase "slimefun" comes up in it. Attach it to your bug report then.
+See if the phrase "Slimefun5" comes up in it. Attach it to your bug report then.
 
 **It is very important to always post the FULL stacktrace, snip off one single word and it all becomes useless, so please make sure to include everything you see.**
 
-Note that stacktraces that contain "slimefun" in them or even outright say they are caused by Slimefun, they maybe aren't.<br>
+Note that stacktraces that contain "Slimefun5" in them or even outright say they are caused by Slimefun5, they maybe aren't.<br>
 If the name of one of your installed addons comes up in that stacktrace, post it on that addon's bug tracker instead.
 
 If you don't have file access to the server, then contact one of your admins, explain them your issue and link them to this guide.
 
-### 6. Make sure it is Slimefun!
+### 6. Make sure it is Slimefun5!
 
-When you encounter problems with content in Slimefun, then please make sure that the Item/Block/Machine is actually from Slimefun and not from an addon.<br>
-If your problem revolves around items from ExoticGarden or any other Slimefun addons, then report them on their bug tracker and not here.
+When you encounter problems with content in Slimefun5, then please make sure that the Item/Block/Machine is actually from Slimefun5 and not from an addon.<br>
+If your problem revolves around items from ExoticGarden or any other Slimefun5 addons, then report them on their bug tracker and not here.
 
 ### 7. Gather as much information as possible
 

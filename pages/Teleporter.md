@@ -1,4 +1,4 @@
-﻿![Teleporter](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/Teleporter.png)
+![Teleporter](https://raw.githubusercontent.com/Slimefun5/Slimefun5-Wiki/master/images/Teleporter.png)
 
 The Teleporter is a Multiblock GPS-based device.
 
@@ -11,5 +11,5 @@ Teleporters are used to teleport to waypoints created using a [GPS Marker Tool](
 
 Teleporting speed is determined by the distance of the given waypoint and the [GPS network complexity](https://github.com/Slimefun5/Slimefun5/wiki/GPS-Transmitter). </br>
 If the network complexity is lower than 100, it will always take 50 seconds to teleport.
-If the network complexity is above 100, the speed is given by the following equation: ![Teleporting Speed Equation](https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/TeleportEquation.png) seconds, where DistanceSquared
+If the network complexity is above 100, the speed is given by the following equation: ![Teleporting Speed Equation](https://raw.githubusercontent.com/Slimefun5/Slimefun5-Wiki/master/images/TeleportEquation.png) seconds, where DistanceSquared
 cannot be greater than 100 000 000, and the whole expression cannot be greater than 20.5 seconds.

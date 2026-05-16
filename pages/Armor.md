@@ -1,4 +1,4 @@
-﻿The Armor category contains six new sets of armor, plus the ability to craft Chainmail Armor.
+The Armor category contains six new sets of armor, plus the ability to craft Chainmail Armor.
 
 ## Armor Sets
 ### Damascus Steel Armor Set

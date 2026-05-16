@@ -1,4 +1,4 @@
-﻿The Magic Workbench is a [Basic Machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) in Slimefun. It is a multiblock structure.<br>
+The Magic Workbench is a [Basic Machine](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) in Slimefun5. It is a multiblock structure.<br>
 
 ## Obtaining
 The Magic Workbench is a multiblock structure which consists of a bookshelf, crafting table and dispenser placed side by side.<br>
@@ -11,5 +11,5 @@ You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki
 
 ## Usage
 It is used to craft many [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) and [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets).<br>
-Check out the Magical Workbench in the Slimefun Guide in-game for all possible recipes.<br>
+Check out the Magical Workbench in the Slimefun5 Guide in-game for all possible recipes.<br>
 To craft items in the Magic Workbench, you put the correct recipe in the dispenser then right click the crafting table and if the recipe was correct, it'll output your item.

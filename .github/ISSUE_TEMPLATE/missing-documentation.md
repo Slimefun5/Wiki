@@ -1,6 +1,6 @@
 ---
 name: Missing documentation
-about: A part of Slimefun4 is not covered by the Wiki? Let us know!
+about: A part of Slimefun5 is not covered by the Wiki? Let us know!
 title: ''
 labels: "\U0001F578 Missing documentation"
 assignees: ''
@@ -13,5 +13,5 @@ assignees: ''
 ## Wiki page (If applicable)
 <!-- What page is missing information? -->
 
-## Slimefun Version
-<!-- What Version of Slimefun are you using? -->
+## Slimefun5 Version
+<!-- What Version of Slimefun5 are you using? -->

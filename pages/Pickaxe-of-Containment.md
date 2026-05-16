@@ -1,4 +1,4 @@
-﻿The Pickaxe of Containment is an item in the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
+The Pickaxe of Containment is an item in the [Tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
 It is an Iron Pickaxe which allows you to pick up spawners. Although it can be enchanted like any other tool, it is not affected by the Fortune enchantment.
 
 ## Obtaining

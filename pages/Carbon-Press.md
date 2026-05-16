@@ -1,4 +1,4 @@
-﻿The Carbon Press is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to craft all [Carbon](https://github.com/Slimefun5/Slimefun5/wiki/Carbon)-like items.
+The Carbon Press is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to craft all [Carbon](https://github.com/Slimefun5/Slimefun5/wiki/Carbon)-like items.
 
 ## Carbon Press Tiers
 

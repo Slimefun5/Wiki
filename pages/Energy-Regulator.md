@@ -1,4 +1,4 @@
-﻿An Energy Regulator is the core part of an [Energy Network](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which allows energy to be transferred.  
+An Energy Regulator is the core part of an [Energy Network](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which allows energy to be transferred.  
 It is essential to a working energy network.
 
 ## Obtaining

@@ -12,10 +12,10 @@ assignees: ''
 <!-- Explain what you think should be added to the Wiki -->
 
 ## Addon Resources (if applicable)
-<!-- If you made an Addon, please link it here and describe how it interacts with Slimefun -->
+<!-- If you made an Addon, please link it here and describe how it interacts with Slimefun5 -->
 
 ## Wiki page (If applicable)
 <!-- What page is this addition related to? -->
 
-## Slimefun Version
-<!-- What Version of Slimefun are you using? -->
+## Slimefun5 Version
+<!-- What Version of Slimefun5 are you using? -->

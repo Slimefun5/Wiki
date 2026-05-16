@@ -1,10 +1,10 @@
-﻿# Contributing to Slimefun
-This document outlines various ways how you can help contribute to the Slimefun wiki and make this a bigger and better project.<br>
-All contributions must be inline with our [Code of Conduct](https://github.com/Slimefun/Slimefun-Wiki/blob/master/.github/CODE_OF_CONDUCT.md) and [License](https://github.com/Slimefun/Slimefun-Wiki/blob/master/LICENSE).
+# Contributing to Slimefun5
+This document outlines various ways how you can help contribute to the Slimefun5 wiki and make this a bigger and better project.<br>
+All contributions must be inline with our [Code of Conduct](https://github.com/Slimefun5/Slimefun5-Wiki/blob/master/.github/CODE_OF_CONDUCT.md) and [License](https://github.com/Slimefun5/Slimefun5-Wiki/blob/master/LICENSE).
 Please also follow the templates for Issues and Pull Requests we provide.
 
 ## :beetle: 1. Issues
-If you find something on the wiki that is missing or just wrong, feel free to report it on our [Issues Tracker](https://github.com/Slimefun/Slimefun-Wiki/issues).<br>
+If you find something on the wiki that is missing or just wrong, feel free to report it on our [Issues Tracker](https://github.com/Slimefun5/Slimefun5-Wiki/issues).<br>
 It helps us improve the wiki as a whole.
 
 ## :memo: 2. Pull Requests

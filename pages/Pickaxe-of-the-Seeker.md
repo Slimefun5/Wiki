@@ -1,4 +1,4 @@
-﻿The Pickaxe of the Seeker is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
+The Pickaxe of the Seeker is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
 It is an unenchanted diamond pickaxe which can help you locate nearby ore.
 
 ## Obtaining

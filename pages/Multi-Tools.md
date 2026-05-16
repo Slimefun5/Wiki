@@ -1,4 +1,4 @@
-﻿Multi Tools are part of the [Technical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Gadgets) category. They need to be charged in a [Charging Bench](https://github.com/Slimefun5/Slimefun5/wiki/Charging-Bench) before usage.
+Multi Tools are part of the [Technical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Gadgets) category. They need to be charged in a [Charging Bench](https://github.com/Slimefun5/Slimefun5/wiki/Charging-Bench) before usage.
 
 Right-click to use. Crouch + right-click to switch modes.
 Each time you use it, it will use up 0.3 J of its stored energy.

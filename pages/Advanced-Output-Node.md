@@ -1,4 +1,4 @@
-﻿An Advanced Output Node is a component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which can receive items sent by [input nodes](https://github.com/Slimefun5/Slimefun5/wiki/Input-Node).<br>
+An Advanced Output Node is a component of a [cargo network](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) which can receive items sent by [input nodes](https://github.com/Slimefun5/Slimefun5/wiki/Input-Node).<br>
 It is a more complex type of [output node](https://github.com/Slimefun5/Slimefun5/wiki/Output-Node), with additional settings to filter items.
 
 ## Obtaining

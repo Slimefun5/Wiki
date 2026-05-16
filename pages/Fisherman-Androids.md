@@ -1,4 +1,4 @@
-﻿An Android that specializes in automating the fishing process.
+An Android that specializes in automating the fishing process.
 
 ## Obtaining
 Fisherman Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

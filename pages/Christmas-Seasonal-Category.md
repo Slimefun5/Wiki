@@ -1,4 +1,4 @@
-﻿Christmas Seasonal Category adds Christmas special items (mostly foods). Normally, this category is only visible throughout December in the Slimefun guide. 
+Christmas Seasonal Category adds Christmas special items (mostly foods). Normally, this category is only visible throughout December in the Slimefun5 guide. 
 
 ## Table of Contents
 * [Christmas Milk](https://github.com/Slimefun5/Slimefun5/wiki/Christmas-Items)

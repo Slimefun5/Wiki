@@ -1,4 +1,4 @@
-﻿This is the **sixth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **sixth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [fifth Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(5-Researches)), then please do that.
 
 ## 1. Our usual recap
@@ -10,8 +10,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
@@ -95,8 +95,8 @@ ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 ```
 
 We want to modify this to use our texture now instead of a diamond.<br>
-Slimefun provides a quick and easy method for this: `SkullItem.fromBase64(...)`.<br>
-Note that you will need to **import** SkullItem from `me.mrCookieSlime.slimefun.cscorelib2.skull.SkullItem` first.
+Slimefun5 provides a quick and easy method for this: `SkullItem.fromBase64(...)`.<br>
+Note that you will need to **import** SkullItem from `me.mrCookieSlime.Slimefun5.cscorelib2.skull.SkullItem` first.
 
 This method takes in a Base64 String and gives us an `ItemStack` version of that head.<br>
 The constructor for `CustomItem` also allows us to specify an ItemStack which we want to rename instead of a Material.<br>
@@ -123,19 +123,19 @@ ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 Our ItemGroup is now displayed as our head.
 
 ## 5. Using your texture for items
-The next part is to modify our `SlimefunItemStack` to have our custom head texture.<br>
+The next part is to modify our `Slimefun5ItemStack` to have our custom head texture.<br>
 This is our code from earlier:
 ```java
 // ...
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 // ...
 ```
 
 Wouldn't it be awesome for our Fire Cake to actually look like a dangerous piece of cake?<br>
-With SlimefunItemStack this is even easier. We can simply replace our Material (`Material.CAKE`) with the Base64 String of our texture.
+With Slimefun5ItemStack this is even easier. We can simply replace our Material (`Material.CAKE`) with the Base64 String of our texture.
 ```java
 // ...
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 // ...
 ```
 
@@ -146,8 +146,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(SkullItem.fromBase64("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0="), "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=", "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {

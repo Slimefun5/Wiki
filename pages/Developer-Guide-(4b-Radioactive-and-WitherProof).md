@@ -1,4 +1,4 @@
-﻿This is the **fourth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **fourth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [third Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(3-Your-first-Item)), then please do that.
 
 *The fourth part is divided into two sections, this is Section b*.
@@ -9,12 +9,12 @@ However we introduced some very important principles that we will need here too,
 
 Alright, last time we created a custom cake that sets you on fire when you try to eat it.<br>
 But it also gives one XP level when you right-click with that cake in your hand.<br>
-To achieve this we introduced classes, more specifically we taught you how to create your own class that extends SlimefunItem, here is our code of that class so far.
+To achieve this we introduced classes, more specifically we taught you how to create your own class that extends Slimefun5Item, here is our code of that class so far.
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -46,10 +46,10 @@ public class FireCake extends SlimefunItem {
 We can ignore the preRegister() and right-click methods for now, those were covered in part 4a.
 
 ## 2. Item Attributes
-Slimefun items can have functionality (called ItemHandlers) but they can also have some properties (called ItemAttributes).<br>
+Slimefun5 items can have functionality (called ItemHandlers) but they can also have some properties (called ItemAttributes).<br>
 Note that these attributes are not related to Minecraft's attributes system.
 
-An `ItemAttribute` adds a certain property to a SlimefunItem, such as being radioactive.<br>
+An `ItemAttribute` adds a certain property to a Slimefun5Item, such as being radioactive.<br>
 Let's make our FireCake also radioactive, shall we?
 
 To add an ItemAttribute, simply add it to your class declaration.<br>
@@ -57,9 +57,9 @@ However ItemAttributes are interfaces, not classes. So you need to use the keywo
 As we covered in the last part: Classes can only have one direct parent class. But they can implement as many interfaces as they want.<br>
 Let's implement the `Radioactive` interface. Now your code may look like this:
 ```java
-public class FireCake extends SlimefunItem implements Radioactive {
+public class FireCake extends Slimefun5Item implements Radioactive {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -74,9 +74,9 @@ Your IDE should already prompt you to do that.
 
 In the case of `Radioactive`, there is only one method: `getRadioactivity()`. Implement that method like this:
 ```java
-public class FireCake extends SlimefunItem implements Radioactive {
+public class FireCake extends Slimefun5Item implements Radioactive {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -95,13 +95,13 @@ This method expects us to return a value of the type `Radioactivity`.
 `Radioactivity` is an enum. Enums (or "Enumerations") are a type of class that cannot be created that easily.<br>
 An enum has a limited amount of possible states and each state is saved as a constant, accessible via `EnumName.CONSTANT_NAME`.
 
-You can see all constants from that enum on our [Javadocs](https://slimefun.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/slimefun5/core/attributes/Radioactivity.html).
+You can see all constants from that enum on our [Javadocs](https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/core/attributes/Radioactivity.html).
 
 We are just gonna choose the level HIGH for now. We can simply return that constant.
 ```java
-public class FireCake extends SlimefunItem implements Radioactive {
+public class FireCake extends Slimefun5Item implements Radioactive {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -127,8 +127,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", "&cBe careful");
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", "&cBe careful");
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
@@ -144,10 +144,10 @@ cake.register(this);
 
 Let's change the lore of our `itemStack`, it currently reads "&cBe careful".<br>
 We wanna include a tooltip that warns about our radioactive properties.<br>
-Luckily Slimefun has a built-in way for that.
+Luckily Slimefun5 has a built-in way for that.
 
 There is a static method called `LoreBuilder.radioactive(...)` which takes a constant of `Radioactivity` as an argument.<br>
-We can use that to create a string that warns about radioactivity. This will be the same string that Slimefun's standard items use.<br>
+We can use that to create a string that warns about radioactivity. This will be the same string that Slimefun5's standard items use.<br>
 If you wanted to go one step further you could also use the static constant `LoreBuilder.HAZMAT_SUIT_REQUIRED` which will warn them to
 wear a Hazmat Suit. Let's do that.
 
@@ -156,8 +156,8 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("FIRE_CAKE", Material.CAKE, "&4Fire Cake", "", LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
@@ -174,18 +174,18 @@ cake.register(this);
 Now our item will have the appropriate tooltips.
 
 ## 4. Implementing any other ItemAttribute
-The process for implementing any `ÌtemAttribute` is pretty much the same.<br>
+The process for implementing any `�temAttribute` is pretty much the same.<br>
 It is always recommended to inform the user of these attributes via the `LoreBuilder` class or manually.
 
-You can find a full list of all available Item Attributes on the [Javadocs](https://slimefun.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/slimefun5/core/attributes/ItemAttribute.html) under **"All Known Subinterfaces"**.
+You can find a full list of all available Item Attributes on the [Javadocs](https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/core/attributes/ItemAttribute.html) under **"All Known Subinterfaces"**.
 
 As a little bonus, let's implement the "WitherProof" attribute.<br>
 This attribute will prevent Withers from destroying our block.<br>
 Let's go back to our class and implement that interface too. You can seperate interfaces you wanna implement with a comma.
 ```java
-public class FireCake extends SlimefunItem implements Radioactive, WitherProof {
+public class FireCake extends Slimefun5Item implements Radioactive, WitherProof {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -198,9 +198,9 @@ Now your process will be the same, WitherProof also has a method it requires to 
 The method is called `onAttack()` and it will be run whenever a Wither tried to destroy this block. Solely implementing that interface will already prevent that though.
 So with that method generated, the code will look like this.
 ```java
-public class FireCake extends SlimefunItem implements Radioactive, WitherProof {
+public class FireCake extends Slimefun5Item implements Radioactive, WitherProof {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -221,9 +221,9 @@ But you can also do something inside that method, such as spawning a particle fo
 or even better... Let's instantly kill any Wither that tries to eat our precious cake.
 
 ```java
-public class FireCake extends SlimefunItem implements Radioactive, WitherProof {
+public class FireCake extends Slimefun5Item implements Radioactive, WitherProof {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -241,9 +241,9 @@ Setting the Wither's health to zero will instantly kill it.<br>
 Now just to recapture everything, here is the full code of our `FireCake` class.
 
 ```java
-public class FireCake extends SlimefunItem implements Radioactive, WitherProof {
+public class FireCake extends Slimefun5Item implements Radioactive, WitherProof {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     

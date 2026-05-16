@@ -1,4 +1,4 @@
-﻿The Electric Ingot Pulverizer is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which pulverizes [Ingots](https://github.com/Slimefun5/Slimefun5/wiki/Ingots) into their corresponding [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts).
+The Electric Ingot Pulverizer is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which pulverizes [Ingots](https://github.com/Slimefun5/Slimefun5/wiki/Ingots) into their corresponding [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts).
 
 The [Electric Ingot Factory](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ingot-Factory) is the opposite of this machine.
 

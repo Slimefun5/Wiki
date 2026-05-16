@@ -1,4 +1,4 @@
-﻿
+
 ## Obtaining
 
 Combining the following items in a [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smeltery) or an [Electric Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Smeltery) yields one Duralumin Ingot:

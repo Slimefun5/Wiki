@@ -1,4 +1,4 @@
-﻿The Items category contains various items that all have their own unique use.
+The Items category contains various items that all have their own unique use.
 
 ## Table of Contents
 * [Portable Crafter](https://github.com/Slimefun5/Slimefun5/wiki/Portable-Crafter)

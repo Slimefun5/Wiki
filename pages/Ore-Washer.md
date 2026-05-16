@@ -1,4 +1,4 @@
-﻿The Ore Washer is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
+The Ore Washer is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
 
 ## Obtaining
 The Ore Washer is a multiblock structure, it consists of a cauldron, a fence and a dispenser.<br>
@@ -12,5 +12,5 @@ You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki
 
 ## Usage
 Most common use is to wash [Sifted Ore](https://github.com/Slimefun5/Slimefun5/wiki/Sifted-Ore) into [Dusts](https://github.com/Slimefun5/Slimefun5/wiki/Dusts).<br>
-Check out the Ore Washer in the Slimefun Guide in-game for more uses.<br>
+Check out the Ore Washer in the Slimefun5 Guide in-game for more uses.<br>
 To use the Ore Washer, you have to put your items in the dispenser, if there is a viable conversion possible when you right click the fence, it'll output the converted item.

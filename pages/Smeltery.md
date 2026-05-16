@@ -1,10 +1,10 @@
-﻿The Smeltery is one of the most fundamental Slimefun machines.  
+The Smeltery is one of the most fundamental Slimefun5 machines.  
 It is not only used to smelt dusts into Ingots but also for making Alloys.
 
 **NOTE: The Smeltery requires fire beneath it. While smelting items, the fire will randomly get consumed, so make sure to reignite it when that happens.**
 
 ## How to build a Smeltery
-The recipe is already found in your Slimefun Guide, but here is the final version:
+The recipe is already found in your Slimefun5 Guide, but here is the final version:
 
 ![Smeltery Setup](https://raw.githubusercontent.com/TheBusyBiscuit/Slimefun5-Wiki/master/images/multiblock-smeltery.png)
 

@@ -1,4 +1,4 @@
-﻿Reactors are a way to [Generate Energy](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) fast and efficiently.  
+Reactors are a way to [Generate Energy](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) fast and efficiently.  
 There are currently two types of Reactors. Both of these require to be surrounded by water next to the reactor. Below and above are not necessary.  
 
 ## Reactor Access Port

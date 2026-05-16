@@ -1,4 +1,4 @@
-﻿The Explosive Pickaxe is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
+The Explosive Pickaxe is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
 It is an unenchanted diamond pickaxe which can mine several blocks at once.
 
 ## Obtaining

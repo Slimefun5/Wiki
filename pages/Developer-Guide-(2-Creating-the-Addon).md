@@ -12,7 +12,7 @@ package ...;
 
 import ...;
 
-public class SlimefunAddon extends JavaPlugin implements SlimefunAddon {
+public class Slimefun5Addon extends JavaPlugin implements Slimefun5Addon {
 	
 	@Override
 	public void onEnable() {
@@ -26,7 +26,7 @@ public class SlimefunAddon extends JavaPlugin implements SlimefunAddon {
 	
 	@Override
 	public JavaPlugin getJavaPlugin() {
-		// This is a method that links your SlimefunAddon to your Plugin.
+		// This is a method that links your Slimefun5Addon to your Plugin.
 		// Just return "this" in this case, so they are linked
 		return this;
 	}
@@ -45,12 +45,12 @@ public class SlimefunAddon extends JavaPlugin implements SlimefunAddon {
 ```
 
 The `package` token at the top simply describes the package this file is in.<br>
-The `import` token tells Java to import classes from other projects, you will probably see a lot of those importing from `io.github.thebusybiscuit.slimefun5...` or `org.bukkit...`.<br>
+The `import` token tells Java to import classes from other projects, you will probably see a lot of those importing from `io.github.thebusybiscuit.Slimefun5...` or `org.bukkit...`.<br>
 This is because you are referencing those classes, as you will work with them.
 
 After that your own class will start it should have the same name as its file (without the file ending) and is followed by `extends JavaPlugin`.<br>
 This basically tells Java to treat it like a Bukkit Plugin (in Java).<br>
-`implements SlimefunAddon` tells Slimefun to treat your Plugin like an Addon.
+`implements Slimefun5Addon` tells Slimefun5 to treat your Plugin like an Addon.
 
 This class also contains two `methods`.<br>
 `onEnable()` is called whenever the plugin is enabled. This is where you would do any initializations.<br>
@@ -71,7 +71,7 @@ public void onEnable() {
 You can use a `Config` class and `new Config(this)` to reference your plugin's config.<br>
 You can find your default config under `src/main/resources/config.yml`.
 
-This `Config` class comes from Slimefun / dough. So you won't see this in any non-Slimefun Projects.<br>
+This `Config` class comes from Slimefun5 / dough. So you won't see this in any non-Slimefun5 Projects.<br>
 You can read values directly from this class using the appropriate getters:
 ```java
 cfg.getBoolean("path.to.your.boolean");
@@ -80,7 +80,7 @@ cfg.getString("path.to.your.string");
 
 You can use your Config to set up values that Server Owners should be able to configure.
 
-**Important hint: If your IDE nags about not being able to find `Config`, then make sure to import the Config class from the `io.github.thebusybiscuit.slimefun5.libraries.dough.config` package.**<br>
+**Important hint: If your IDE nags about not being able to find `Config`, then make sure to import the Config class from the `io.github.thebusybiscuit.Slimefun5.libraries.dough.config` package.**<br>
 You will need to import each external class you will use.
 
 [**> Continue with Part 3**](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(3-Your-first-Item))

@@ -1,4 +1,4 @@
-﻿The Makeshift Smeltery is a cheaper alternative to the [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smeltery). It doesn't need materials from the Nether to be crafted.
+The Makeshift Smeltery is a cheaper alternative to the [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smeltery). It doesn't need materials from the Nether to be crafted.
 
 It does lack some functionality that the Smeltery does have.
 

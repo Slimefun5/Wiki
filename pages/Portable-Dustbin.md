@@ -1,4 +1,4 @@
-﻿The Portable Dustbin is an [Item](https://github.com/Slimefun5/Slimefun5/wiki/Items) that has a unique use.
+The Portable Dustbin is an [Item](https://github.com/Slimefun5/Slimefun5/wiki/Items) that has a unique use.
 
 ## Obtaining
 The Portable Dustbin can be crafted in the [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

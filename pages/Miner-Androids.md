@@ -1,4 +1,4 @@
-﻿An Android specialized for mining purposes, but can used to break other blocks too.
+An Android specialized for mining purposes, but can used to break other blocks too.
 
 ## Obtaining
 Miner Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

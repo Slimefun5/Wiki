@@ -52,7 +52,7 @@ https://github.com/nahkd123/Endrex
 * Your pom includes a local file:// repository which will break on anyone trying to work on this
 * Don't use Random#nextInt() in a for loop if you are not gonna use it, let that entropy come from the algorithm itself
 * Lots of missing access modifiers which could lead to unexpected results
-* Redundant classes with some unneeded utilities, part of which are already in Slimefun
+* Redundant classes with some unneeded utilities, part of which are already in Slimefun5
 * Seemingly unnecessary static fields, some unused class
 * Lack of visual cues on machines, the guide could display their recipes for example
 
@@ -87,7 +87,7 @@ https://github.com/Sfiguz7/TranscEndence
 * Code-wise a few naming conventions were violated, such as the package name "Lists".
 * You should never store a Player Object in a collection, it will lead to severe memory leaks
 * Your custom RecipeType extends RecipeType but you never use instances of that class, you only ever use the static fields which defeats the points of inheriting from that class
-* Way too many unneeded static imports, some rather redundant API classes, the architecture seems kinda copied from Slimefun
+* Way too many unneeded static imports, some rather redundant API classes, the architecture seems kinda copied from Slimefun5
 * The guide should probably be craftable, as players can be rather stuck without it and a Server could add the plugin mid-way through
 * Very few items actually revolve around "The End", it seems like the theme was mostly ignored here except for some end-related machines or machines that "only work in the End"
 
@@ -139,7 +139,7 @@ https://github.com/Gavin296/end-combat
 | -------- | ---------- | ---------- | ------------ | -------- | --------- | ----- |
 | 9.2      | 8.2        | 5.45       | 5.6          | 7.25     | 6.35      | **7.01** |
 
-> Adds a variety of tools/weapons to Slimefun. Also includes a new boss.
+> Adds a variety of tools/weapons to Slimefun5. Also includes a new boss.
 > <br>_by HAL989_
 
 <details>
@@ -208,7 +208,7 @@ It's good but small.
 </details>
 
 ## 6. SlimeVoid by BigBadE
-https://github.com/BigBadE/SlimefunVoid
+https://github.com/BigBadE/Slimefun5Void
 | Accuracy | Creativity | Innovation | Code Quality | Gameplay | Mechanics | TOTAL |
 | -------- | ---------- | ---------- | ------------ | -------- | --------- | ----- |
 | 2.65     | 6.1        | 7.4        | 3.5          | 6.0      | 2.9       | **4.76** |
@@ -248,7 +248,7 @@ https://github.com/BigBadE/SlimefunVoid
 * The api-version in the plugin.yml is specified as "1.13" but the project itself is built against 1.15
 * The version inside the plugin.yml is not automatically inferred by the pom.xml which leads to inaccurate or redundant versioning
 * Cramped one-line functions
-* RegEx patterns are compiled at runtime which is very slow but done repeatedly throughout the code, these should be compiled once and then be re-used instead. Most common patterns are also already included in Slimefun itself, see PatternUtils
+* RegEx patterns are compiled at runtime which is very slow but done repeatedly throughout the code, these should be compiled once and then be re-used instead. Most common patterns are also already included in Slimefun5 itself, see PatternUtils
 * When comparing user input Strings, you should use .equalsIgnoreCase()
 * random.nextInt(2) == 0 should really be changed to Random#nextBoolean()
 * Potential memory leak: Not removing Player UUIDs from Maps on every possible occasion, such as server-leaving or kicking, small but can stack up on large servers

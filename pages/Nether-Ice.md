@@ -1,4 +1,4 @@
-﻿Nether Ice is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to create [Enriched Nether Ice](https://github.com/Slimefun5/Slimefun5/wiki/Enriched-Nether-Ice), a powerful reactor coolant.
+Nether Ice is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to create [Enriched Nether Ice](https://github.com/Slimefun5/Slimefun5/wiki/Enriched-Nether-Ice), a powerful reactor coolant.
 
 ## Obtaining
 Nether Ice must be obtained through a [GEO Miner](https://github.com/Slimefun5/Slimefun5/wiki/GEO-Miner) in the Nether.

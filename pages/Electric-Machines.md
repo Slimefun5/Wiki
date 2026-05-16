@@ -1,4 +1,4 @@
-﻿The Energy and Electricity category adds various machines which generate, consume or transfer energy (measured in Joules or J). It also includes [Programmable Androids](https://github.com/Slimefun5/Slimefun5/wiki/Androids), which can be programmed to execute a series of tasks.
+The Energy and Electricity category adds various machines which generate, consume or transfer energy (measured in Joules or J). It also includes [Programmable Androids](https://github.com/Slimefun5/Slimefun5/wiki/Androids), which can be programmed to execute a series of tasks.
 
 Besides a way to generate electricity for your machines, an energy network requires an [Energy Regulator](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Regulator): without it, power transfer cannot happen.  
 You may also want to use [Energy Capacitors](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Capacitors), as they can store excess energy and extend the range of your network. The [Energy Connector](https://github.com/Slimefun5/Slimefun5/wiki/Energy-Connector) can also extend your network, but it does not store power.

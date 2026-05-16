@@ -1,10 +1,10 @@
-﻿This is the **fourth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
+This is the **fourth Part** of our Developer Guide, you can find a full overview on our [main page](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide).<br>
 If you haven't checked out the [third Part of this Guide](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(3-Your-first-Item)), then please do that.
 
 *The fourth part is divided into two sections, this is Section a*.
 
 ## 1. What we did last time
-On the last part we covered how to create our own Slimefun items, item groups, and recipes.<br>
+On the last part we covered how to create our own Slimefun5 items, item groups, and recipes.<br>
 If you missed it, then please head back now. You will need this info to progress any further.
 
 Still/Back here? Good. Now this is the code from last time (it should be inside your 'onEnable' method).
@@ -15,27 +15,27 @@ CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very
 // Our custom Category
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("MY_ADDON_ITEM", Material.EMERALD, "&aPretty cool Emerald", "", "&7This is awesome");
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("MY_ADDON_ITEM", Material.EMERALD, "&aPretty cool Emerald", "", "&7This is awesome");
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
     new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
-    null,                               SlimefunItems.CARBONADO,            null,
+    null,                               Slimefun5Items.CARBONADO,            null,
     new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
 };
 
-SlimefunItem sfItem = new SlimefunItem(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+Slimefun5Item sfItem = new Slimefun5Item(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
 sfItem.register(this);
 ```
 
 Now, you can compile your addon and test it ingame. See [Compiling](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(9-Compiling)) for details.<br> 
-As you can see our Slimefunitem can already be seen and crafted ingame.<br>
+As you can see our Slimefun5item can already be seen and crafted ingame.<br>
 But there is not much value to this item yet, it doesn't do anything.<br>
 Let's change that.
 
-## 2. Extending SlimefunItem
-For our previous item we simply used the class `SlimefunItem`, this is fine and good. But it doesn't do anything by default.<br>
+## 2. Extending Slimefun5Item
+For our previous item we simply used the class `Slimefun5Item`, this is fine and good. But it doesn't do anything by default.<br>
 So we will need to create our own class instead.<br>
 This should be very straightforward and you will need to create classes all the time.
 
@@ -50,30 +50,30 @@ public class FireCake {
 ```
 
 In Java or any other object-oriented programming language, classes can inherit from each other.<br>
-You can think of a class as a template for objects. The `SlimefunItem` class is basically a template for any item we will create.<br>
-Now we created our own class which makes this a completely new template for objects. However we can extend the `SlimefunItem` template which will
-make sure items that use our class have all the same functionality as an item created from the `SlimefunItem` class.
+You can think of a class as a template for objects. The `Slimefun5Item` class is basically a template for any item we will create.<br>
+Now we created our own class which makes this a completely new template for objects. However we can extend the `Slimefun5Item` template which will
+make sure items that use our class have all the same functionality as an item created from the `Slimefun5Item` class.
 
 Likewise, your plugin's main class is just an *extension* of Bukkit's JavaPlugin class, the template for all plugins.<br>
 Your main class extends that plugin and your Server then creates a Plugin object based on the template you defined.
 
 I hope this didn't confuse you too much, what we need to do now is the following:<br>
-We want our `FireCake` class to extend the `SlimefunItem` class, to make it inherit from that.<br>
-For this we use the `extends` keyword followed by the parent class (`SlimefunItem`). Note that any class can only have one parent and one parent only.
+We want our `FireCake` class to extend the `Slimefun5Item` class, to make it inherit from that.<br>
+For this we use the `extends` keyword followed by the parent class (`Slimefun5Item`). Note that any class can only have one parent and one parent only.
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
 
 }
 ```
 
 Now your IDE will probably start nagging you with errors at this point.<br>
 We will need a constructor. A constructor defines **how** objects are created from this "template".<br>
-And the `SlimefunItem` constructor requires a few parameters which all child classes need to provide too.
+And the `Slimefun5Item` constructor requires a few parameters which all child classes need to provide too.
 
 If we think back of our previous code, the constructor looked like this:
 ```java
-new SlimefunItem(itemGroup, itemStack, recipeType, recipe);
+new Slimefun5Item(itemGroup, itemStack, recipeType, recipe);
 ```
 
 With our new class we can simply copy this constructor and pass all arguments onto the constructor of our parent class.<br>
@@ -82,9 +82,9 @@ With our new class we can simply copy this constructor and pass all arguments on
 We simply use the `super` keyword for this and pass on the arguments, the constructor will look like this now:
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -99,13 +99,13 @@ NamespacedKey categoryId = new NamespacedKey(this, "cool_category");
 CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, "&4Our very cool Category");
 ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
 
-// The custom item for our SlimefunItem
-SlimefunItemStack itemStack = new SlimefunItemStack("MY_ADDON_ITEM", Material.CAKE, "&aA Fire Cake", "", "&7This is awesome");
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack("MY_ADDON_ITEM", Material.CAKE, "&aA Fire Cake", "", "&7This is awesome");
 
 // A 3x3 shape representing our recipe
 ItemStack[] recipe = {
     new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
-    null,                               SlimefunItems.CARBONADO,            null,
+    null,                               Slimefun5Items.CARBONADO,            null,
     new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
 };
 
@@ -114,36 +114,36 @@ FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_
 cake.register(this);
 ```
 
-**IMPORTANT: Remember to change the SlimefunItemStack to be a cake, otherwise you won't be able to eat it.**
+**IMPORTANT: Remember to change the Slimefun5ItemStack to be a cake, otherwise you won't be able to eat it.**
 
 ## 3. Adding an Item Handler (BlockUseHandler)
 Now that we swapped our the class, the addon should still work as expected. However nothing has changed.<br>
-All we have done so far is basically add a new class which acts exactly like a SlimefunItem.<br>
+All we have done so far is basically add a new class which acts exactly like a Slimefun5Item.<br>
 We need to add actual features to the class now.
 
-In Slimefun one way we can add functionality is through an `ItemHandler` ([Javadocs](https://slimefun.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/slimefun5/api/items/ItemHandler.html)).<br>
+In Slimefun5 one way we can add functionality is through an `ItemHandler` ([Javadocs](https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/api/items/ItemHandler.html)).<br>
 There are several Item Handler types available to choose from.<br>
 You can find a full list on our JavaDocs - that are linked above - under the point "All Known Subinterfaces".
 
 To add our ItemHandler, we go back to our custom item class.
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
 }
 ```
 
-Here we will **override** a method from SlimefunItem called `preRegister()`.<br>
+Here we will **override** a method from Slimefun5Item called `preRegister()`.<br>
 This method is called right before the item is registered, this ensures that our handlers get added properly.<br>
 Note that overridden methods should have an `@Override` annotation as seen here:
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -218,9 +218,9 @@ BlockUseHandler blockUseHandler = this::onBlockRightClick;
 The full code now looks like this.
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -272,9 +272,9 @@ We can simply add a new method (also with a PlayerRightClickEvent parameter) and
 Let's be nice and give the Player 1 XP level when he right clicks with the cake in his hand.
 
 ```java
-public class FireCake extends SlimefunItem {
+public class FireCake extends Slimefun5Item {
     
-    public FireCake(ItemGroup itemGroup, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(itemGroup, item, recipeType, recipe);
     }
     
@@ -303,7 +303,7 @@ public class FireCake extends SlimefunItem {
 }
 ```
 
-Phew, now we have shown you how to make your custom slimefun item perform actions on right-click.<br>
+Phew, now we have shown you how to make your custom Slimefun5 item perform actions on right-click.<br>
 If you have any questions, feel free to hop on discord and ask them in `#programming-help`.<br>
 I hope this was helpful to you and I expect to see lots of awesome addons very soon!
 

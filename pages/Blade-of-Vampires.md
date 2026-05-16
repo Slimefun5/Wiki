@@ -1,3 +1,3 @@
-﻿The Blade of Vampires is a [Weapon](https://github.com/Slimefun5/Slimefun5/wiki/Weapons) added in Slimefun.<br>
+The Blade of Vampires is a [Weapon](https://github.com/Slimefun5/Slimefun5/wiki/Weapons) added in Slimefun5.<br>
 It is a Gold Sword which is enchanted with Fire Aspect II, Sharpness II and Unbreaking IV.<br>
 It also has Life Steal, which gives you a 45% chance to recover 2 Hearts of your Health each time you attack something with it.

@@ -181,7 +181,7 @@ https://github.com/Seggan/EMC2
 #### Cons
 * Horrible user experience, lack of explanation
 * The Atomizer opens the Beacon UI
-* "QGC" does not take Slimefun items into account, only vanilla materials which results in a servere disbalance and exploits
+* "QGC" does not take Slimefun5 items into account, only vanilla materials which results in a servere disbalance and exploits
 * Very limited features
 * Concept essentially copied from EE2 and not really any "new" or "unique" elements to it
 * No visual effects, using the machines is not very rewarding or satisfying, you just see a number go up

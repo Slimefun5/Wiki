@@ -1,4 +1,4 @@
-﻿Circuit Boards are [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that can be used in various crafting recipes.
+Circuit Boards are [Technical Components](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Components) that can be used in various crafting recipes.
 
 ## Obtaining
 ### Basic Circuit Board

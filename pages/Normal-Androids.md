@@ -1,4 +1,4 @@
-﻿A Normal Android is used as a base to create a specialized Android.
+A Normal Android is used as a base to create a specialized Android.
 
 ## Obtaining
 Normal Androids can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

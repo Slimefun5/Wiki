@@ -1,4 +1,4 @@
-﻿The Tools category contains various tools with special properties.
+The Tools category contains various tools with special properties.
 
 ## Table of contents
 * [Gold Pan](https://github.com/Slimefun5/Slimefun5/wiki/Gold-Pan)

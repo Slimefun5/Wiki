@@ -1,4 +1,4 @@
-﻿
+
 ## Obtaining
 Smelting one [Lead Dust](https://github.com/Slimefun5/Slimefun5/wiki/Lead-Dust) in a [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smeltery) or an [Electric Ingot Factory](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Ingot-Factory) yields one Lead Ingot.<br>
 

@@ -1,4 +1,4 @@
-﻿The EXP-Collector is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to collect exp.  
+The EXP-Collector is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which can be used to collect exp.  
 It stores the exp in [Flasks of Knowledge](https://github.com/Slimefun5/Slimefun5/wiki/Flask-of-Knowledge).
 
 ## EXP-Collector Tiers

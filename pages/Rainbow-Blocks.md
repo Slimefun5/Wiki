@@ -1,4 +1,4 @@
-﻿These are all the non-seasonal rainbow blocks that can be crafted. 
+These are all the non-seasonal rainbow blocks that can be crafted. 
 - Rainbow Glass
 - Rainbow Glass Pane
 - Rainbow Clay

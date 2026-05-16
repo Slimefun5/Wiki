@@ -1,4 +1,4 @@
-﻿The Automatic Ignition Chamber is part of the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category.  
+The Automatic Ignition Chamber is part of the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category.  
 
 ## Usage
 The Automatic Ignition Chamber can only be used as an extension on the [Smeltery](https://github.com/Slimefun5/Slimefun5/wiki/Smeltery) (not the Makeshift Smeltery).  

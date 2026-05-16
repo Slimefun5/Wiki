@@ -1,4 +1,4 @@
-﻿The Heated Pressure Chamber is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which is used for a few specific end-game recipes.
+The Heated Pressure Chamber is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) which is used for a few specific end-game recipes.
 
 It is a more robust and more powerful version of the [Pressure Chamber](https://github.com/Slimefun5/Slimefun5/wiki/Pressure-Chamber).
 

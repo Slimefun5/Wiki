@@ -1,4 +1,4 @@
-﻿The Food Fabricator is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) that can be used to create [Organic Food](https://github.com/Slimefun5/Slimefun5/wiki/Miscellaneous-Items) which is used as fuel in a few other [Electric Machines](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines).
+The Food Fabricator is an [Electric Machine](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines) that can be used to create [Organic Food](https://github.com/Slimefun5/Slimefun5/wiki/Miscellaneous-Items) which is used as fuel in a few other [Electric Machines](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines).
 
 ## Food Fabricator Tiers
 

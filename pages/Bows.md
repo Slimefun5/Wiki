@@ -1,4 +1,4 @@
-﻿Among the [Weapons](https://github.com/Slimefun5/Slimefun5/wiki/Weapons) it adds, Slimefun introduces three new bows: the Soulbound Bow, the Explosive Bow, and the Icy Bow.<br>
+Among the [Weapons](https://github.com/Slimefun5/Slimefun5/wiki/Weapons) it adds, Slimefun5 introduces three new bows: the Soulbound Bow, the Explosive Bow, and the Icy Bow.<br>
 They each have special properties and may be enchanted like any other Bow.
 
 ## Soulbound Bow

@@ -1,4 +1,4 @@
-﻿The GPS Transmitter is a basic component of a GPS network, which is a building block of the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The GPS Transmitter is a basic component of a GPS network, which is a building block of the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The GPS Transmitters can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

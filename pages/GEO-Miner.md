@@ -1,4 +1,4 @@
-﻿The GEO Miner is a placeable machine added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
+The GEO Miner is a placeable machine added in the [GPS](https://github.com/Slimefun5/Slimefun5/wiki/GPS) category.
 
 ## Obtaining
 The GEO Miner can be crafted in an [Enhanced Crafting Table](https://github.com/Slimefun5/Slimefun5/wiki/Enhanced-Crafting-Table).

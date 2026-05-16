@@ -1,4 +1,4 @@
-﻿The Hologram Projector is part of the [Technical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Gadgets) category.  
+The Hologram Projector is part of the [Technical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Technical-Gadgets) category.  
 It is not required to power these machines for them to be able to run.
 
 With the Hologram Projector you can display custom text, color codes are supported.  

@@ -1,4 +1,4 @@
-﻿Carbon is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to craft a variety of other items. It comes in three forms:
+Carbon is a [Resource](https://github.com/Slimefun5/Slimefun5/wiki/Resources) that can be used to craft a variety of other items. It comes in three forms:
 
 - Carbon
 - Compressed Carbon

@@ -1,4 +1,4 @@
-﻿The Explosive Shovel is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
+The Explosive Shovel is an item in the [tools](https://github.com/Slimefun5/Slimefun5/wiki/Tools) category.<br>
 It is an unenchanted diamond shovel which can dig several blocks at once.
 
 ## Obtaining

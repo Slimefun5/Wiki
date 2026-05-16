@@ -1,4 +1,4 @@
-﻿The Infused Magnet is part of the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
+The Infused Magnet is part of the [Magical Gadgets](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Gadgets) category.  
 
 It is a useful item that picks up nearby items in a bigger range than you normally could.
 

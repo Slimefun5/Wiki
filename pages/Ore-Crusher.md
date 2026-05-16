@@ -1,4 +1,4 @@
-﻿The Ore Crusher is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
+The Ore Crusher is in the [Basic Machines](https://github.com/Slimefun5/Slimefun5/wiki/Basic-Machines) category. It is a multiblock structure.<br>
 
 ## Obtaining
 The Ore Crusher is a multiblock structure, it consists of a dispenser, a nether brick fence and 2 iron bars.<br>
@@ -11,4 +11,4 @@ You can also place an [Output Chest](https://github.com/Slimefun5/Slimefun5/wiki
 
 ## Usage
 The Ore Crusher is mainly used to crush ores into their minerals, but it has other uses too.<br>
-Check out the Ore Crusher in the Slimefun Guide in-game for more recipes.
+Check out the Ore Crusher in the Slimefun5 Guide in-game for more recipes.

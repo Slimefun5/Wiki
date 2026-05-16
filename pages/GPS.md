@@ -1,4 +1,4 @@
-﻿The GPS category adds various electric and non-electric machines revolving around GPS network.
+The GPS category adds various electric and non-electric machines revolving around GPS network.
 
 ## Table of contents
 

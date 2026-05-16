@@ -1,4 +1,4 @@
-﻿The Solar Generator is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines).  
+The Solar Generator is a type of [Energy Generator](https://github.com/Slimefun5/Slimefun5/wiki/Electric-Machines).  
 Unlike most other generators, it does not need to be fueled, requiring only direct sunlight. However, it does not generate power at night until you reach the last tier of solar generators.
 
 ## Obtaining

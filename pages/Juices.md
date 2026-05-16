@@ -1,4 +1,4 @@
-﻿Juices are [Food](https://github.com/Slimefun5/Slimefun5/wiki/Food) items added by Slimefun.<br>
+Juices are [Food](https://github.com/Slimefun5/Slimefun5/wiki/Food) items added by Slimefun5.<br>
 You can obtain Juices by processing the corresponding Fruit/Vegetable in a [Juicer](https://github.com/Slimefun5/Slimefun5/wiki/Juicer).
 
 ## List of Juices

@@ -1,4 +1,4 @@
-﻿The Magical Gadgets contains various gadgets with magical powers. Use your [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) to craft these!
+The Magical Gadgets contains various gadgets with magical powers. Use your [Magical Items](https://github.com/Slimefun5/Slimefun5/wiki/Magical-Items) to craft these!
 
 ## Table of contents
 ----

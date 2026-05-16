@@ -16,5 +16,5 @@ assignees: ''
 ## Wiki page
 <!-- What page contains the Typo? -->
 
-## Slimefun Version
-<!-- What Version of Slimefun are you using? -->
+## Slimefun5 Version
+<!-- What Version of Slimefun5 are you using? -->

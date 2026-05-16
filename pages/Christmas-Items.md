@@ -1,4 +1,4 @@
-﻿Christmas items are [Christmas specialities](https://github.com/Slimefun5/Slimefun5/wiki/Christmas-Seasonal-Category).<br>
+Christmas items are [Christmas specialities](https://github.com/Slimefun5/Slimefun5/wiki/Christmas-Seasonal-Category).<br>
 This category mostly consists of different kinds of food.
 
 | Food | Ingredients | Workbench | Output Amount |
