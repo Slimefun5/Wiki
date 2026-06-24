@@ -3,7 +3,7 @@ name: Wiki Sync
 on:
   push:
     branches:
-    - master
+    - stable
     paths:
     - 'pages/**'
 
@@ -12,7 +12,7 @@ jobs:
 
     name: Synchronize Wiki
     runs-on: ubuntu-latest
-    if: github.repository == 'Slimefun/Wiki'
+    if: github.repository == 'Slimefun5/Wiki'
 
     steps:
     - name: Checking out repository
