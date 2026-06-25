@@ -1,6 +1,9 @@
 name: Wiki Sync
 
 on:
+  # Manual trigger (e.g. first-time population / re-sync)
+  workflow_dispatch: {}
+
   push:
     branches:
     - stable
