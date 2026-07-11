@@ -1,4 +1,4 @@
-If you join our [Discord Server](https://discord.gg/fsD4Bkh), then we want you to follow these rules.<br>
+If you join our [Discord Server](https://discord.gg/CbBYZBEWdR), then we want you to follow these rules.<br>
 Not following this ruleset can result in us kicking or banning you from the server.
 
 **These rules can change at any time, so please check these regularly. Large changes will be announced of course.**

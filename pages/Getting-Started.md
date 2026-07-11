@@ -2,7 +2,7 @@ If you have just started using Slimefun5 it may seem overwhelming or very compli
 You may not know where to start.
 If that sounds familiar then you have come to the right place!
 
-This guide assumes that you have already installed Slimefun5, otherwise start by reading [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5)
+This guide assumes that you have already installed Slimefun5, otherwise start by reading [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun)
 
 ## 1. Slimefun5 Guide
 The very first Item you will need on your journey is the Slimefun5 Guide.

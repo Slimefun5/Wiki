@@ -53,7 +53,7 @@ After you make your changes, compile your addon again.<br>
 The compiled jar will be in the `target/` folder of the project.<br>
 Now, stop the server, remove the old addon `.jar`, and put in the new `.jar`. Then rerun the server.
 
-As always, if you have any questions, you can ask them in `#programming-help` in the [Slimefun5 Discord](https://discord.gg/Slimefun5). 
+As always, if you have any questions, you can ask them in `#programming-help` in the [Slimefun5 Discord](https://discord.gg/CbBYZBEWdR). 
 
 ## Publishing
 

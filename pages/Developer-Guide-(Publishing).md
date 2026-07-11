@@ -48,5 +48,5 @@ We recommend all addon developers to feature their addon on our public [Addons p
 Simply make a new pull request on our wiki repository, you can find a tutorial here:<br>
 https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki
 
-You can also share your project by posting about it on our [Discord server](https://discord.gg/Slimefun5).<br>
+You can also share your project by posting about it on our [Discord server](https://discord.gg/CbBYZBEWdR).<br>
 Upload videos or screenshots to get people excited! But please don't tag anyone.

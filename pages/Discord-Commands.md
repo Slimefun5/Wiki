@@ -1,6 +1,6 @@
 Before continuing to read, make sure to first read the [Rules of our Discord Server](https://github.com/Slimefun5/Slimefun5/wiki/Discord-Rules).<br>
 
-Note that the following commands only work on our [Official Discord Server](https://discord.gg/fsD4Bkh).<br>
+Note that the following commands only work on our [Official Discord Server](https://discord.gg/CbBYZBEWdR).<br>
 If you are looking for the commands you can perform ingame then see [this page](https://github.com/Slimefun5/Slimefun5/wiki/Commands).
 
 ## Commands

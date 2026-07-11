@@ -1,5 +1,5 @@
 Slimefun5 is a Bukkit Plugin that aims to make Bukkit Servers feel like a modpack.<br>
-If you want to know how to install Slimefun5, go [here](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5).<br>
+If you want to know how to install Slimefun5, go [here](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun).<br>
 If you are looking for a guide on how to use Slimefun5, start [here](https://github.com/Slimefun5/Slimefun5/wiki/Getting-Started).
 
 ## What does Slimefun5 do?

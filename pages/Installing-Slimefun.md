@@ -2,7 +2,7 @@
 To install Slimefun5, you will need a Spigot or Paper Server (most preferabbly the latest version).<br>
 Forks of either of these should work too, though we only test against Paper and Spigot.
 
-### Slimefun5 4 Downloads
+### Slimefun5 Downloads
 You can choose between two branches of Slimefun5, the ["stable" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/stable/) or the [main "development" branch](https://thebusybiscuit.github.io/builds/TheBusyBiscuit/Slimefun5/master/).
 Stable builds have been around for quite a while and were thoroughly tested, development builds are the latest builds of Slimefun5 you can get.
 If your Server is very reliant on a working build of Slimefun5, choose a stable build.
@@ -21,7 +21,7 @@ If you plan to upgrade or move servers, or create a backup, it is ***very*** imp
 deleting it results in loss of ALL Slimefun5 related data, such as levels, unlocked items, etc.
 
 ## Configuring Slimefun5
-This part assumes you now have Slimefun5 4 installed on your server.
+This part assumes you now have Slimefun5 installed on your server.
 
 When viewing the Slimefun5 plugin folder, you will notice a few different .YML files. Start by viewing *config.yml* in your favorite text editor.
 Personally, I recommend [Notepad++](https://notepad-plus-plus.org).

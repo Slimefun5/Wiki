@@ -3,14 +3,14 @@ The old Wiki was abandoned for obvious reasons, this one is centered around you,
 Contributions to the Wiki are therefore much appreciated!
 
 # Overview
-* [What is Slimefun5?](https://github.com/Slimefun5/Slimefun5/wiki/Slimefun5-in-a-nutshell)
-* [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5)
+* [What is Slimefun5?](https://github.com/Slimefun5/Slimefun5/wiki/Slimefun-in-a-nutshell)
+* [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun)
   * [Optimizing your Slimefun5 Server](https://github.com/Slimefun5/Slimefun5/wiki/Server-Optimizations)
-* [Addons for Slimefun5 4](https://github.com/Slimefun5/Slimefun5/wiki/Addons)
+* [Addons for Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Addons)
 * [Getting Started](https://github.com/Slimefun5/Slimefun5/wiki/Getting-Started)
 * [Permissions](https://github.com/Slimefun5/Slimefun5/wiki/Permissions) & [Commands](https://github.com/Slimefun5/Slimefun5/wiki/Commands)
 * [Help us expand the Wiki!](https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki)
-* [Help us translate Slimefun5!](https://github.com/Slimefun5/Slimefun5/wiki/Translating-Slimefun5)
+* [Help us translate Slimefun5!](https://github.com/Slimefun5/Slimefun5/wiki/Translating-Slimefun)
 * [Frequently Asked Questions (FAQ)](https://github.com/Slimefun5/Slimefun5/wiki/FAQ)
 * [Common Issues](https://github.com/Slimefun5/Slimefun5/wiki/Common-Issues)
 * [Create your own Addon](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide)
@@ -38,4 +38,4 @@ Contributions to the Wiki are therefore much appreciated!
 
 ## Discord
 Slimefun5 also has a Discord Server for you to make suggestions, discuss features or just chat around.
-https://discord.gg/fsD4Bkh
+https://discord.gg/CbBYZBEWdR

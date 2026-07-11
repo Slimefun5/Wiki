@@ -1,15 +1,15 @@
 ## Overview
-* [What is Slimefun5?](https://github.com/Slimefun5/Slimefun5/wiki/Slimefun5-in-a-nutshell)
-* [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5)
+* [What is Slimefun5?](https://github.com/Slimefun5/Slimefun5/wiki/Slimefun-in-a-nutshell)
+* [How to install Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun)
 * [Getting Started](https://github.com/Slimefun5/Slimefun5/wiki/Getting-Started)
 * [Common Issues and Problems](https://github.com/Slimefun5/Slimefun5/wiki/Common-Issues)
 * [How to report bugs](https://github.com/Slimefun5/Slimefun5/wiki/How-to-report-bugs)
 * [Help us expand the Wiki!](https://github.com/Slimefun5/Slimefun5/wiki/Expanding-the-Wiki)
-* [Help us translate Slimefun5!](https://github.com/Slimefun5/Slimefun5/wiki/Translating-Slimefun5)
+* [Help us translate Slimefun5!](https://github.com/Slimefun5/Slimefun5/wiki/Translating-Slimefun)
 * [FAQ](https://github.com/Slimefun5/Slimefun5/wiki/FAQ)
 
 ## Other Plugins
-* [Addons for Slimefun5 4](https://github.com/Slimefun5/Slimefun5/wiki/Addons)
+* [Addons for Slimefun5](https://github.com/Slimefun5/Slimefun5/wiki/Addons)
 * [Create your own Addon](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide)
 * [Supported Protection Plugins](https://github.com/Slimefun5/Slimefun5/wiki/Protection-Plugins)
 
@@ -34,5 +34,5 @@
 * [Seasonal Categories](https://github.com/Slimefun5/Slimefun5/wiki/Seasonal-Categories)
 
 <p>
-  <a href="https://discord.gg/Slimefun5">https://discord.gg/Slimefun5</a>
+  <a href="https://discord.gg/CbBYZBEWdR">https://discord.gg/CbBYZBEWdR</a>
 </p>

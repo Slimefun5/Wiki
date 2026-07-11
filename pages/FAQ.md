@@ -23,7 +23,7 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## How can I download / install Slimefun5 or its Addons?
-To download and install Slimefun5 you can refer to [this guide here](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun5).  
+To download and install Slimefun5 you can refer to [this guide here](https://github.com/Slimefun5/Slimefun5/wiki/Installing-Slimefun).  
 You can find Addons for Slimefun5 on our ["Addons" - page](https://github.com/Slimefun5/Slimefun5/wiki/Addons).<br>
 You can install these just like you did with Slimefun5, putting them in the `/plugins/` folder of your Server.
 
@@ -35,7 +35,7 @@ Slimefun5 is a Bukkit / Spigot plugin, so it requires you to have a Bukkit-based
 Slimefun5 has been consistently available for every Minecraft version from MC 1.5 onwards, so I would say you can rest assured that it will come out for that Minecraft version too. With over 100+ contributors to the project, the chances are high someone is gonna update it to work with that version.
 
 ## I have an error/bug with Slimefun5
-Ok, first things first, join our [Support Server](https://discord.gg/fsD4Bkh) if you aren't in it already and go to `#bug-discussions`. We need to determine if it is a bug, user error or intended behaviour. Note that we **do not accept bug reports on discord, only on GitHub**. But experience has shown that 9 of 10 "bugs" tend to be the result of really outdated plugin versions or similar, so please try to discuss these issues with others on our discord server first, so that developers can focus on confirmed bug reports.
+Ok, first things first, join our [Support Server](https://discord.gg/CbBYZBEWdR) if you aren't in it already and go to `#bug-discussions`. We need to determine if it is a bug, user error or intended behaviour. Note that we **do not accept bug reports on discord, only on GitHub**. But experience has shown that 9 of 10 "bugs" tend to be the result of really outdated plugin versions or similar, so please try to discuss these issues with others on our discord server first, so that developers can focus on confirmed bug reports.
 
 Now, send us the following information (in the `#bug-discussions` channel):
 1. Run /sf versions and send us a screenshot. We need the exact versions you are using, otherwise, we will not be able to help you.
