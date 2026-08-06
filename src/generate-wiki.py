@@ -10,12 +10,11 @@ renders that into a fully static HTML site served from this repository's project
     GitHub Pages serves it as-is), with its GitHub-wiki links rewritten to site-relative links;
   * every Slimefun item id that has a matching page gets a redirect at ``<base>/<plugin>/<id>/`` - the URL
     the in-game "View in Wiki" button builds (see core WikiLinks) - pointing at that content page;
-  * an index lists every page.
+  * an index lists every page, filterable by a small inline search.
 
-The output is plain HTML with a ``.nojekyll`` marker, so GitHub Pages does NO Jekyll build (nothing to
-fail on stray ``{{``/``{%`` sequences in the content). ``--base`` is the URL path the site is served
-under (the project-page prefix, e.g. ``/Wiki``); file paths omit it because GitHub Pages adds the
-repository name to the URL itself, while link hrefs carry it.
+The output is plain HTML with a ``.nojekyll`` marker, so GitHub Pages runs NO Jekyll build. ``--base`` is
+the URL path the site is served under (the project-page prefix, e.g. ``/Wiki``); file paths omit it
+because GitHub Pages adds the repository name to the URL itself, while link hrefs carry it.
 
 Usage:
   python3 generate-wiki.py --pages pages --items <core items.yml> --out site --base /Wiki
@@ -31,6 +30,68 @@ import markdown
 
 GITHUB_WIKI = re.compile(r"https?://github\.com/Slimefun5/Slimefun5/wiki/([A-Za-z0-9_%\-]+)")
 COLOR_CODE = re.compile(r"[&§][0-9a-fk-orA-FK-OR]")
+
+# A line-art beaker (Slimefun's alchemy motif), drawn with currentColor so the header/favicon share it.
+MARK = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M9 3h6M10 3v6L4.6 18.4A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.6L14 9V3"/>'
+    '<path d="M7.5 14h9"/></svg>'
+)
+
+FAVICON = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' "
+    "stroke='%2316a34a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E"
+    "%3Cpath d='M9 3h6M10 3v6L4.6 18.4A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.6L14 9V3'/%3E"
+    "%3Cpath d='M7.5 14h9'/%3E%3C/svg%3E"
+)
+
+SITE_CSS = """\
+:root{--bg:#fff;--fg:#18181b;--muted:#6b7280;--border:#e8e8ea;--code:#f4f4f5;--accent:#16a34a;--w:44rem}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1211;--fg:#e8eae9;--muted:#9aa0a6;--border:#242927;--code:#1a1e1c;--accent:#4ade80}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap,main,footer{max-width:var(--w);margin:0 auto;padding-left:1.25rem;padding-right:1.25rem}
+header{border-bottom:1px solid var(--border)}
+header .wrap{height:3.25rem;display:flex;align-items:center}
+header a{display:flex;align-items:center;gap:.5rem;color:var(--fg);font-weight:650}
+header a:hover{text-decoration:none}
+header svg{width:1.3rem;height:1.3rem;color:var(--accent)}
+main{padding-top:2.75rem;padding-bottom:4rem}
+h1{font-size:1.95rem;line-height:1.2;letter-spacing:-.02em;margin:0 0 1rem;text-wrap:balance}
+h2{font-size:1.3rem;letter-spacing:-.01em;margin:2.4rem 0 .8rem}
+h3{font-size:1.08rem;margin:1.7rem 0 .5rem}
+img{max-width:100%;border-radius:.5rem}
+code{background:var(--code);padding:.15em .4em;border-radius:.3rem;font-size:.9em}
+pre{background:var(--code);padding:1rem;border-radius:.6rem;overflow-x:auto}
+pre code{background:none;padding:0}
+blockquote{margin:1.2rem 0;padding:.1rem 0 .1rem 1rem;border-left:2px solid var(--accent);color:var(--muted)}
+table{border-collapse:collapse;width:100%;margin:1.2rem 0;font-size:.95rem}
+th,td{border-bottom:1px solid var(--border);padding:.55rem .7rem;text-align:left}
+th{color:var(--muted);font-weight:600}
+.back{display:inline-block;color:var(--muted);font-size:.9rem;margin-bottom:1.75rem}
+.lede{color:var(--muted);margin:-.4rem 0 0}
+.search{width:100%;margin:1.5rem 0 0;padding:.7rem .9rem;font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--border);border-radius:.6rem}
+.search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.list{columns:2;column-gap:2.5rem;margin-top:1.5rem}
+.list a{display:block;padding:.38rem 0;color:var(--fg);break-inside:avoid}
+.list a:hover{color:var(--accent);text-decoration:none}
+.none{color:var(--muted);display:none;margin-top:1.5rem}
+footer{padding-top:2rem;padding-bottom:3rem;margin-top:1rem;border-top:1px solid var(--border);color:var(--muted);font-size:.85rem}
+footer a{color:var(--muted);text-decoration:underline}
+@media(max-width:640px){.list{columns:1}}
+"""
+
+INDEX_SCRIPT = """\
+<script>
+(function(){var q=document.getElementById('q'),g=document.getElementById('grid'),n=document.getElementById('none');
+var a=[].slice.call(g.children);q.addEventListener('input',function(){var v=q.value.toLowerCase().trim(),c=0;
+a.forEach(function(e){var m=e.getAttribute('data-name').indexOf(v)>-1;e.style.display=m?'':'none';if(m)c++;});
+n.style.display=c?'none':'block';});})();
+</script>
+"""
 
 
 def strip_color(text):
@@ -68,26 +129,8 @@ def rewrite_links(markdown_text, base):
     return GITHUB_WIKI.sub(lambda m: base + "/" + m.group(1) + "/", markdown_text)
 
 
-# A book octicon, used as the header mark and (as a data URI) the favicon. Kept inline so the site has
-# no external asset dependency for its chrome.
-LOGO_SVG = (
-    '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 '
-    '2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 '
-    '2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 '
-    '1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 '
-    '4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/></svg>'
-)
-
-FAVICON = (
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2376d1ff'"
-    "%3E%3Cpath d='M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 "
-    "1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 "
-    "0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Z'/%3E%3C/svg%3E"
-)
-
-
 def page_shell(title, base, inner_html):
-    """Wrap page content in the shared Slimefun5 site chrome (header bar, panel, footer)."""
+    """Wrap page content in the shared site chrome (hairline header, content column, footer)."""
     safe_title = html.escape(title)
     return (
         "<!doctype html>\n<html lang=\"en\">\n<head>\n"
@@ -95,15 +138,12 @@ def page_shell(title, base, inner_html):
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         f"<title>{safe_title} · Slimefun Wiki</title>\n"
         f"<link rel=\"icon\" href=\"{FAVICON}\">\n"
-        "<link href=\"https://fonts.googleapis.com/css?family=Noto+Sans:400,700\" rel=\"stylesheet\">\n"
         f"<link rel=\"stylesheet\" href=\"{base}/assets/style.css\">\n"
         "</head>\n<body>\n"
-        "<header class=\"site-header\"><div class=\"inner\">"
-        f"<a class=\"brand\" href=\"{base}/\">{LOGO_SVG}<span>Slimefun Wiki</span></a>"
-        "</div></header>\n"
+        f"<header><div class=\"wrap\"><a href=\"{base}/\">{MARK}<span>Slimefun Wiki</span></a></div></header>\n"
         f"<main>\n{inner_html}\n</main>\n"
-        "<footer>Slimefun5 · content licensed under the "
-        "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU General Public License v3.0</a> · "
+        "<footer>Content licensed under the "
+        "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU GPL v3.0</a> · "
         "<a href=\"https://slimefun5.github.io/builds/\">Builds</a> · "
         "<a href=\"https://github.com/Slimefun5\">GitHub</a></footer>\n"
         "</body>\n</html>\n"
@@ -111,13 +151,31 @@ def page_shell(title, base, inner_html):
 
 
 def render_content_page(title, body_html, base):
-    """A single wiki topic: a back link plus the rendered Markdown in a prose panel."""
+    """A single wiki topic: a back link, the title, then the rendered Markdown."""
     safe_title = html.escape(title)
     inner = (
-        f"<a class=\"back\" href=\"{base}/\">← All pages</a>\n"
-        f"<article class=\"panel prose\">\n<h1>{safe_title}</h1>\n{body_html}\n</article>"
+        f"<a class=\"back\" href=\"{base}/\">← Back to index</a>\n"
+        f"<h1>{safe_title}</h1>\n{body_html}"
     )
     return page_shell(title, base, inner)
+
+
+def render_index(page_titles, base):
+    """The landing page: a live-filterable list of every wiki topic."""
+    links = "\n".join(
+        f'<a data-name="{html.escape(t.lower())}" href="{base}/{page_slug(t)}/">{html.escape(t)}</a>'
+        for t in sorted(page_titles)
+    )
+    inner = (
+        "<h1>Slimefun Wiki</h1>\n"
+        f"<p class=\"lede\">Browse every Slimefun item and mechanic — {len(page_titles)} pages.</p>\n"
+        "<input id=\"q\" class=\"search\" type=\"search\" autocomplete=\"off\" "
+        "placeholder=\"Search pages…\" aria-label=\"Search pages\">\n"
+        f"<div id=\"grid\" class=\"list\">\n{links}\n</div>\n"
+        "<p id=\"none\" class=\"none\">No pages match your search.</p>\n"
+        f"{INDEX_SCRIPT}"
+    )
+    return page_shell("Slimefun Wiki", base, inner)
 
 
 def to_html(markdown_text):
@@ -146,108 +204,6 @@ def emit_redirect(out_dir, plugin, item_id, target_slug, base):
         )
 
 
-INDEX_SCRIPT = """
-<script>
-(function(){
-  var q=document.getElementById('q'),grid=document.getElementById('grid'),none=document.getElementById('none');
-  var cards=[].slice.call(grid.querySelectorAll('.card'));
-  q.addEventListener('input',function(){
-    var v=q.value.toLowerCase().trim(),n=0;
-    cards.forEach(function(c){var m=c.getAttribute('data-name').indexOf(v)!==-1;c.style.display=m?'':'none';if(m)n++;});
-    none.style.display=n?'none':'block';
-  });
-})();
-</script>
-"""
-
-
-def render_index(page_titles, base):
-    """The landing page: a live-filterable grid of every wiki topic."""
-    cards = "\n".join(
-        f'<a class="card" data-name="{html.escape(t.lower())}" href="{base}/{page_slug(t)}/">{html.escape(t)}</a>'
-        for t in sorted(page_titles)
-    )
-    inner = (
-        "<div class=\"index-head\">"
-        "<h1>Slimefun Wiki</h1>"
-        f"<p>Browse every Slimefun item and mechanic — {len(page_titles)} pages.</p>"
-        "</div>\n"
-        "<input id=\"q\" class=\"search\" type=\"search\" autocomplete=\"off\" "
-        "placeholder=\"Search pages…\" aria-label=\"Search pages\">\n"
-        f"<div id=\"grid\" class=\"grid\">\n{cards}\n</div>\n"
-        "<p id=\"none\" class=\"no-results\">No pages match your search.</p>"
-        f"{INDEX_SCRIPT}"
-    )
-    return page_shell("Slimefun Wiki", base, inner)
-
-
-SITE_CSS = """\
-:root{
-  --header:#1a1a1a;--header-text:#fafafa;
-  --background:#343a40;--panel:#232426;
-  --border:#2b2f32;--shadow:#20292f;
-  --text:#e2e2e2;--muted:#9ba6aa;
-  --link:#76d1ff;--link-hover:#00a9ff;--secondary-link:#6bbfe9;
-  --table-primary:#363b3f;--table-secondary:#2d3338;--table-head:#222325;
-  --code-bg:#1c1e20;
-}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--background);color:var(--text);
-  font-family:'Noto Sans',system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65}
-a{color:var(--link);text-decoration:none}
-a:hover{color:var(--link-hover);text-decoration:underline}
-
-.site-header{position:sticky;top:0;z-index:10;background:var(--header);
-  border-bottom:1px solid #000;box-shadow:0 2px 6px var(--shadow)}
-.site-header .inner{max-width:960px;margin:0 auto;padding:.7rem 1.2rem;display:flex;align-items:center}
-.site-header .brand{display:flex;align-items:center;gap:.55rem;color:var(--header-text);
-  font-weight:700;font-size:1.15rem}
-.site-header .brand:hover{text-decoration:none}
-.site-header svg{width:24px;height:24px;fill:var(--link)}
-
-main{max-width:960px;margin:1.6rem auto;padding:0 1.2rem}
-.panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;
-  box-shadow:0 3px 8px var(--shadow);padding:1.6rem 1.9rem}
-
-.back{display:inline-block;margin-bottom:1rem;color:var(--muted);font-size:.9rem}
-.back:hover{color:var(--link)}
-
-.prose h1{margin:.1rem 0 1rem;font-size:1.9rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}
-.prose h2{margin:2rem 0 .8rem;font-size:1.4rem;border-bottom:1px solid var(--border);padding-bottom:.3rem}
-.prose h3{margin:1.5rem 0 .6rem;font-size:1.15rem}
-.prose p,.prose li{color:var(--text)}
-.prose img{max-width:100%;border-radius:6px}
-.prose code{background:var(--code-bg);padding:.15rem .4rem;border-radius:4px;
-  font-family:SFMono-Regular,Consolas,monospace;font-size:.9em}
-.prose pre{background:var(--code-bg);padding:1rem;border-radius:8px;overflow-x:auto;border:1px solid var(--border)}
-.prose pre code{background:none;padding:0}
-.prose blockquote{margin:1rem 0;padding:.5rem 1rem;border-left:3px solid var(--link);
-  background:#ffffff08;color:var(--muted)}
-.prose table{border-collapse:collapse;width:100%;margin:1rem 0;display:block;overflow-x:auto}
-.prose th{background:var(--table-head);text-align:left}
-.prose td,.prose th{border:1px solid var(--border);padding:.5rem .8rem}
-.prose tr:nth-child(odd) td{background:var(--table-secondary)}
-.prose tr:nth-child(even) td{background:var(--table-primary)}
-.prose ul,.prose ol{padding-left:1.4rem}
-.prose a{color:var(--link)}
-
-.index-head h1{margin:.2rem 0 .3rem;font-size:1.9rem}
-.index-head p{margin:0;color:var(--muted)}
-.search{width:100%;margin:1.2rem 0;padding:.7rem 1rem;font-size:1rem;background:var(--panel);
-  border:1px solid var(--border);border-radius:8px;color:var(--text)}
-.search:focus{outline:none;border-color:var(--link)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
-.card{display:block;padding:.8rem 1rem;background:var(--panel);border:1px solid var(--border);
-  border-radius:8px;color:var(--text);font-weight:600;transition:border-color .12s,transform .12s,color .12s}
-.card:hover{border-color:var(--link);color:var(--link);text-decoration:none;transform:translateY(-1px)}
-.no-results{color:var(--muted);padding:1rem 0;display:none}
-
-footer{max-width:960px;margin:2.5rem auto 2rem;padding:1.2rem;color:var(--muted);
-  font-size:.85rem;border-top:1px solid var(--border);text-align:center}
-footer a{color:var(--secondary-link)}
-"""
-
-
 def write_site_files(out_dir, page_titles, base):
     """Write the index, stylesheet and the .nojekyll marker (no Jekyll build)."""
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
@@ -257,7 +213,6 @@ def write_site_files(out_dir, page_titles, base):
     with open(os.path.join(out_dir, "assets", "style.css"), "w", encoding="utf-8") as f:
         f.write(SITE_CSS)
 
-    # .nojekyll: serve the pre-rendered HTML as-is; GitHub Pages runs no Jekyll build.
     with open(os.path.join(out_dir, ".nojekyll"), "w", encoding="utf-8") as f:
         f.write("")
 
