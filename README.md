@@ -11,13 +11,16 @@ redirects to the matching page.
 
 ## How it is built
 
-[`src/generate-wiki.py`](src/generate-wiki.py) turns the content into a Jekyll site:
+[`src/generate-wiki.py`](src/generate-wiki.py) renders the content into a fully static HTML site (no
+Jekyll — a `.nojekyll` marker tells GitHub Pages to serve it as-is):
 
-* every `pages/<Display-Name>.md` becomes a page at `/Wiki/<Display-Name>/`, with its GitHub-wiki links
+* every `pages/<Display-Name>.md` is rendered to `/Wiki/<Display-Name>/`, with its GitHub-wiki links
   rewritten to site-relative links;
 * every Slimefun item id (read from the core `items.yml`) that has a matching page gets a redirect at
   `/Wiki/<plugin>/<id>/` so the in-game links resolve;
 * a `/Wiki/` index lists every page.
+
+Requires the `markdown` package (`pip install markdown`).
 
 ```sh
 python3 src/generate-wiki.py --pages pages --items items.yml --plugin slimefun --base /Wiki --out _src
@@ -26,8 +29,8 @@ python3 src/generate-wiki.py --pages pages --items items.yml --plugin slimefun -
 ## Deployment
 
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) runs on every push to `stable` (and on demand):
-it fetches the core `items.yml`, runs the generator, builds the site with Jekyll, and publishes it to the
-`gh-pages` branch. GitHub Pages serves that branch at https://slimefun5.github.io/Wiki/.
+it fetches the core `items.yml`, runs the generator, and publishes the static site to the `gh-pages` branch.
+GitHub Pages serves that branch at https://slimefun5.github.io/Wiki/.
 
 > One-time setup (org admin): enable GitHub Pages for this repository with **Source: Deploy from a branch →
 > `gh-pages` / `/ (root)`**.

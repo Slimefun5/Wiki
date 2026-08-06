@@ -10,7 +10,6 @@ on:
 permissions:
   contents: write
 
-# Only one deploy at a time; let a running one finish.
 concurrency:
   group: pages-deploy
   cancel-in-progress: false
@@ -19,34 +18,31 @@ jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Fetch core item names (for /Wiki/<plugin>/<id> redirects)
+      # No `uses:` actions on purpose: action-download resolution has an outage often enough that a plain
+      # git clone (which only needs the runner's git) is more reliable. The site is rendered to static HTML
+      # here and pushed with a .nojekyll marker, so GitHub Pages runs no Jekyll build to fail on.
+      - name: Build and deploy
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -e
+          python3 -m pip install --quiet markdown
+
+          git clone --depth 1 -b stable \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
+          cd repo
+
           curl -sfL \
             https://raw.githubusercontent.com/Slimefun5/Slimefun5/stable/core/src/main/resources/languages/en/items.yml \
             -o items.yml || echo "items.yml unavailable - building without item redirects"
 
-      - name: Generate the Jekyll site
-        run: |
           python3 src/generate-wiki.py \
-            --pages pages \
-            --items items.yml \
-            --plugin slimefun \
-            --base /Wiki \
-            --out _src
+            --pages pages --items items.yml --plugin slimefun --base /Wiki --out _site
 
-      # Publish the Jekyll SOURCE to gh-pages; GitHub Pages runs Jekyll on the branch itself (the same
-      # legacy-branch method the builds page uses). No local Jekyll build, so no container/ownership issues.
-      - name: Publish to gh-pages
-        run: |
-          cd _src
+          cd _site
           git init -q -b gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -qm "deploy: regenerate wiki site"
-          git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages:gh-pages
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages:gh-pages
