@@ -68,21 +68,56 @@ def rewrite_links(markdown_text, base):
     return GITHUB_WIKI.sub(lambda m: base + "/" + m.group(1) + "/", markdown_text)
 
 
-def render_page(title, body_html, base):
-    """Wrap rendered page HTML in the site shell."""
+# A book octicon, used as the header mark and (as a data URI) the favicon. Kept inline so the site has
+# no external asset dependency for its chrome.
+LOGO_SVG = (
+    '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 '
+    '2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 '
+    '2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 '
+    '1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 '
+    '4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/></svg>'
+)
+
+FAVICON = (
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%2376d1ff'"
+    "%3E%3Cpath d='M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 "
+    "1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 "
+    "0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Z'/%3E%3C/svg%3E"
+)
+
+
+def page_shell(title, base, inner_html):
+    """Wrap page content in the shared Slimefun5 site chrome (header bar, panel, footer)."""
     safe_title = html.escape(title)
     return (
         "<!doctype html>\n<html lang=\"en\">\n<head>\n"
         "<meta charset=\"utf-8\">\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         f"<title>{safe_title} · Slimefun Wiki</title>\n"
+        f"<link rel=\"icon\" href=\"{FAVICON}\">\n"
+        "<link href=\"https://fonts.googleapis.com/css?family=Noto+Sans:400,700\" rel=\"stylesheet\">\n"
         f"<link rel=\"stylesheet\" href=\"{base}/assets/style.css\">\n"
         "</head>\n<body>\n"
-        f"<header><a href=\"{base}/\">Slimefun Wiki</a></header>\n"
-        f"<main><h1>{safe_title}</h1>\n{body_html}\n</main>\n"
-        "<footer>Slimefun5 · content licensed under the GNU General Public License v3.0</footer>\n"
+        "<header class=\"site-header\"><div class=\"inner\">"
+        f"<a class=\"brand\" href=\"{base}/\">{LOGO_SVG}<span>Slimefun Wiki</span></a>"
+        "</div></header>\n"
+        f"<main>\n{inner_html}\n</main>\n"
+        "<footer>Slimefun5 · content licensed under the "
+        "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU General Public License v3.0</a> · "
+        "<a href=\"https://slimefun5.github.io/builds/\">Builds</a> · "
+        "<a href=\"https://github.com/Slimefun5\">GitHub</a></footer>\n"
         "</body>\n</html>\n"
     )
+
+
+def render_content_page(title, body_html, base):
+    """A single wiki topic: a back link plus the rendered Markdown in a prose panel."""
+    safe_title = html.escape(title)
+    inner = (
+        f"<a class=\"back\" href=\"{base}/\">← All pages</a>\n"
+        f"<article class=\"panel prose\">\n<h1>{safe_title}</h1>\n{body_html}\n</article>"
+    )
+    return page_shell(title, base, inner)
 
 
 def to_html(markdown_text):
@@ -93,7 +128,7 @@ def emit_page(out_dir, slug, title, body_html, base):
     page_dir = os.path.join(out_dir, slug)
     os.makedirs(page_dir, exist_ok=True)
     with open(os.path.join(page_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render_page(title, body_html, base))
+        f.write(render_content_page(title, body_html, base))
 
 
 def emit_redirect(out_dir, plugin, item_id, target_slug, base):
@@ -111,28 +146,116 @@ def emit_redirect(out_dir, plugin, item_id, target_slug, base):
         )
 
 
+INDEX_SCRIPT = """
+<script>
+(function(){
+  var q=document.getElementById('q'),grid=document.getElementById('grid'),none=document.getElementById('none');
+  var cards=[].slice.call(grid.querySelectorAll('.card'));
+  q.addEventListener('input',function(){
+    var v=q.value.toLowerCase().trim(),n=0;
+    cards.forEach(function(c){var m=c.getAttribute('data-name').indexOf(v)!==-1;c.style.display=m?'':'none';if(m)n++;});
+    none.style.display=n?'none':'block';
+  });
+})();
+</script>
+"""
+
+
+def render_index(page_titles, base):
+    """The landing page: a live-filterable grid of every wiki topic."""
+    cards = "\n".join(
+        f'<a class="card" data-name="{html.escape(t.lower())}" href="{base}/{page_slug(t)}/">{html.escape(t)}</a>'
+        for t in sorted(page_titles)
+    )
+    inner = (
+        "<div class=\"index-head\">"
+        "<h1>Slimefun Wiki</h1>"
+        f"<p>Browse every Slimefun item and mechanic — {len(page_titles)} pages.</p>"
+        "</div>\n"
+        "<input id=\"q\" class=\"search\" type=\"search\" autocomplete=\"off\" "
+        "placeholder=\"Search pages…\" aria-label=\"Search pages\">\n"
+        f"<div id=\"grid\" class=\"grid\">\n{cards}\n</div>\n"
+        "<p id=\"none\" class=\"no-results\">No pages match your search.</p>"
+        f"{INDEX_SCRIPT}"
+    )
+    return page_shell("Slimefun Wiki", base, inner)
+
+
+SITE_CSS = """\
+:root{
+  --header:#1a1a1a;--header-text:#fafafa;
+  --background:#343a40;--panel:#232426;
+  --border:#2b2f32;--shadow:#20292f;
+  --text:#e2e2e2;--muted:#9ba6aa;
+  --link:#76d1ff;--link-hover:#00a9ff;--secondary-link:#6bbfe9;
+  --table-primary:#363b3f;--table-secondary:#2d3338;--table-head:#222325;
+  --code-bg:#1c1e20;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--background);color:var(--text);
+  font-family:'Noto Sans',system-ui,-apple-system,Segoe UI,sans-serif;line-height:1.65}
+a{color:var(--link);text-decoration:none}
+a:hover{color:var(--link-hover);text-decoration:underline}
+
+.site-header{position:sticky;top:0;z-index:10;background:var(--header);
+  border-bottom:1px solid #000;box-shadow:0 2px 6px var(--shadow)}
+.site-header .inner{max-width:960px;margin:0 auto;padding:.7rem 1.2rem;display:flex;align-items:center}
+.site-header .brand{display:flex;align-items:center;gap:.55rem;color:var(--header-text);
+  font-weight:700;font-size:1.15rem}
+.site-header .brand:hover{text-decoration:none}
+.site-header svg{width:24px;height:24px;fill:var(--link)}
+
+main{max-width:960px;margin:1.6rem auto;padding:0 1.2rem}
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:10px;
+  box-shadow:0 3px 8px var(--shadow);padding:1.6rem 1.9rem}
+
+.back{display:inline-block;margin-bottom:1rem;color:var(--muted);font-size:.9rem}
+.back:hover{color:var(--link)}
+
+.prose h1{margin:.1rem 0 1rem;font-size:1.9rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}
+.prose h2{margin:2rem 0 .8rem;font-size:1.4rem;border-bottom:1px solid var(--border);padding-bottom:.3rem}
+.prose h3{margin:1.5rem 0 .6rem;font-size:1.15rem}
+.prose p,.prose li{color:var(--text)}
+.prose img{max-width:100%;border-radius:6px}
+.prose code{background:var(--code-bg);padding:.15rem .4rem;border-radius:4px;
+  font-family:SFMono-Regular,Consolas,monospace;font-size:.9em}
+.prose pre{background:var(--code-bg);padding:1rem;border-radius:8px;overflow-x:auto;border:1px solid var(--border)}
+.prose pre code{background:none;padding:0}
+.prose blockquote{margin:1rem 0;padding:.5rem 1rem;border-left:3px solid var(--link);
+  background:#ffffff08;color:var(--muted)}
+.prose table{border-collapse:collapse;width:100%;margin:1rem 0;display:block;overflow-x:auto}
+.prose th{background:var(--table-head);text-align:left}
+.prose td,.prose th{border:1px solid var(--border);padding:.5rem .8rem}
+.prose tr:nth-child(odd) td{background:var(--table-secondary)}
+.prose tr:nth-child(even) td{background:var(--table-primary)}
+.prose ul,.prose ol{padding-left:1.4rem}
+.prose a{color:var(--link)}
+
+.index-head h1{margin:.2rem 0 .3rem;font-size:1.9rem}
+.index-head p{margin:0;color:var(--muted)}
+.search{width:100%;margin:1.2rem 0;padding:.7rem 1rem;font-size:1rem;background:var(--panel);
+  border:1px solid var(--border);border-radius:8px;color:var(--text)}
+.search:focus{outline:none;border-color:var(--link)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.7rem}
+.card{display:block;padding:.8rem 1rem;background:var(--panel);border:1px solid var(--border);
+  border-radius:8px;color:var(--text);font-weight:600;transition:border-color .12s,transform .12s,color .12s}
+.card:hover{border-color:var(--link);color:var(--link);text-decoration:none;transform:translateY(-1px)}
+.no-results{color:var(--muted);padding:1rem 0;display:none}
+
+footer{max-width:960px;margin:2.5rem auto 2rem;padding:1.2rem;color:var(--muted);
+  font-size:.85rem;border-top:1px solid var(--border);text-align:center}
+footer a{color:var(--secondary-link)}
+"""
+
+
 def write_site_files(out_dir, page_titles, base):
     """Write the index, stylesheet and the .nojekyll marker (no Jekyll build)."""
-    items = "\n".join(
-        f'<li><a href="{base}/{page_slug(t)}/">{html.escape(t)}</a></li>' for t in sorted(page_titles)
-    )
-    index_body = f"<p>Browse every Slimefun item and mechanic:</p>\n<ul>\n{items}\n</ul>"
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(render_page("Slimefun Wiki", index_body, base))
+        f.write(render_index(page_titles, base))
 
     os.makedirs(os.path.join(out_dir, "assets"), exist_ok=True)
     with open(os.path.join(out_dir, "assets", "style.css"), "w", encoding="utf-8") as f:
-        f.write(
-            ":root{color-scheme:light dark}"
-            "body{max-width:820px;margin:0 auto;padding:1.5rem;"
-            "font-family:system-ui,sans-serif;line-height:1.6}"
-            "header{font-weight:700;margin-bottom:1rem}"
-            "header a{text-decoration:none}"
-            "main img{max-width:100%}"
-            "footer{margin-top:3rem;padding-top:1rem;border-top:1px solid #8884;"
-            "font-size:.85rem;opacity:.7}"
-            "table{border-collapse:collapse}td,th{border:1px solid #8884;padding:.3rem .6rem}\n"
-        )
+        f.write(SITE_CSS)
 
     # .nojekyll: serve the pre-rendered HTML as-is; GitHub Pages runs no Jekyll build.
     with open(os.path.join(out_dir, ".nojekyll"), "w", encoding="utf-8") as f:
