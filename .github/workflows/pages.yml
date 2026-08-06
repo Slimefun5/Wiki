@@ -1,0 +1,55 @@
+name: Deploy Wiki to GitHub Pages
+
+on:
+  push:
+    branches:
+      - stable
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one Pages deploy at a time; let a running one finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch core item names (for /Wiki/<plugin>/<id> redirects)
+        run: |
+          curl -sfL \
+            https://raw.githubusercontent.com/Slimefun5/Slimefun5/stable/core/src/main/resources/languages/en/items.yml \
+            -o items.yml || echo "items.yml unavailable - building without item redirects"
+
+      - name: Generate the Jekyll site
+        run: |
+          python3 src/generate-wiki.py \
+            --pages pages \
+            --items items.yml \
+            --plugin slimefun \
+            --base /Wiki \
+            --out _src
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: _src
+          destination: _site
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

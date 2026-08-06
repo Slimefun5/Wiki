@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
-"""Generate the static Slimefun wiki site (for slimefun5.github.io) from the wiki content pages.
+"""Generate the static Slimefun wiki site from the wiki content pages.
 
 The wiki content lives as one Markdown file per topic in ``pages/<Display-Name>.md``, with internal
 links pointing at the GitHub wiki (``github.com/Slimefun5/Slimefun5/wiki/<Display-Name>``). This script
-turns that into a GitHub Pages (Jekyll) site:
+turns that into a GitHub Pages (Jekyll) site served from this repository's project page
+(``slimefun5.github.io/Wiki/`` by default):
 
-  * every content page is emitted at ``/wiki/<Display-Name>/`` (Jekyll renders the Markdown), with its
-    GitHub-wiki links rewritten to site-relative ``/wiki/...`` links;
-  * every Slimefun item id that has a matching page gets a redirect at ``/wiki/<plugin>/<id>/`` - the URL
+  * every content page is emitted at ``<base>/<Display-Name>/`` (Jekyll renders the Markdown), with its
+    GitHub-wiki links rewritten to site-relative links under ``<base>``;
+  * every Slimefun item id that has a matching page gets a redirect at ``<base>/<plugin>/<id>/`` - the URL
     the in-game "View in Wiki" button builds (see core WikiLinks) - pointing at that content page;
   * an index lists every page.
 
-GitHub Pages renders the Markdown itself, so no HTML conversion happens here.
+``--base`` is the URL path the site is served under (the project-page prefix, e.g. ``/Wiki``). File
+paths are written WITHOUT that prefix because GitHub Pages adds the repository name to the URL itself;
+only link hrefs, redirect targets and canonical URLs carry it. GitHub Pages renders the Markdown, so no
+HTML conversion happens here.
 
 Usage:
-  python3 generate-wiki.py --pages pages --items <core items.yml> --out site [--plugin slimefun]
+  python3 generate-wiki.py --pages pages --items <core items.yml> --out site --base /Wiki
 """
 
 import argparse
@@ -22,7 +26,7 @@ import os
 import re
 import shutil
 
-# Links in the content point at the GitHub wiki; rewrite them to this site's /wiki/ paths.
+# Links in the content point at the GitHub wiki; rewrite them to this site's paths.
 GITHUB_WIKI = re.compile(r"https?://github\.com/Slimefun5/Slimefun5/wiki/([A-Za-z0-9_%\-]+)")
 COLOR_CODE = re.compile(r"[&§][0-9a-fk-orA-FK-OR]")
 
@@ -57,32 +61,32 @@ def page_slug(display_name):
     return display_name.replace(" ", "-")
 
 
-def rewrite_links(markdown):
+def rewrite_links(markdown, base):
     """Point GitHub-wiki links at this site instead (preserving any #anchor)."""
-    return GITHUB_WIKI.sub(lambda m: "/wiki/" + m.group(1) + "/", markdown)
+    return GITHUB_WIKI.sub(lambda m: base + "/" + m.group(1) + "/", markdown)
 
 
 def emit_page(out_dir, slug, title, body):
-    """Write one Jekyll content page at /wiki/<slug>/."""
-    page_dir = os.path.join(out_dir, "wiki", slug)
+    """Write one Jekyll content page (served at <base>/<slug>/ via the project-page prefix)."""
+    page_dir = os.path.join(out_dir, slug)
     os.makedirs(page_dir, exist_ok=True)
     safe_title = title.replace('"', "'")
     front_matter = (
         "---\n"
         "layout: wiki\n"
         f'title: "{safe_title}"\n'
-        f"permalink: /wiki/{slug}/\n"
+        f"permalink: /{slug}/\n"
         "---\n\n"
     )
     with open(os.path.join(page_dir, "index.md"), "w", encoding="utf-8") as f:
         f.write(front_matter + body)
 
 
-def emit_redirect(out_dir, plugin, item_id, target_slug):
-    """Write a meta-refresh redirect at /wiki/<plugin>/<id>/ pointing at the content page."""
-    redirect_dir = os.path.join(out_dir, "wiki", plugin, item_id)
+def emit_redirect(out_dir, plugin, item_id, target_slug, base):
+    """Write a meta-refresh redirect at <base>/<plugin>/<id>/ pointing at the content page."""
+    redirect_dir = os.path.join(out_dir, plugin, item_id)
     os.makedirs(redirect_dir, exist_ok=True)
-    target = f"/wiki/{target_slug}/"
+    target = f"{base}/{target_slug}/"
     html = (
         "<!doctype html><html><head><meta charset=\"utf-8\">"
         f"<meta http-equiv=\"refresh\" content=\"0; url={target}\">"
@@ -94,14 +98,15 @@ def emit_redirect(out_dir, plugin, item_id, target_slug):
         f.write(html)
 
 
-def write_scaffold(out_dir, page_titles):
+def write_scaffold(out_dir, page_titles, base):
     """Write the Jekyll config, layout, stylesheet and index."""
     with open(os.path.join(out_dir, "_config.yml"), "w", encoding="utf-8") as f:
+        # baseurl left empty: the /Wiki prefix is the project-page path, already baked into hrefs.
         f.write(
             "title: Slimefun Wiki\n"
             "description: The official wiki for the Slimefun5 fork.\n"
             "markdown: kramdown\n"
-            "exclude: [src, README.md, CONTRIBUTING.md, LICENSE]\n"
+            "exclude: [src, README.md, CONTRIBUTING.md, LICENSE, pages]\n"
         )
 
     os.makedirs(os.path.join(out_dir, "_layouts"), exist_ok=True)
@@ -111,8 +116,9 @@ def write_scaffold(out_dir, page_titles):
             "<meta charset=\"utf-8\">\n"
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
             "<title>{{ page.title }} · {{ site.title }}</title>\n"
-            "<link rel=\"stylesheet\" href=\"/assets/style.css\">\n"
-            "</head>\n<body>\n<header><a href=\"/wiki/\">{{ site.title }}</a></header>\n"
+            f"<link rel=\"stylesheet\" href=\"{base}/assets/style.css\">\n"
+            "</head>\n<body>\n"
+            f"<header><a href=\"{base}/\">{{{{ site.title }}}}</a></header>\n"
             "<main><h1>{{ page.title }}</h1>\n{{ content }}\n</main>\n"
             "<footer>Slimefun5 · content licensed under the GNU General Public License v3.0</footer>\n"
             "</body>\n</html>\n"
@@ -132,22 +138,12 @@ def write_scaffold(out_dir, page_titles):
             "table{border-collapse:collapse}td,th{border:1px solid #8884;padding:.3rem .6rem}\n"
         )
 
-    lines = ["---", "layout: wiki", 'title: "Slimefun Wiki"', "permalink: /wiki/", "---", ""]
+    lines = ["---", "layout: wiki", 'title: "Slimefun Wiki"', "permalink: /", "---", ""]
     lines.append("Browse every Slimefun item and mechanic:\n")
     for title in sorted(page_titles):
-        lines.append(f"* [{title}](/wiki/{page_slug(title)}/)")
-    os.makedirs(os.path.join(out_dir, "wiki"), exist_ok=True)
-    with open(os.path.join(out_dir, "wiki", "index.md"), "w", encoding="utf-8") as f:
+        lines.append(f"* [{title}]({base}/{page_slug(title)}/)")
+    with open(os.path.join(out_dir, "index.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
-
-    # The site's whole purpose is the wiki, so redirect the org-root to /wiki/ instead of 404ing.
-    with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
-        f.write(
-            "<!doctype html><html><head><meta charset=\"utf-8\">"
-            "<meta http-equiv=\"refresh\" content=\"0; url=/wiki/\">"
-            "<link rel=\"canonical\" href=\"/wiki/\"><title>Slimefun Wiki</title></head>"
-            "<body>Redirecting to <a href=\"/wiki/\">the wiki</a>.</body></html>\n"
-        )
 
 
 def main():
@@ -155,8 +151,11 @@ def main():
     parser.add_argument("--pages", required=True, help="Directory of <Display-Name>.md content pages")
     parser.add_argument("--items", help="Path to a core/addon items.yml for id->name mapping")
     parser.add_argument("--plugin", default="slimefun", help="Plugin slug for item redirect URLs")
+    parser.add_argument("--base", default="", help="URL path the site is served under, e.g. /Wiki")
     parser.add_argument("--out", required=True, help="Output site directory")
     args = parser.parse_args()
+
+    base = args.base.rstrip("/")
 
     if os.path.isdir(args.out):
         shutil.rmtree(args.out)
@@ -171,24 +170,24 @@ def main():
         slug = name[:-3]
         title = slug.replace("-", " ")
         with open(os.path.join(args.pages, name), encoding="utf-8", errors="replace") as f:
-            body = rewrite_links(f.read())
+            body = rewrite_links(f.read(), base)
         emit_page(args.out, slug, title, body)
         page_titles.append(title)
         available_slugs.add(slug)
 
-    # Emit /wiki/<plugin>/<id>/ redirects for every item id whose page exists.
+    # Emit <base>/<plugin>/<id>/ redirects for every item id whose page exists.
     names = parse_item_names(args.items)
     redirects = 0
     for item_id, display_name in names.items():
         slug = page_slug(display_name)
         if slug in available_slugs:
-            emit_redirect(args.out, args.plugin, item_id.lower(), slug)
+            emit_redirect(args.out, args.plugin, item_id.lower(), slug, base)
             redirects += 1
 
-    write_scaffold(args.out, page_titles)
+    write_scaffold(args.out, page_titles, base)
 
     # No .nojekyll: we rely on GitHub Pages' Jekyll to render the Markdown pages.
-    print(f"Generated {len(page_titles)} pages and {redirects} item redirects into {args.out}")
+    print(f"Generated {len(page_titles)} pages and {redirects} item redirects into {args.out} (base '{base or '/'}')")
 
 
 if __name__ == "__main__":
