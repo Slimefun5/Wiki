@@ -37,18 +37,11 @@ jobs:
             --base /Wiki \
             --out _src
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: _src
-          destination: _site
-
-      # Publish the rendered HTML to gh-pages (the same legacy-branch method the builds page uses).
-      # .nojekyll tells Pages to serve the already-built HTML as-is instead of re-running Jekyll.
+      # Publish the Jekyll SOURCE to gh-pages; GitHub Pages runs Jekyll on the branch itself (the same
+      # legacy-branch method the builds page uses). No local Jekyll build, so no container/ownership issues.
       - name: Publish to gh-pages
         run: |
-          cd _site
-          touch .nojekyll
+          cd _src
           git init -q -b gh-pages
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
