@@ -140,6 +140,15 @@ def write_scaffold(out_dir, page_titles):
     with open(os.path.join(out_dir, "wiki", "index.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
 
+    # The site's whole purpose is the wiki, so redirect the org-root to /wiki/ instead of 404ing.
+    with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
+        f.write(
+            "<!doctype html><html><head><meta charset=\"utf-8\">"
+            "<meta http-equiv=\"refresh\" content=\"0; url=/wiki/\">"
+            "<link rel=\"canonical\" href=\"/wiki/\"><title>Slimefun Wiki</title></head>"
+            "<body>Redirecting to <a href=\"/wiki/\">the wiki</a>.</body></html>\n"
+        )
+
 
 def main():
     parser = argparse.ArgumentParser()
