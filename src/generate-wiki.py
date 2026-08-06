@@ -31,20 +31,8 @@ import markdown
 GITHUB_WIKI = re.compile(r"https?://github\.com/Slimefun5/Slimefun5/wiki/([A-Za-z0-9_%\-]+)")
 COLOR_CODE = re.compile(r"[&§][0-9a-fk-orA-FK-OR]")
 
-# A line-art beaker (Slimefun's alchemy motif), drawn with currentColor so the header/favicon share it.
-MARK = (
-    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
-    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-    '<path d="M9 3h6M10 3v6L4.6 18.4A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.6L14 9V3"/>'
-    '<path d="M7.5 14h9"/></svg>'
-)
-
-FAVICON = (
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' "
-    "stroke='%2316a34a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E"
-    "%3Cpath d='M9 3h6M10 3v6L4.6 18.4A1.6 1.6 0 0 0 6 21h12a1.6 1.6 0 0 0 1.4-2.6L14 9V3'/%3E"
-    "%3Cpath d='M7.5 14h9'/%3E%3C/svg%3E"
-)
+# The Slimefun icon, vendored next to this script and copied into the site's assets on build.
+LOGO_SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slimefun-icon.png")
 
 SITE_CSS = """\
 :root{--bg:#fff;--fg:#18181b;--muted:#6b7280;--border:#e8e8ea;--code:#f4f4f5;--accent:#16a34a;--w:44rem}
@@ -56,9 +44,9 @@ a:hover{text-decoration:underline}
 .wrap,main,footer{max-width:var(--w);margin:0 auto;padding-left:1.25rem;padding-right:1.25rem}
 header{border-bottom:1px solid var(--border)}
 header .wrap{height:3.25rem;display:flex;align-items:center}
-header a{display:flex;align-items:center;gap:.5rem;color:var(--fg);font-weight:650}
+header a{display:flex;align-items:center;gap:.55rem;color:var(--fg);font-weight:650}
 header a:hover{text-decoration:none}
-header svg{width:1.3rem;height:1.3rem;color:var(--accent)}
+.logo{width:1.5rem;height:1.5rem;border-radius:.25rem;display:block}
 main{padding-top:2.75rem;padding-bottom:4rem}
 h1{font-size:1.95rem;line-height:1.2;letter-spacing:-.02em;margin:0 0 1rem;text-wrap:balance}
 h2{font-size:1.3rem;letter-spacing:-.01em;margin:2.4rem 0 .8rem}
@@ -137,10 +125,12 @@ def page_shell(title, base, inner_html):
         "<meta charset=\"utf-8\">\n"
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
         f"<title>{safe_title} · Slimefun Wiki</title>\n"
-        f"<link rel=\"icon\" href=\"{FAVICON}\">\n"
+        f"<link rel=\"icon\" href=\"{base}/assets/logo.png\">\n"
         f"<link rel=\"stylesheet\" href=\"{base}/assets/style.css\">\n"
         "</head>\n<body>\n"
-        f"<header><div class=\"wrap\"><a href=\"{base}/\">{MARK}<span>Slimefun Wiki</span></a></div></header>\n"
+        f"<header><div class=\"wrap\"><a href=\"{base}/\">"
+        f"<img class=\"logo\" src=\"{base}/assets/logo.png\" alt=\"\" width=\"24\" height=\"24\">"
+        "<span>Slimefun Wiki</span></a></div></header>\n"
         f"<main>\n{inner_html}\n</main>\n"
         "<footer>Content licensed under the "
         "<a href=\"https://www.gnu.org/licenses/gpl-3.0.html\">GNU GPL v3.0</a> · "
@@ -209,9 +199,13 @@ def write_site_files(out_dir, page_titles, base):
     with open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8") as f:
         f.write(render_index(page_titles, base))
 
-    os.makedirs(os.path.join(out_dir, "assets"), exist_ok=True)
-    with open(os.path.join(out_dir, "assets", "style.css"), "w", encoding="utf-8") as f:
+    assets = os.path.join(out_dir, "assets")
+    os.makedirs(assets, exist_ok=True)
+    with open(os.path.join(assets, "style.css"), "w", encoding="utf-8") as f:
         f.write(SITE_CSS)
+
+    if os.path.exists(LOGO_SOURCE):
+        shutil.copy(LOGO_SOURCE, os.path.join(assets, "logo.png"))
 
     with open(os.path.join(out_dir, ".nojekyll"), "w", encoding="utf-8") as f:
         f.write("")
