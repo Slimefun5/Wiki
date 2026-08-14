@@ -1,4 +1,7 @@
-from wiki.model import Item, page_slug, strip_color, item_url, parse_items_yaml, parse_lines_yaml, parse_topics_yaml
+import re
+
+from wiki.model import (Item, page_slug, plugin_slug, strip_color, item_url, parse_items_yaml,
+                        parse_lines_yaml, parse_topics_yaml)
 
 ITEMS_YAML = """
 ADVANCED_INDUSTRIAL_MINER:
@@ -24,6 +27,40 @@ def test_strip_color_removes_codes_and_quotes():
 def test_page_slug_matches_the_existing_prose_filenames():
     assert page_slug("Cargo Management") == "Cargo-Management"
     assert page_slug("Ancient Altar") == "Ancient-Altar"
+
+
+def test_plugin_slug_lowercases_a_plain_name():
+    assert plugin_slug("Slimefun") == "slimefun"
+    assert plugin_slug("InfinityExpansion") == "infinityexpansion"
+
+
+def test_plugin_slug_replaces_a_space_a_dot_and_a_plus():
+    assert plugin_slug("My Addon") == "my-addon"
+    assert plugin_slug("Addon.Name") == "addon-name"
+    assert plugin_slug("C++Tools") == "c--tools"
+
+
+# pluginName values from infra/manifest/addons.json (core + all 21 addons); hardcoded rather than
+# read from the sibling infra/manifest checkout, which is a separate repo not present in this
+# repo's CI checkout and whose absolute path is host-specific.
+REAL_PLUGIN_NAMES = [
+    "Slimefun", "Galactifun", "SlimefunLuckyBlocks", "ExoticGarden", "ExtraGear",
+    "LiteXpansion", "SensibleToolbox", "InfinityExpansion", "SlimeTinker",
+    "FluffyMachines", "DynaTech", "ChestTerminal", "SFAdvancements", "MissileWarfare",
+    "Networks", "SoulJars", "FastMachines", "GeneticChickengineering", "Supreme",
+    "FoxyMachines", "SimpleMaterialGenerators", "SimpleUtils",
+]
+
+
+def _core_wikilinks_slug(name: str) -> str:
+    """Independent re-implementation of core's Java WikiLinks.slug(), so this test can catch
+    plugin_slug drifting from the rule it is meant to mirror."""
+    return re.sub(r"[^a-z0-9_-]", "-", name.lower())
+
+
+def test_plugin_slug_matches_core_rule_for_every_real_plugin_name():
+    for name in REAL_PLUGIN_NAMES:
+        assert plugin_slug(name) == _core_wikilinks_slug(name)
 
 
 def test_item_url_matches_wikilinks():

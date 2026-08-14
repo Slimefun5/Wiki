@@ -1,8 +1,8 @@
 import json
 
 from wiki.model import Addon, Item, Prose, Site, Topic
-from wiki.render import (render_addon_index, render_item_page, render_landing, render_redirect,
-                         render_topic_page, search_index)
+from wiki.render import (_block, _paragraphs, render_addon_index, render_item_page, render_landing,
+                         render_redirect, render_topic_page, search_index)
 
 
 def _item(**overrides):
@@ -35,6 +35,17 @@ def test_item_page_escapes_html_in_names():
     assert "<Pan>" not in html
 
 
+def test_item_page_escapes_a_quote_in_the_plugin_segment():
+    html = render_item_page(_item(plugin='slimefun" onmouseover="alert(1)'), "/wiki")
+    assert '" onmouseover="alert(1)' not in html
+    assert "&quot; onmouseover=&quot;alert(1)" in html
+
+
+def test_item_page_escapes_a_quote_in_the_prose_link():
+    html = render_item_page(_item(prose_link='/wiki/x/"><script>alert(1)</script>'), "/wiki")
+    assert "<script>alert(1)</script>" not in html
+
+
 def test_topic_page_lists_its_items_as_links():
     topic = Topic(id="cargo", title="Cargo Networks", icon="HOPPER", summary="Move items",
                   body=["Cargo moves items.", "", "Build a network."], item_ids=["GOLD_PAN"],
@@ -44,6 +55,14 @@ def test_topic_page_lists_its_items_as_links():
     assert 'href="/wiki/slimefun/gold_pan/"' in html
     assert "Cargo moves items." in html
     assert "Build a network." in html
+
+
+def test_topic_page_escapes_a_quote_in_an_item_url():
+    quoted_item = _item(url='/wiki/x/"><script>alert(1)</script>')
+    topic = Topic(id="cargo", title="Cargo", icon="HOPPER", summary="", item_ids=["GOLD_PAN"],
+                  url="/wiki/topic/cargo/")
+    html = render_topic_page(topic, {"GOLD_PAN": quoted_item}, "/wiki")
+    assert "<script>alert(1)</script>" not in html
 
 
 def test_topic_page_skips_unknown_item_ids():
@@ -67,6 +86,12 @@ def test_redirect_targets_the_canonical_url():
     html = render_redirect("/wiki/slimefun/gold_pan/")
     assert 'url=/wiki/slimefun/gold_pan/' in html
     assert 'rel="canonical"' in html
+
+
+def test_redirect_escapes_a_quote_in_the_target():
+    html = render_redirect('/wiki/x/"><script>alert(1)</script>')
+    assert "<script>alert(1)</script>" not in html
+    assert html.count("&quot;") >= 3
 
 
 def test_search_index_covers_items_topics_and_guides():
@@ -98,3 +123,29 @@ def test_landing_reports_the_real_counts():
 
     assert "1 item" in html
     assert 'href="/wiki/addon/slimefun/"' in html
+
+
+def test_block_handles_an_empty_list_and_an_all_blank_list():
+    assert _block([]) == ""
+    assert _block(["", ""]) == ""
+
+
+def test_block_ignores_leading_and_trailing_blank_lines():
+    result = _block(["", "First", "Second", ""])
+    assert result.count("<li>") == 2
+    assert "First" in result and "Second" in result
+
+
+def test_paragraphs_handles_an_empty_list_and_an_all_blank_list():
+    assert _paragraphs([]) == ""
+    assert _paragraphs(["", "", ""]) == ""
+
+
+def test_paragraphs_ignores_leading_and_trailing_blank_lines():
+    assert _paragraphs(["", "First line", ""]) == "<p>First line</p>\n"
+
+
+def test_paragraphs_treats_consecutive_blank_lines_as_a_single_break():
+    result = _paragraphs(["A", "", "", "", "B"])
+    assert result == "<p>A</p>\n<p>B</p>\n"
+    assert "<p></p>" not in result

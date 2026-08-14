@@ -19,6 +19,12 @@ def page_slug(display_name: str) -> str:
     return display_name.replace(" ", "-")
 
 
+def plugin_slug(name: str) -> str:
+    """Mirrors core's Java `WikiLinks.slug()` so the in-game "View in Wiki" link and this
+    generator always build the same URL segment for a plugin name."""
+    return re.sub(r"[^a-z0-9_-]", "-", name.lower())
+
+
 def item_url(plugin: str, item_id: str, base: str) -> str:
     return "{}/{}/{}/".format(base, plugin, item_id.lower())
 

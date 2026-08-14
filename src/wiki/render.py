@@ -38,8 +38,13 @@ n.style.display=hits.length?'none':'block';});})();
 """
 
 
+def _attr(value: str) -> str:
+    return html.escape(value, quote=True)
+
+
 def page_shell(title: str, base: str, inner_html: str) -> str:
     safe = html.escape(title)
+    base = _attr(base)
     return (
         '<!doctype html>\n<html lang="en">\n<head>\n'
         '<meta charset="utf-8">\n'
@@ -63,10 +68,11 @@ def page_shell(title: str, base: str, inner_html: str) -> str:
 
 
 def _block(lines: List[str]) -> str:
-    if not lines:
+    items = "".join("<li>{}</li>".format(html.escape(line)) for line in lines if line)
+
+    if not items:
         return ""
 
-    items = "".join("<li>{}</li>".format(html.escape(line)) for line in lines if line)
     return '<div class="sf-block"><ul>{}</ul></div>\n'.format(items)
 
 
@@ -89,7 +95,7 @@ def _paragraphs(lines: List[str]) -> str:
 def render_item_page(item, base: str) -> str:
     parts = [
         '<a class="sf-back" href="{}/addon/{}/">\u2190 {}</a>\n'.format(
-            base, item.plugin, html.escape(item.addon_name)),
+            _attr(base), _attr(item.plugin), html.escape(item.addon_name)),
         "<h1>{}<span class=\"sf-badge\">{}</span></h1>\n".format(
             html.escape(item.name), html.escape(item.addon_name)),
         _block(item.type_lines),
@@ -102,7 +108,7 @@ def render_item_page(item, base: str) -> str:
     if item.prose_html:
         parts.append(item.prose_html)
     elif item.prose_link:
-        parts.append('<p><a href="{}">Read the full guide</a></p>\n'.format(item.prose_link))
+        parts.append('<p><a href="{}">Read the full guide</a></p>\n'.format(_attr(item.prose_link)))
 
     return page_shell(item.name, base, "".join(parts))
 
@@ -110,7 +116,7 @@ def render_item_page(item, base: str) -> str:
 def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
     tiles = [items_by_id[item_id] for item_id in topic.item_ids if item_id in items_by_id]
     parts = [
-        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(base),
+        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(_attr(base)),
         "<h1>{}</h1>\n".format(html.escape(topic.title)),
         '<p class="sf-lede">{}</p>\n'.format(html.escape(topic.summary)),
         _paragraphs(topic.body),
@@ -120,7 +126,7 @@ def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
         parts.append(topic.prose_html)
 
     if tiles:
-        links = "".join('<a href="{}">{}</a>'.format(i.url, html.escape(i.name)) for i in tiles)
+        links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name)) for i in tiles)
         parts.append("<h2>Items in this topic</h2>\n<div class=\"sf-list\">{}</div>\n".format(links))
 
     return page_shell(topic.title, base, "".join(parts))
@@ -128,17 +134,17 @@ def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
 
 def render_prose_page(prose, base: str) -> str:
     inner = (
-        '<a class="sf-back" href="{}/guides/">\u2190 All guides</a>\n'.format(base) +
+        '<a class="sf-back" href="{}/guides/">\u2190 All guides</a>\n'.format(_attr(base)) +
         "<h1>{}</h1>\n".format(html.escape(prose.title)) + prose.html
     )
     return page_shell(prose.title, base, inner)
 
 
 def render_addon_index(addon, base: str) -> str:
-    links = "".join('<a href="{}">{}</a>'.format(i.url, html.escape(i.name))
+    links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name))
                     for i in sorted(addon.items, key=lambda i: i.name))
     inner = (
-        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(base) +
+        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(_attr(base)) +
         "<h1>{}</h1>\n".format(html.escape(addon.name)) +
         '<p class="sf-lede">{} items</p>\n'.format(len(addon.items)) +
         '<div class="sf-list">{}</div>\n'.format(links)
@@ -147,10 +153,10 @@ def render_addon_index(addon, base: str) -> str:
 
 
 def render_guides_index(prose_pages, base: str) -> str:
-    links = "".join('<a href="{}">{}</a>'.format(p.url, html.escape(p.title))
+    links = "".join('<a href="{}">{}</a>'.format(_attr(p.url), html.escape(p.title))
                     for p in sorted(prose_pages, key=lambda p: p.title))
     inner = (
-        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(base) +
+        '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(_attr(base)) +
         "<h1>Guides</h1>\n" +
         '<p class="sf-lede">{} guides</p>\n'.format(len(prose_pages)) +
         '<div class="sf-list">{}</div>\n'.format(links)
@@ -160,11 +166,11 @@ def render_guides_index(prose_pages, base: str) -> str:
 
 def render_landing(site, base: str) -> str:
     guides = [p for p in site.prose if p.absorbed_by is None]
-    topics = "".join('<a href="{}">{}</a>'.format(t.url, html.escape(t.title)) for t in site.topics)
+    topics = "".join('<a href="{}">{}</a>'.format(_attr(t.url), html.escape(t.title)) for t in site.topics)
     cards = "".join(
         '<a class="sf-card" href="{}"><strong>{}</strong><br>'
         '<span class="sf-count">{} items</span></a>'.format(
-            a.url, html.escape(a.name), len(a.items))
+            _attr(a.url), html.escape(a.name), len(a.items))
         for a in site.addons)
 
     inner = (
@@ -177,21 +183,23 @@ def render_landing(site, base: str) -> str:
         "<h2>Topics</h2>\n<div class=\"sf-list\">{topics}</div>\n"
         '<p><a href="{base}/guides/">All {guides} guides</a></p>\n'
         "<h2>Browse by addon</h2>\n<div class=\"sf-cards\">{cards}</div>\n"
-        '<script>var BASE="{base}";</script>\n{script}'
+        '<script>var BASE="{raw_base}";</script>\n{script}'
     ).format(items=len(site.items), guides=len(guides), topics=topics, cards=cards,
-             base=base, script=SEARCH_SCRIPT)
+             base=_attr(base), raw_base=base, script=SEARCH_SCRIPT)
 
     return page_shell("Slimefun Wiki", base, inner)
 
 
 def render_redirect(target: str) -> str:
+    attr = _attr(target)
+    text = html.escape(target)
     return (
         '<!doctype html><html><head><meta charset="utf-8">'
-        '<meta http-equiv="refresh" content="0; url={target}">'
-        '<link rel="canonical" href="{target}">'
+        '<meta http-equiv="refresh" content="0; url={attr}">'
+        '<link rel="canonical" href="{attr}">'
         "<title>Redirecting...</title></head><body>"
-        'Redirecting to <a href="{target}">{target}</a>.</body></html>\n'
-    ).format(target=target)
+        'Redirecting to <a href="{attr}">{text}</a>.</body></html>\n'
+    ).format(attr=attr, text=text)
 
 
 def search_index(site) -> List[dict]:

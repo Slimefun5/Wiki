@@ -7,6 +7,8 @@ from typing import Dict, List, Optional
 from urllib.error import URLError
 from urllib.request import urlopen
 
+from wiki.model import plugin_slug
+
 MANIFEST_URL = "https://raw.githubusercontent.com/Slimefun5/manifest/main/addons.json"
 ITEMS_PATH = "src/main/resources/languages/en/items.yml"
 CORE_WIKI_PATHS = {
@@ -55,7 +57,7 @@ def fetch_text(url: str) -> Optional[str]:
 
 def _ref(entry: dict) -> RepoRef:
     plugin_name = entry.get("pluginName") or entry["repo"].split("/")[-1]
-    return RepoRef(plugin=plugin_name.lower(), name=entry.get("name", plugin_name),
+    return RepoRef(plugin=plugin_slug(plugin_name), name=entry.get("name", plugin_name),
                    repo=entry["repo"], ref=entry.get("defaultBranch", "main"))
 
 
