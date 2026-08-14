@@ -36,6 +36,43 @@ def test_load_prose_renders_markdown_and_rewrites_github_wiki_links(tmp_path):
     assert "github.com" not in prose["Common-Issues"]
 
 
+def test_load_prose_does_not_swallow_the_markdown_closing_paren(tmp_path):
+    pages = tmp_path / "pages"
+    pages.mkdir()
+    (pages / "Common-Issues.md").write_text(
+        "See [cargo](https://github.com/Slimefun5/Slimefun5/wiki/Cargo-Management) for details.\n",
+        encoding="utf-8")
+
+    prose = load_prose(str(pages), "/wiki")
+
+    assert '<a href="/wiki/Cargo-Management/">cargo</a> for details.' in prose["Common-Issues"]
+
+
+def test_load_prose_rewrites_a_link_to_a_parenthesised_page_name(tmp_path):
+    pages = tmp_path / "pages"
+    pages.mkdir()
+    (pages / "Common-Issues.md").write_text(
+        "[setup](https://github.com/Slimefun5/Slimefun5/wiki/Developer-Guide-(1-Project-Setup))\n",
+        encoding="utf-8")
+
+    prose = load_prose(str(pages), "/wiki")
+
+    assert "/wiki/Developer-Guide-(1-Project-Setup)/" in prose["Common-Issues"]
+    assert "github.com" not in prose["Common-Issues"]
+
+
+def test_load_prose_rewrites_a_link_to_an_apostrophe_page_name(tmp_path):
+    pages = tmp_path / "pages"
+    pages.mkdir()
+    (pages / "Common-Issues.md").write_text(
+        "[pickaxe](https://github.com/Slimefun5/Slimefun5/wiki/Hercules'-Pickaxe)\n",
+        encoding="utf-8")
+
+    prose = load_prose(str(pages), "/wiki")
+
+    assert "/wiki/Hercules'-Pickaxe/" in prose["Common-Issues"]
+
+
 def test_write_site_emits_every_page_and_the_search_index(tmp_path):
     site = build_site(_sources(), prose={"Gold-Pan": "<p>Guide.</p>"}, base="/wiki")
     out = str(tmp_path / "out")

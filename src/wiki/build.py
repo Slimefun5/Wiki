@@ -13,7 +13,10 @@ from wiki import render
 from wiki.fetch import MANIFEST_URL, MissingRequiredSource, fetch_sources, fetch_text
 from wiki.model import build_site
 
-GITHUB_WIKI = re.compile(r"https?://github\.com/Slimefun5/Slimefun5/wiki/([A-Za-z0-9_%\-]+)")
+# The optional group only closes on a "(" it opened itself, so a markdown link's own closing
+# ")" - e.g. "[text](.../wiki/Cargo-Management)" - is left for markdown rather than swallowed.
+GITHUB_WIKI = re.compile(
+    r"https?://github\.com/Slimefun5/Slimefun5/wiki/([A-Za-z0-9_%\-']+(?:\([^)\s]*\))?)")
 HREF = re.compile(r'href="([^"]+)"')
 LOGO_SOURCE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "slimefun-icon.png")
 
