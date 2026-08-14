@@ -26,7 +26,10 @@ def plugin_slug(name: str) -> str:
 
 
 def item_url(plugin: str, item_id: str, base: str) -> str:
-    return "{}/{}/{}/".format(base, plugin, item_id.lower())
+    """Routes the id through the same rule as the plugin segment (`WikiLinks.slug()`), so a raw
+    id containing a filesystem/URL-reserved character (e.g. `?`) sanitizes instead of crashing
+    the write or producing a link the browser reinterprets as a query string."""
+    return "{}/{}/{}/".format(base, plugin, plugin_slug(item_id))
 
 
 def topic_url(topic_id: str, base: str) -> str:
@@ -39,6 +42,35 @@ def addon_url(plugin: str, base: str) -> str:
 
 def prose_url(slug: str, base: str) -> str:
     return "{}/{}/".format(base, slug)
+
+
+FAMILY_TOKEN = re.compile(r"%[A-Za-z_]+%")
+
+
+def is_family_template(item_id: str) -> bool:
+    return "%" in item_id
+
+
+def family_slug(item_id: str) -> str:
+    """The family page's slug: the `%TOKEN%` and any underscore left dangling beside it removed,
+    the remainder slugged, with '-family' appended."""
+    remainder = FAMILY_TOKEN.sub("", item_id)
+    remainder = re.sub(r"_+", "_", remainder).strip("_")
+    return plugin_slug(remainder) + "-family"
+
+
+def family_url(plugin: str, item_id: str, base: str) -> str:
+    return "{}/{}/{}/".format(base, plugin, family_slug(item_id))
+
+
+def family_regex_source(item_id: str) -> str:
+    """The families.json regex: derived from the id run through the SAME lowercase+slug rule a
+    real variation's URL segment goes through, so the `%TOKEN%` placeholder (itself slugged, e.g.
+    `%MOB%` -> `-mob-`) maps to `(.+)` at the matching position and the anchored result matches
+    any concrete variation's slugged id (`%MOB%_SOUL_JAR` -> `^(.+)_soul_jar$`)."""
+    slugged = plugin_slug(item_id.lower())
+    placeholder = plugin_slug(FAMILY_TOKEN.search(item_id).group(0).lower())
+    return "^" + re.escape(slugged).replace(re.escape(placeholder), "(.+)") + "$"
 
 
 @dataclass
@@ -54,6 +86,20 @@ class Item:
     wiki_lines: List[str] = field(default_factory=list)
     prose_html: Optional[str] = None
     prose_link: Optional[str] = None
+    url: str = ""
+
+
+@dataclass
+class ItemFamily:
+    plugin: str
+    addon_name: str
+    template_id: str
+    name: str
+    type_lines: List[str] = field(default_factory=list)
+    description: List[str] = field(default_factory=list)
+    stats: List[str] = field(default_factory=list)
+    usage: List[str] = field(default_factory=list)
+    regex: str = ""
     url: str = ""
 
 
@@ -93,6 +139,7 @@ class Site:
     topics: List[Topic] = field(default_factory=list)
     prose: List[Prose] = field(default_factory=list)
     addons: List[Addon] = field(default_factory=list)
+    families: List[ItemFamily] = field(default_factory=list)
     collisions: List[str] = field(default_factory=list)
 
     def items_by_id(self) -> Dict[str, Item]:
@@ -177,14 +224,26 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
         if not text:
             continue
 
-        items = parse_items_yaml(text, repo.plugin, repo.name)
+        items = []
 
-        for item in items:
-            item.url = item_url(item.plugin, item.id, base)
+        for entry in parse_items_yaml(text, repo.plugin, repo.name):
+            if is_family_template(entry.id):
+                site.families.append(ItemFamily(
+                    plugin=entry.plugin, addon_name=entry.addon_name, template_id=entry.id,
+                    name=entry.name, type_lines=entry.type_lines, description=entry.description,
+                    stats=entry.stats, usage=entry.usage,
+                    regex=family_regex_source(entry.id),
+                    url=family_url(entry.plugin, entry.id, base)))
+                continue
+
+            entry.url = item_url(entry.plugin, entry.id, base)
+            items.append(entry)
 
         site.items.extend(items)
         site.addons.append(Addon(plugin=repo.plugin, name=repo.name, items=items,
                                  url=addon_url(repo.plugin, base)))
+
+    site.families.sort(key=lambda f: -len(FAMILY_TOKEN.sub("", f.template_id)))
 
     authored = parse_lines_yaml(sources.core_wiki_items or "")
     for item in site.items:

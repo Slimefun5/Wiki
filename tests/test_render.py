@@ -1,8 +1,9 @@
 import json
 
-from wiki.model import Addon, Item, Prose, Site, Topic
+from wiki.model import Addon, Item, ItemFamily, Prose, Site, Topic
 from wiki.render import (_block, _paragraphs, render_addon_index, render_item_page, render_landing,
-                         render_redirect, render_topic_page, search_index)
+                         render_redirect, render_topic_page, search_index, render_family_page,
+                         render_404_page, families_json)
 
 
 def _item(**overrides):
@@ -80,6 +81,73 @@ def test_addon_index_shows_the_item_count():
 
     assert "2 items" in html
     assert "Networks" in html
+
+
+def _family(**overrides):
+    base = dict(plugin="souljars", addon_name="SoulJars", template_id="%MOB%_SOUL_JAR",
+                name="%mob% Soul Jar", type_lines=["Gadget"], description=["Traps a %mob%."],
+                stats=["+ Soul"], usage=["Right-click a %mob%."],
+                regex="^(.+)_soul_jar$", url="/wiki/souljars/soul_jar-family/")
+    base.update(overrides)
+    return ItemFamily(**base)
+
+
+def test_family_page_substitutes_any_mob_for_the_placeholder():
+    html = render_family_page(_family(), "/wiki")
+
+    assert "any mob Soul Jar" in html
+    assert "Traps a any mob." in html
+    assert "%mob%" not in html
+
+
+def test_family_page_shows_the_addon_and_back_link():
+    html = render_family_page(_family(), "/wiki")
+    assert 'href="/wiki/addon/souljars/"' in html
+    assert "SoulJars" in html
+
+
+def test_families_json_keeps_the_mob_placeholder_intact():
+    site = Site(families=[_family()])
+    entries = json.loads(families_json(site))
+
+    assert entries == [{
+        "plugin": "souljars", "regex": "^(.+)_soul_jar$", "url": "/wiki/souljars/soul_jar-family/",
+        "addon": "SoulJars", "name": "%mob% Soul Jar", "type": ["Gadget"],
+        "description": ["Traps a %mob%."], "stats": ["+ Soul"], "usage": ["Right-click a %mob%."],
+    }]
+
+
+def test_search_index_includes_families_with_a_distinct_kind():
+    site = Site(families=[_family()])
+    index = search_index(site)
+
+    assert index == [{"n": "any mob Soul Jar", "u": "/wiki/souljars/soul_jar-family/",
+                      "k": "family", "a": "SoulJars"}]
+
+
+def test_addon_index_links_to_its_families():
+    addon = Addon(plugin="souljars", name="SoulJars", url="/wiki/addon/souljars/")
+    html = render_addon_index(addon, "/wiki", families=[_family()])
+    assert 'href="/wiki/souljars/soul_jar-family/"' in html
+
+
+def test_addon_index_without_families_is_unaffected():
+    addon = Addon(plugin="souljars", name="SoulJars", url="/wiki/addon/souljars/")
+    html = render_addon_index(addon, "/wiki")
+    assert "Item families" not in html
+
+
+def test_404_page_falls_back_to_a_not_found_message_with_an_index_link():
+    html = render_404_page("/wiki")
+    assert "Page not found" in html
+    assert 'href="/wiki/"' in html
+    assert "assets/families.json" in html
+
+
+def test_404_page_has_no_em_dash_or_en_dash():
+    html = render_404_page("/wiki")
+    assert "—" not in html
+    assert "–" not in html
 
 
 def test_redirect_targets_the_canonical_url():

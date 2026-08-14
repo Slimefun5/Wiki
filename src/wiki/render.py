@@ -2,7 +2,10 @@
 
 import html
 import json
+import re
 from typing import Dict, List
+
+FAMILY_PLACEHOLDER = re.compile(r"%mob%", re.IGNORECASE)
 
 WIKI_CSS = """\
 .sf-lede{color:var(--sf-muted,#6b7280);margin:-.4rem 0 0}
@@ -113,6 +116,71 @@ def render_item_page(item, base: str) -> str:
     return page_shell(item.name, base, "".join(parts))
 
 
+def render_family_page(family, base: str) -> str:
+    """The one real page emitted for an item-family template; %mob% renders as the literal
+    words 'any mob' here (a concrete variation's own text is filled in dynamically by 404.html)."""
+    replacement = "any mob"
+
+    def sub(lines):
+        return [FAMILY_PLACEHOLDER.sub(replacement, line) for line in lines]
+
+    name = FAMILY_PLACEHOLDER.sub(replacement, family.name)
+    parts = [
+        '<a class="sf-back" href="{}/addon/{}/">← {}</a>\n'.format(
+            _attr(base), _attr(family.plugin), html.escape(family.addon_name)),
+        "<h1>{}<span class=\"sf-badge\">{}</span></h1>\n".format(
+            html.escape(name), html.escape(family.addon_name)),
+        _block(sub(family.type_lines)),
+        _block(sub(family.description)),
+        _block(sub(family.stats)),
+        _block(sub(family.usage)),
+    ]
+    return page_shell(name, base, "".join(parts))
+
+
+FAMILY_SCRIPT = """\
+<script>
+(function(){
+function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function block(lines,human){var items=(lines||[]).filter(Boolean).map(function(l){
+return '<li>'+escapeHtml(l.replace(/%mob%/gi,human))+'</li>'}).join('');
+return items?'<div class="sf-block"><ul>'+items+'</ul></div>':''}
+var path=location.pathname,rest=path.indexOf(BASE)===0?path.slice(BASE.length):path,
+segments=rest.replace(/^\\/+|\\/+$/g,'').split('/').filter(Boolean);
+if(segments.length<2){return}
+var plugin=segments[0],id=segments[1];
+fetch(BASE+'/assets/families.json').then(function(r){return r.json()}).then(function(families){
+for(var i=0;i<families.length;i++){var fam=families[i];
+if(fam.plugin!==plugin){continue}
+var match=id.match(new RegExp(fam.regex));
+if(!match){continue}
+var human=match[1].split('_').map(function(w){
+return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ');
+document.getElementById('sf-404-main').innerHTML=
+'<a class="sf-back" href="'+BASE+'/addon/'+fam.plugin+'/">← '+escapeHtml(fam.addon)+'</a>'+
+'<h1>'+escapeHtml(fam.name.replace(/%mob%/gi,human))+
+'<span class="sf-badge">'+escapeHtml(fam.addon)+'</span></h1>'+
+block(fam.type,human)+block(fam.description,human)+block(fam.stats,human)+block(fam.usage,human);
+return}
+});})();
+</script>
+"""
+
+
+def render_404_page(base: str) -> str:
+    """GitHub Pages custom 404: resolves any concrete family-template variation URL client-side
+    against families.json, since the unbounded variation set cannot be pre-generated as files."""
+    inner = (
+        '<div id="sf-404-main">'
+        "<h1>Page not found</h1>\n"
+        '<p class="sf-lede">That page does not exist.</p>\n'
+        '<p><a href="{base}">Back to the index</a></p>\n'
+        "</div>\n"
+        '<script>var BASE="{raw_base}";</script>\n{script}'
+    ).format(base=_attr(base + "/"), raw_base=base, script=FAMILY_SCRIPT)
+    return page_shell("Page not found", base, inner)
+
+
 def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
     tiles = [items_by_id[item_id] for item_id in topic.item_ids if item_id in items_by_id]
     parts = [
@@ -140,7 +208,7 @@ def render_prose_page(prose, base: str) -> str:
     return page_shell(prose.title, base, inner)
 
 
-def render_addon_index(addon, base: str) -> str:
+def render_addon_index(addon, base: str, families=None) -> str:
     links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name))
                     for i in sorted(addon.items, key=lambda i: i.name))
     inner = (
@@ -149,6 +217,13 @@ def render_addon_index(addon, base: str) -> str:
         '<p class="sf-lede">{} items</p>\n'.format(len(addon.items)) +
         '<div class="sf-list">{}</div>\n'.format(links)
     )
+
+    if families:
+        family_links = "".join(
+            '<a href="{}">{}</a>'.format(_attr(f.url), html.escape(FAMILY_PLACEHOLDER.sub("any mob", f.name)))
+            for f in sorted(families, key=lambda f: f.name))
+        inner += "<h2>Item families</h2>\n<div class=\"sf-list\">{}</div>\n".format(family_links)
+
     return page_shell(addon.name, base, inner)
 
 
@@ -207,8 +282,19 @@ def search_index(site) -> List[dict]:
     entries += [{"n": t.title, "u": t.url, "k": "topic", "a": ""} for t in site.topics]
     entries += [{"n": p.title, "u": p.url, "k": "guide", "a": ""}
                 for p in site.prose if p.absorbed_by is None]
+    entries += [{"n": FAMILY_PLACEHOLDER.sub("any mob", f.name), "u": f.url, "k": "family",
+                "a": f.addon_name} for f in site.families]
     return entries
 
 
 def search_index_json(site) -> str:
     return json.dumps(search_index(site), separators=(",", ":"))
+
+
+def families_json(site) -> str:
+    entries = [{
+        "plugin": f.plugin, "regex": f.regex, "url": f.url, "addon": f.addon_name,
+        "name": f.name, "type": f.type_lines, "description": f.description,
+        "stats": f.stats, "usage": f.usage,
+    } for f in site.families]
+    return json.dumps(entries, separators=(",", ":"))

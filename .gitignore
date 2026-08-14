@@ -1,4 +1,5 @@
 /.vscode/
 /site/
+/_site/
 __pycache__/
 *.pyc

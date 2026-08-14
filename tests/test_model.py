@@ -1,7 +1,8 @@
 import re
 
 from wiki.model import (Item, page_slug, plugin_slug, strip_color, item_url, parse_items_yaml,
-                        parse_lines_yaml, parse_topics_yaml)
+                        parse_lines_yaml, parse_topics_yaml, is_family_template, family_slug,
+                        family_url, family_regex_source)
 
 ITEMS_YAML = """
 ADVANCED_INDUSTRIAL_MINER:
@@ -67,6 +68,42 @@ def test_item_url_matches_wikilinks():
     assert item_url("slimefun", "ANCIENT_ALTAR", "/wiki") == "/wiki/slimefun/ancient_altar/"
     assert item_url("infinityexpansion", "ADVANCED_CHARGER", "/wiki") == \
         "/wiki/infinityexpansion/advanced_charger/"
+
+
+def test_item_url_is_unchanged_for_ids_already_in_the_allowed_charset():
+    assert item_url("slimefun", "ANCIENT_ALTAR", "/wiki") == "/wiki/slimefun/ancient_altar/"
+    assert item_url("infinityexpansion", "ADVANCED_CHARGER", "/wiki") == \
+        "/wiki/infinityexpansion/advanced_charger/"
+
+
+def test_item_url_sanitizes_reserved_characters_in_the_id():
+    assert item_url("slimetinker", "WHO_NEEDS_PRESSURE_PLATES?_TRAIT", "/wiki") == \
+        "/wiki/slimetinker/who_needs_pressure_plates-_trait/"
+    assert item_url("slimetinker", "MOB?S,GREAT!ITEM+NAME'S", "/wiki") == \
+        "/wiki/slimetinker/mob-s-great-item-name-s/"
+
+
+def test_is_family_template_detects_the_percent_token():
+    assert is_family_template("%MOB%_SOUL_JAR")
+    assert not is_family_template("GOLD_PAN")
+
+
+def test_family_slug_strips_the_token_and_dangling_underscores():
+    assert family_slug("%MOB%_SOUL_JAR") == "soul_jar-family"
+    assert family_slug("FILLED_%MOB%_SOUL_JAR") == "filled_soul_jar-family"
+    assert family_slug("%MOB%_BROKEN_SPAWNER") == "broken_spawner-family"
+    assert family_slug("GHOST_BLOCK_%MOB%") == "ghost_block-family"
+
+
+def test_family_url_uses_the_family_slug():
+    assert family_url("souljars", "%MOB%_SOUL_JAR", "/wiki") == "/wiki/souljars/soul_jar-family/"
+
+
+def test_family_regex_source_anchors_and_captures_the_token():
+    assert family_regex_source("%MOB%_SOUL_JAR") == "^(.+)_soul_jar$"
+    assert family_regex_source("FILLED_%MOB%_SOUL_JAR") == "^filled_(.+)_soul_jar$"
+    assert family_regex_source("%MOB%_BROKEN_SPAWNER") == "^(.+)_broken_spawner$"
+    assert family_regex_source("GHOST_BLOCK_%MOB%") == "^ghost_block_(.+)$"
 
 
 def test_item_defaults_are_empty_not_none():
@@ -233,6 +270,39 @@ def test_topics_carry_body_and_item_tiles():
     assert cargo.body == ["Cargo moves items."]
     assert cargo.item_ids == ["GOLD_PAN"]
     assert cargo.url == "/wiki/topic/cargo/"
+
+
+def test_family_templates_are_excluded_from_normal_items_and_addon_counts():
+    site = build_site(
+        _sources(
+            repos=[SimpleNamespace(plugin="souljars", name="SoulJars")],
+            items_yaml={"souljars": "'%MOB%_SOUL_JAR':\n  name: '&6%mob% Soul Jar'\n"},
+            core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None),
+        prose={}, base="/wiki")
+
+    assert site.items == []
+    assert site.addons[0].items == []
+    assert len(site.families) == 1
+
+    family = site.families[0]
+    assert family.plugin == "souljars"
+    assert family.addon_name == "SoulJars"
+    assert family.name == "%mob% Soul Jar"
+    assert family.url == "/wiki/souljars/soul_jar-family/"
+    assert family.regex == "^(.+)_soul_jar$"
+
+
+def test_family_extraction_orders_more_specific_templates_first():
+    site = build_site(
+        _sources(
+            repos=[SimpleNamespace(plugin="souljars", name="SoulJars")],
+            items_yaml={"souljars":
+                "'%MOB%_SOUL_JAR':\n  name: '&6%mob% Soul Jar'\n"
+                "'FILLED_%MOB%_SOUL_JAR':\n  name: '&6Filled %mob% Soul Jar'\n"},
+            core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None),
+        prose={}, base="/wiki")
+
+    assert [f.template_id for f in site.families] == ["FILLED_%MOB%_SOUL_JAR", "%MOB%_SOUL_JAR"]
 
 
 def test_missing_core_wiki_resources_degrade_to_an_empty_site_section():
