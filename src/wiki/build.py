@@ -52,7 +52,7 @@ def _relative(url: str, base: str) -> str:
     return trimmed + "/index.html" if trimmed else "index.html"
 
 
-def write_site(site, out_dir: str, base: str) -> int:
+def write_site(site, out_dir: str, base: str, header: str = None, footer: str = None) -> int:
     if os.path.isdir(out_dir):
         shutil.rmtree(out_dir)
 
@@ -62,36 +62,40 @@ def write_site(site, out_dir: str, base: str) -> int:
 
     for item in site.items:
         assert item.url, "item {} has no url".format(item.id)
-        _write(out_dir, _relative(item.url, base), render.render_item_page(item, base))
+        _write(out_dir, _relative(item.url, base),
+               render.render_item_page(item, base, header=header, footer=footer))
         written += 1
 
     for topic in site.topics:
         _write(out_dir, _relative(topic.url, base),
-               render.render_topic_page(topic, items_by_id, base))
+               render.render_topic_page(topic, items_by_id, base, header=header, footer=footer))
         written += 1
 
     families_by_plugin = {}
     for family in site.families:
         families_by_plugin.setdefault(family.plugin, []).append(family)
-        _write(out_dir, _relative(family.url, base), render.render_family_page(family, base))
+        _write(out_dir, _relative(family.url, base),
+               render.render_family_page(family, base, header=header, footer=footer))
         written += 1
 
     for addon in site.addons:
         _write(out_dir, _relative(addon.url, base),
-               render.render_addon_index(addon, base, families_by_plugin.get(addon.plugin)))
+               render.render_addon_index(addon, base, families_by_plugin.get(addon.plugin),
+                                        header=header, footer=footer))
         written += 1
 
     guides = [p for p in site.prose if p.absorbed_by is None]
 
     for page in site.prose:
         content = (render.render_redirect(page.absorbed_by) if page.absorbed_by
-                   else render.render_prose_page(page, base))
+                   else render.render_prose_page(page, base, header=header, footer=footer))
         _write(out_dir, _relative(page.url, base), content)
         written += 1
 
-    _write(out_dir, "guides/index.html", render.render_guides_index(guides, base))
-    _write(out_dir, "index.html", render.render_landing(site, base))
-    _write(out_dir, "404.html", render.render_404_page(base))
+    _write(out_dir, "guides/index.html",
+           render.render_guides_index(guides, base, header=header, footer=footer))
+    _write(out_dir, "index.html", render.render_landing(site, base, header=header, footer=footer))
+    _write(out_dir, "404.html", render.render_404_page(base, header=header, footer=footer))
     _write(out_dir, "assets/wiki.css", render.WIKI_CSS)
     _write(out_dir, "assets/search-index.json", render.search_index_json(site))
     _write(out_dir, "assets/families.json", render.families_json(site))
@@ -140,9 +144,15 @@ def main(argv=None) -> int:
                         help="Fail the build on any dangling internal link")
     parser.add_argument("--max-skipped", type=int, default=3,
                         help="Fail the build if more than this many addons are skipped")
+    parser.add_argument("--header", default=None,
+                        help="Path to the shared header.html partial; falls back to a built-in header")
+    parser.add_argument("--footer", default=None,
+                        help="Path to the shared footer.html partial; falls back to a built-in footer")
     args = parser.parse_args(argv)
 
     base = args.base.rstrip("/")
+    header = open(args.header, encoding="utf-8").read() if args.header else None
+    footer = open(args.footer, encoding="utf-8").read() if args.footer else None
     manifest_text = fetch_text(args.manifest)
 
     if manifest_text is None:
@@ -160,7 +170,7 @@ def main(argv=None) -> int:
     for collision in site.collisions:
         print("warning: " + collision, file=sys.stderr)
 
-    written = write_site(site, args.out, base)
+    written = write_site(site, args.out, base, header=header, footer=footer)
     dangling = check_links(args.out, base)
 
     if dangling:

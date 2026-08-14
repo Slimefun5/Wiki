@@ -35,8 +35,15 @@ jobs:
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
           cd repo
 
+          mkdir -p _chrome
+          for partial in header.html footer.html; do
+            curl -sfL "https://raw.githubusercontent.com/Slimefun5/web/main/${partial}" \
+              -o "_chrome/${partial}"
+          done
+
           PYTHONPATH=src python3 -m wiki.build \
-            --pages pages --base /wiki --out _site
+            --pages pages --base /wiki --out _site \
+            --header _chrome/header.html --footer _chrome/footer.html
 
           for sheet in tokens.css site.css; do
             curl -sfL "https://raw.githubusercontent.com/Slimefun5/web/main/${sheet}" \

@@ -2,9 +2,9 @@ import json
 
 from wiki.model import Addon, Item, ItemFamily, Prose, Site, Topic
 from wiki.render import (ESCAPE_HTML_JS, FAMILY_SCRIPT, SEARCH_SCRIPT, _block, _paragraphs,
-                         render_addon_index, render_item_page, render_landing, render_redirect,
-                         render_topic_page, search_index, render_family_page, render_404_page,
-                         families_json)
+                         page_shell, render_addon_index, render_guides_index, render_item_page,
+                         render_landing, render_prose_page, render_redirect, render_topic_page,
+                         search_index, render_family_page, render_404_page, families_json)
 
 
 def _item(**overrides):
@@ -268,3 +268,56 @@ def test_paragraphs_treats_consecutive_blank_lines_as_a_single_break():
     result = _paragraphs(["A", "", "", "", "B"])
     assert result == "<p>A</p>\n<p>B</p>\n"
     assert "<p></p>" not in result
+
+
+def test_page_shell_uses_the_supplied_header_and_footer():
+    html = page_shell("Guides", "/wiki", "<p>Inner</p>",
+                      header="<header>SHARED HEADER</header>", footer="<footer>SHARED FOOTER</footer>")
+    assert "<header>SHARED HEADER</header>" in html
+    assert "<footer>SHARED FOOTER</footer>" in html
+
+
+def test_page_shell_falls_back_to_a_built_in_header_and_footer_when_none_supplied():
+    html = page_shell("Guides", "/wiki", "<p>Inner</p>")
+    assert 'class="sf-header"' in html
+    assert 'class="sf-footer"' in html
+
+
+def test_page_shell_emits_sf_main_for_the_content_column():
+    html = page_shell("Guides", "/wiki", "<p>Inner</p>")
+    assert '<main class="sf-main">' in html
+
+
+def test_no_rendered_page_type_emits_sf_wrap():
+    base = "/wiki"
+    item = _item()
+    addon = Addon(plugin="slimefun", name="Slimefun", items=[item], url="/wiki/addon/slimefun/")
+    topic = Topic(id="cargo", title="Cargo", icon="HOPPER", summary="", item_ids=["GOLD_PAN"],
+                  url="/wiki/topic/cargo/")
+    prose = Prose(slug="Common-Issues", title="Common Issues", html="<p>Guide.</p>",
+                  url="/wiki/Common-Issues/")
+    pages = [
+        render_item_page(item, base),
+        render_addon_index(addon, base),
+        render_topic_page(topic, {"GOLD_PAN": item}, base),
+        render_guides_index([], base),
+        render_prose_page(prose, base),
+        render_landing(Site(), base),
+        render_family_page(_family(), base),
+        render_404_page(base),
+    ]
+
+    for html in pages:
+        assert "sf-wrap" not in html
+
+
+def test_landing_title_is_no_longer_doubled():
+    html = render_landing(Site(), "/wiki")
+    assert "<title>Slimefun Wiki</title>" in html
+    assert "Slimefun Wiki · Slimefun Wiki" not in html
+
+
+def test_other_pages_still_carry_the_slimefun_wiki_suffix():
+    html = render_addon_index(Addon(plugin="slimefun", name="Slimefun", url="/wiki/addon/slimefun/"),
+                              "/wiki")
+    assert "<title>Slimefun · Slimefun Wiki</title>" in html

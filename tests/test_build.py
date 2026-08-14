@@ -221,6 +221,50 @@ def test_main_returns_nonzero_with_strict_links_on_a_dangling_link(tmp_path, mon
     assert exit_code == 1
 
 
+def test_write_site_threads_the_supplied_header_and_footer_into_every_page(tmp_path):
+    site = build_site(_sources(), prose={}, base="/wiki")
+    out = str(tmp_path / "out")
+
+    write_site(site, out, "/wiki", header="<header>H</header>", footer="<footer>F</footer>")
+
+    landing = open(os.path.join(out, "index.html"), encoding="utf-8").read()
+    item_page = open(os.path.join(out, "slimefun", "gold_pan", "index.html"), encoding="utf-8").read()
+    assert "<header>H</header>" in landing and "<footer>F</footer>" in landing
+    assert "<header>H</header>" in item_page and "<footer>F</footer>" in item_page
+
+
+def test_write_site_falls_back_to_the_built_in_chrome_when_none_supplied(tmp_path):
+    site = build_site(_sources(), prose={}, base="/wiki")
+    out = str(tmp_path / "out")
+
+    write_site(site, out, "/wiki")
+
+    landing = open(os.path.join(out, "index.html"), encoding="utf-8").read()
+    assert 'class="sf-header"' in landing
+    assert 'class="sf-footer"' in landing
+
+
+def test_main_reads_the_header_and_footer_partials_from_disk(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_module, "fetch_text", lambda url: "{}")
+    monkeypatch.setattr(build_module, "fetch_sources", lambda *args, **kwargs: _fake_sources())
+
+    pages = tmp_path / "pages"
+    pages.mkdir()
+    header_file = tmp_path / "header.html"
+    header_file.write_text("<header>SHARED</header>", encoding="utf-8")
+    footer_file = tmp_path / "footer.html"
+    footer_file.write_text("<footer>SHARED</footer>", encoding="utf-8")
+    out = tmp_path / "out"
+
+    exit_code = main(["--pages", str(pages), "--out", str(out), "--base", "/wiki",
+                      "--header", str(header_file), "--footer", str(footer_file)])
+
+    assert exit_code == 0
+    landing = open(os.path.join(str(out), "index.html"), encoding="utf-8").read()
+    assert "<header>SHARED</header>" in landing
+    assert "<footer>SHARED</footer>" in landing
+
+
 def test_main_exits_cleanly_on_missing_required_source_instead_of_a_traceback(
         tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(build_module, "fetch_text", lambda url: "{}")

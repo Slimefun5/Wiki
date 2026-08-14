@@ -55,29 +55,48 @@ def _attr(value: str) -> str:
     return html.escape(value, quote=True)
 
 
-def page_shell(title: str, base: str, inner_html: str) -> str:
+SITE_TITLE = "Slimefun Wiki"
+
+
+def _default_header(base: str) -> str:
+    """Used only when no shared header.html was supplied (e.g. local builds without network)."""
+    return (
+        '<header class="sf-header"><a class="sf-brand" href="{base}/">'
+        '<img src="{base}/assets/logo.png" alt="" width="24" height="24">'
+        '<span>Slimefun Wiki</span></a></header>\n'
+    ).format(base=_attr(base))
+
+
+def _default_footer() -> str:
+    return (
+        '<footer class="sf-footer">Content licensed under the '
+        '<a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL v3.0</a> \u00b7 '
+        '<a href="https://slimefun5.github.io/builds/">Builds</a> \u00b7 '
+        '<a href="https://github.com/Slimefun5">GitHub</a></footer>\n'
+    )
+
+
+def page_shell(title: str, base: str, inner_html: str, header: str = None, footer: str = None) -> str:
     safe = html.escape(title)
-    base = _attr(base)
+    full_title = safe if title == SITE_TITLE else "{} \u00b7 {}".format(safe, SITE_TITLE)
+    header_html = header if header is not None else _default_header(base)
+    footer_html = footer if footer is not None else _default_footer()
+    attr_base = _attr(base)
     return (
         '<!doctype html>\n<html lang="en">\n<head>\n'
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        '<title>{title} \u00b7 Slimefun Wiki</title>\n'
+        '<title>{full_title}</title>\n'
         '<link rel="icon" href="{base}/assets/logo.png">\n'
         '<link rel="stylesheet" href="{base}/assets/tokens.css">\n'
         '<link rel="stylesheet" href="{base}/assets/site.css">\n'
         '<link rel="stylesheet" href="{base}/assets/wiki.css">\n'
         '</head>\n<body>\n'
-        '<header class="sf-header"><div class="sf-wrap"><a class="sf-brand" href="{base}/">'
-        '<img src="{base}/assets/logo.png" alt="" width="24" height="24">'
-        '<span>Slimefun Wiki</span></a></div></header>\n'
-        '<main class="sf-wrap">\n{inner}\n</main>\n'
-        '<footer class="sf-footer"><div class="sf-wrap">Content licensed under the '
-        '<a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL v3.0</a> \u00b7 '
-        '<a href="https://slimefun5.github.io/builds/">Builds</a> \u00b7 '
-        '<a href="https://github.com/Slimefun5">GitHub</a></div></footer>\n'
+        '{header}'
+        '<main class="sf-main">\n{inner}\n</main>\n'
+        '{footer}'
         '</body>\n</html>\n'
-    ).format(title=safe, base=base, inner=inner_html)
+    ).format(full_title=full_title, base=attr_base, header=header_html, inner=inner_html, footer=footer_html)
 
 
 def _block(lines: List[str]) -> str:
@@ -105,7 +124,7 @@ def _paragraphs(lines: List[str]) -> str:
     return "".join("<p>{}</p>\n".format(p) for p in paragraphs)
 
 
-def render_item_page(item, base: str) -> str:
+def render_item_page(item, base: str, header: str = None, footer: str = None) -> str:
     parts = [
         '<a class="sf-back" href="{}/addon/{}/">\u2190 {}</a>\n'.format(
             _attr(base), _attr(item.plugin), html.escape(item.addon_name)),
@@ -123,10 +142,10 @@ def render_item_page(item, base: str) -> str:
     elif item.prose_link:
         parts.append('<p><a href="{}">Read the full guide</a></p>\n'.format(_attr(item.prose_link)))
 
-    return page_shell(item.name, base, "".join(parts))
+    return page_shell(item.name, base, "".join(parts), header=header, footer=footer)
 
 
-def render_family_page(family, base: str) -> str:
+def render_family_page(family, base: str, header: str = None, footer: str = None) -> str:
     """The one real page emitted for an item-family template; the family's own token (e.g. %MOB%)
     renders as a generic phrase here (a concrete variation's own text is filled in dynamically by
     404.html)."""
@@ -147,7 +166,7 @@ def render_family_page(family, base: str) -> str:
         _block(sub(family.stats)),
         _block(sub(family.usage)),
     ]
-    return page_shell(name, base, "".join(parts))
+    return page_shell(name, base, "".join(parts), header=header, footer=footer)
 
 
 FAMILY_SCRIPT = """\
@@ -180,7 +199,7 @@ return}
 """
 
 
-def render_404_page(base: str) -> str:
+def render_404_page(base: str, header: str = None, footer: str = None) -> str:
     """GitHub Pages custom 404: resolves any concrete family-template variation URL client-side
     against families.json, since the unbounded variation set cannot be pre-generated as files."""
     inner = (
@@ -191,10 +210,11 @@ def render_404_page(base: str) -> str:
         "</div>\n"
         '<script>var BASE={base_json};</script>\n{script}'
     ).format(base=_attr(base + "/"), base_json=json.dumps(base), script=FAMILY_SCRIPT)
-    return page_shell("Page not found", base, inner)
+    return page_shell("Page not found", base, inner, header=header, footer=footer)
 
 
-def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
+def render_topic_page(topic, items_by_id: Dict[str, object], base: str,
+                      header: str = None, footer: str = None) -> str:
     tiles = [items_by_id[item_id] for item_id in topic.item_ids if item_id in items_by_id]
     parts = [
         '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(_attr(base)),
@@ -210,18 +230,18 @@ def render_topic_page(topic, items_by_id: Dict[str, object], base: str) -> str:
         links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name)) for i in tiles)
         parts.append("<h2>Items in this topic</h2>\n<div class=\"sf-list\">{}</div>\n".format(links))
 
-    return page_shell(topic.title, base, "".join(parts))
+    return page_shell(topic.title, base, "".join(parts), header=header, footer=footer)
 
 
-def render_prose_page(prose, base: str) -> str:
+def render_prose_page(prose, base: str, header: str = None, footer: str = None) -> str:
     inner = (
         '<a class="sf-back" href="{}/guides/">\u2190 All guides</a>\n'.format(_attr(base)) +
         "<h1>{}</h1>\n".format(html.escape(prose.title)) + prose.html
     )
-    return page_shell(prose.title, base, inner)
+    return page_shell(prose.title, base, inner, header=header, footer=footer)
 
 
-def render_addon_index(addon, base: str, families=None) -> str:
+def render_addon_index(addon, base: str, families=None, header: str = None, footer: str = None) -> str:
     links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name))
                     for i in sorted(addon.items, key=lambda i: i.name))
     inner = (
@@ -238,10 +258,10 @@ def render_addon_index(addon, base: str, families=None) -> str:
             for f in sorted(families, key=lambda f: f.name))
         inner += "<h2>Item families</h2>\n<div class=\"sf-list\">{}</div>\n".format(family_links)
 
-    return page_shell(addon.name, base, inner)
+    return page_shell(addon.name, base, inner, header=header, footer=footer)
 
 
-def render_guides_index(prose_pages, base: str) -> str:
+def render_guides_index(prose_pages, base: str, header: str = None, footer: str = None) -> str:
     links = "".join('<a href="{}">{}</a>'.format(_attr(p.url), html.escape(p.title))
                     for p in sorted(prose_pages, key=lambda p: p.title))
     inner = (
@@ -250,10 +270,10 @@ def render_guides_index(prose_pages, base: str) -> str:
         '<p class="sf-lede">{} guides</p>\n'.format(len(prose_pages)) +
         '<div class="sf-list">{}</div>\n'.format(links)
     )
-    return page_shell("Guides", base, inner)
+    return page_shell("Guides", base, inner, header=header, footer=footer)
 
 
-def render_landing(site, base: str) -> str:
+def render_landing(site, base: str, header: str = None, footer: str = None) -> str:
     guides = [p for p in site.prose if p.absorbed_by is None]
     cards = "".join(
         '<a class="sf-card" href="{}"><strong>{}</strong><br>'
@@ -280,7 +300,7 @@ def render_landing(site, base: str) -> str:
     ).format(items=len(site.items), guides=len(guides), topics_section=topics_section, cards=cards,
              base=_attr(base), base_json=json.dumps(base), script=SEARCH_SCRIPT)
 
-    return page_shell("Slimefun Wiki", base, inner)
+    return page_shell(SITE_TITLE, base, inner, header=header, footer=footer)
 
 
 def render_redirect(target: str) -> str:
