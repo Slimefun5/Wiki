@@ -2,7 +2,7 @@
 
 This repository is both the **content source** and the **published website** for the Slimefun5 fork's wiki.
 
-* **Web wiki:** https://slimefun5.github.io/Wiki/ — generated from the pages below and served via GitHub Pages.
+* **Web wiki:** https://slimefun5.github.io/Wiki/ - generated from the pages below and served via GitHub Pages.
 * **Content:** one Markdown file per topic in [`pages/`](pages), kept in sync with the GitHub wiki at
   https://github.com/Slimefun5/Slimefun5/wiki
 
@@ -11,20 +11,28 @@ redirects to the matching page.
 
 ## How it is built
 
-[`src/generate-wiki.py`](src/generate-wiki.py) renders the content into a fully static HTML site (no
-Jekyll — a `.nojekyll` marker tells GitHub Pages to serve it as-is):
+[`src/wiki/build.py`](src/wiki/build.py) fetches the manifest, core and addon repos, merges them with
+the content in `pages/`, and renders a fully static HTML site (no Jekyll - a `.nojekyll` marker tells
+GitHub Pages to serve it as-is):
 
-* every `pages/<Display-Name>.md` is rendered to `/Wiki/<Display-Name>/`, with its GitHub-wiki links
+* every `pages/<Display-Name>.md` is rendered to `/<base>/<Display-Name>/`, with its GitHub-wiki links
   rewritten to site-relative links;
-* every Slimefun item id (read from the core `items.yml`) that has a matching page gets a redirect at
-  `/Wiki/<plugin>/<id>/` so the in-game links resolve;
-* a `/Wiki/` index lists every page.
+* every Slimefun item id (read from every addon's `items.yml`) gets its own page at
+  `/<base>/<plugin>/<id>/` so the in-game "View in Wiki" links resolve directly;
+* item-family templates (ids containing a `%TOKEN%` placeholder, e.g. SoulJars' per-mob items) get one
+  canonical family page plus a `404.html` fallback that resolves any concrete variation client-side;
+* a `/<base>/` index lists every page, and dangling internal links are reported as warnings (or as a
+  build failure with `--strict-links`).
 
-Requires the `markdown` package (`pip install markdown`).
+Requires the `markdown` and `pyyaml` packages (`pip install markdown pyyaml`).
 
 ```sh
-python3 src/generate-wiki.py --pages pages --items items.yml --plugin slimefun --base /Wiki --out _src
+PYTHONPATH=src python3 -m wiki.build --pages pages --out _site --base /wiki
 ```
+
+Flags: `--pages` (the `pages/` directory), `--out` (the output directory), `--base` (default `/wiki`),
+`--manifest` (default the live `Slimefun5/manifest` addon list), `--core-ref` (override core's ref),
+`--strict-links` (fail the build on any dangling internal link).
 
 ## Deployment
 

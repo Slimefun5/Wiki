@@ -43,7 +43,10 @@ def _write(out_dir: str, relative: str, content: str) -> None:
 
 
 def _relative(url: str, base: str) -> str:
-    return url[len(base):].strip("/") + "/index.html"
+    """A path fragment with no leading slash, so os.path.join(out_dir, ...) never discards
+    out_dir - including for the base root itself (url == base + "/")."""
+    trimmed = url[len(base):].strip("/")
+    return trimmed + "/index.html" if trimmed else "index.html"
 
 
 def write_site(site, out_dir: str, base: str) -> int:

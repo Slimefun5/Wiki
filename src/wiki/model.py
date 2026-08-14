@@ -48,7 +48,7 @@ FAMILY_TOKEN = re.compile(r"%[A-Za-z_]+%")
 
 
 def is_family_template(item_id: str) -> bool:
-    return "%" in item_id
+    return bool(FAMILY_TOKEN.search(item_id))
 
 
 def family_slug(item_id: str) -> str:

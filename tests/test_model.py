@@ -88,6 +88,10 @@ def test_is_family_template_detects_the_percent_token():
     assert not is_family_template("GOLD_PAN")
 
 
+def test_is_family_template_rejects_a_stray_percent_with_no_full_token():
+    assert not is_family_template("SOME_50%_ITEM")
+
+
 def test_family_slug_strips_the_token_and_dangling_underscores():
     assert family_slug("%MOB%_SOUL_JAR") == "soul_jar-family"
     assert family_slug("FILLED_%MOB%_SOUL_JAR") == "filled_soul_jar-family"
@@ -290,6 +294,19 @@ def test_family_templates_are_excluded_from_normal_items_and_addon_counts():
     assert family.name == "%mob% Soul Jar"
     assert family.url == "/wiki/souljars/soul_jar-family/"
     assert family.regex == "^(.+)_soul_jar$"
+
+
+def test_a_stray_percent_with_no_full_token_is_an_ordinary_sanitized_item():
+    site = build_site(
+        _sources(
+            repos=[SimpleNamespace(plugin="slimefun", name="Slimefun")],
+            items_yaml={"slimefun": "SOME_50%_ITEM:\n  name: '&6Some Item'\n"},
+            core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None),
+        prose={}, base="/wiki")
+
+    assert site.families == []
+    assert [i.id for i in site.items] == ["SOME_50%_ITEM"]
+    assert site.items[0].url == "/wiki/slimefun/some_50-_item/"
 
 
 def test_family_extraction_orders_more_specific_templates_first():

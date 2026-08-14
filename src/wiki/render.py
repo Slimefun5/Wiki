@@ -126,7 +126,7 @@ def render_family_page(family, base: str) -> str:
 
     name = FAMILY_PLACEHOLDER.sub(replacement, family.name)
     parts = [
-        '<a class="sf-back" href="{}/addon/{}/">← {}</a>\n'.format(
+        '<a class="sf-back" href="{}/addon/{}/">\u2190 {}</a>\n'.format(
             _attr(base), _attr(family.plugin), html.escape(family.addon_name)),
         "<h1>{}<span class=\"sf-badge\">{}</span></h1>\n".format(
             html.escape(name), html.escape(family.addon_name)),
@@ -157,7 +157,7 @@ if(!match){continue}
 var human=match[1].split('_').map(function(w){
 return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ');
 document.getElementById('sf-404-main').innerHTML=
-'<a class="sf-back" href="'+BASE+'/addon/'+fam.plugin+'/">← '+escapeHtml(fam.addon)+'</a>'+
+'<a class="sf-back" href="'+BASE+'/addon/'+fam.plugin+'/">\u2190 '+escapeHtml(fam.addon)+'</a>'+
 '<h1>'+escapeHtml(fam.name.replace(/%mob%/gi,human))+
 '<span class="sf-badge">'+escapeHtml(fam.addon)+'</span></h1>'+
 block(fam.type,human)+block(fam.description,human)+block(fam.stats,human)+block(fam.usage,human);

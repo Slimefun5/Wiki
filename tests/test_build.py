@@ -86,6 +86,29 @@ def test_check_links_accepts_a_written_page(tmp_path):
     assert check_links(str(out), "/wiki") == []
 
 
+def test_write_site_does_not_crash_on_a_stray_percent_with_no_full_token(tmp_path):
+    sources = SimpleNamespace(
+        repos=[SimpleNamespace(plugin="slimefun", name="Slimefun")],
+        items_yaml={"slimefun": "SOME_50%_ITEM:\n  name: '&6Some Item'\n"},
+        core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None)
+    site = build_site(sources, prose={}, base="/wiki")
+    out = str(tmp_path / "out")
+
+    write_site(site, out, "/wiki")
+
+    assert os.path.exists(os.path.join(out, "slimefun", "some_50-_item", "index.html"))
+
+
+def test_check_links_accepts_the_site_root_href(tmp_path):
+    out = tmp_path / "out"
+    out.mkdir(parents=True)
+    (out / "index.html").write_text("root", encoding="utf-8")
+    (out / "a").mkdir(parents=True)
+    (out / "a" / "index.html").write_text('<a href="/wiki/">x</a>', encoding="utf-8")
+
+    assert check_links(str(out), "/wiki") == []
+
+
 def test_check_links_unescapes_html_entities_before_checking(tmp_path):
     out = tmp_path / "out"
     (out / "it's_a_test").mkdir(parents=True)
