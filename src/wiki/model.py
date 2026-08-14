@@ -155,3 +155,67 @@ def parse_topics_yaml(text: str) -> List[Topic]:
         ))
 
     return topics
+
+
+def build_site(sources, prose: Dict[str, str], base: str) -> Site:
+    """Merge every source into one page per subject.
+
+    Topics claim their prose before items do, so a page named by a topic's 'page' key never also
+    appears inlined on an item page.
+    """
+    site = Site()
+
+    for repo in sources.repos:
+        text = sources.items_yaml.get(repo.plugin)
+
+        if not text:
+            continue
+
+        items = parse_items_yaml(text, repo.plugin, repo.name)
+
+        for item in items:
+            item.url = item_url(item.plugin, item.id, base)
+
+        site.items.extend(items)
+        site.addons.append(Addon(plugin=repo.plugin, name=repo.name, items=items,
+                                 url=addon_url(repo.plugin, base)))
+
+    authored = parse_lines_yaml(sources.core_wiki_items or "")
+    for item in site.items:
+        item.wiki_lines = authored.get(item.id, [])
+
+    mechanics = parse_lines_yaml(sources.core_mechanics or "")
+    topic_items = parse_lines_yaml(sources.core_topic_items or "")
+    claimed = {}
+
+    for topic in parse_topics_yaml(sources.core_topics or ""):
+        topic.url = topic_url(topic.id, base)
+        topic.body = mechanics.get(topic.id, [])
+        topic.item_ids = topic_items.get(topic.id, [])
+
+        if topic.page and topic.page in prose:
+            topic.prose_html = prose[topic.page]
+            claimed[topic.page] = topic.url
+
+        site.topics.append(topic)
+
+    by_slug = {}
+    for item in site.items:
+        by_slug.setdefault(page_slug(item.name), []).append(item)
+
+    for slug, html in sorted(prose.items()):
+        target = claimed.get(slug)
+
+        for item in by_slug.get(slug, []):
+            if target:
+                item.prose_link = target
+                site.collisions.append(
+                    "{} is claimed by a topic; item {} links to it instead".format(slug, item.id))
+            else:
+                item.prose_html = html
+                target = item.url
+
+        site.prose.append(Prose(slug=slug, title=slug.replace("-", " "), html=html,
+                                absorbed_by=target, url=prose_url(slug, base)))
+
+    return site

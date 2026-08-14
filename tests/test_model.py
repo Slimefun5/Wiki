@@ -85,3 +85,89 @@ def test_parse_topics_yaml_reads_page_mapping_and_order():
     assert topics[0].summary == "Move items automatically"
     assert topics[0].page == "Cargo-Management"
     assert topics[1].page is None
+
+
+from types import SimpleNamespace
+
+from wiki.model import build_site
+
+
+def _sources(**overrides):
+    base = dict(
+        repos=[SimpleNamespace(plugin="slimefun", name="Slimefun"),
+               SimpleNamespace(plugin="networks", name="Networks")],
+        items_yaml={
+            "slimefun": "SMELTERY:\n  name: '&7Smeltery'\n  type:\n  - '&7&oMultiblock'\n"
+                        "GOLD_PAN:\n  name: '&6Gold Pan'\n",
+            "networks": "NTW_GRID:\n  name: '&bNetwork Grid'\n",
+        },
+        core_wiki_items="GOLD_PAN:\n  - '&7Right-click gravel to sift.'\n",
+        core_mechanics="cargo:\n  - '&7Cargo moves items.'\n",
+        core_topics="cargo:\n  title: Cargo Networks\n  icon: HOPPER\n"
+                    "  summary: '&7Move items'\n  page: Cargo-Management\n",
+        core_topic_items="cargo:\n  - 'GOLD_PAN'\n",
+    )
+    base.update(overrides)
+    return SimpleNamespace(**base)
+
+
+def test_items_carry_authored_wiki_lines_and_a_canonical_url():
+    site = build_site(_sources(), prose={}, base="/wiki")
+    gold_pan = site.items_by_id()["GOLD_PAN"]
+
+    assert gold_pan.wiki_lines == ["Right-click gravel to sift."]
+    assert gold_pan.url == "/wiki/slimefun/gold_pan/"
+
+
+def test_addon_items_are_grouped_and_counted():
+    site = build_site(_sources(), prose={}, base="/wiki")
+
+    assert [(a.plugin, len(a.items)) for a in site.addons] == [("slimefun", 2), ("networks", 1)]
+    assert site.items_by_id()["NTW_GRID"].url == "/wiki/networks/ntw_grid/"
+
+
+def test_prose_is_absorbed_into_the_matching_item_and_redirects():
+    site = build_site(_sources(), prose={"Gold-Pan": "<p>All about the Gold Pan.</p>"}, base="/wiki")
+
+    assert site.items_by_id()["GOLD_PAN"].prose_html == "<p>All about the Gold Pan.</p>"
+    absorbed = [p for p in site.prose if p.slug == "Gold-Pan"][0]
+    assert absorbed.absorbed_by == "/wiki/slimefun/gold_pan/"
+
+
+def test_unmatched_prose_stays_a_standalone_guide():
+    site = build_site(_sources(), prose={"Common-Issues": "<p>FAQ.</p>"}, base="/wiki")
+    guide = [p for p in site.prose if p.slug == "Common-Issues"][0]
+
+    assert guide.absorbed_by is None
+    assert guide.url == "/wiki/Common-Issues/"
+    assert guide.title == "Common Issues"
+
+
+def test_topic_wins_a_contested_prose_page_and_the_item_links_to_it():
+    prose = {"Smeltery": "<p>Smeltery guide.</p>"}
+    topics = "smeltery:\n  title: Smeltery\n  icon: FURNACE\n  summary: '&7Alloys'\n  page: Smeltery\n"
+    site = build_site(_sources(core_topics=topics), prose=prose, base="/wiki")
+
+    smeltery_item = site.items_by_id()["SMELTERY"]
+    assert smeltery_item.prose_html is None
+    assert smeltery_item.prose_link == "/wiki/topic/smeltery/"
+    assert site.topics[0].prose_html == "<p>Smeltery guide.</p>"
+    assert any("Smeltery" in c for c in site.collisions)
+
+
+def test_topics_carry_body_and_item_tiles():
+    site = build_site(_sources(), prose={}, base="/wiki")
+    cargo = site.topics[0]
+
+    assert cargo.body == ["Cargo moves items."]
+    assert cargo.item_ids == ["GOLD_PAN"]
+    assert cargo.url == "/wiki/topic/cargo/"
+
+
+def test_missing_core_wiki_resources_degrade_to_an_empty_site_section():
+    site = build_site(
+        _sources(core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None),
+        prose={}, base="/wiki")
+
+    assert site.topics == []
+    assert site.items_by_id()["GOLD_PAN"].wiki_lines == []
