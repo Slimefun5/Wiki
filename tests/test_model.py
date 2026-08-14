@@ -143,6 +143,31 @@ def test_item_defaults_are_empty_not_none():
     assert item.prose_html is None
 
 
+def test_item_is_documented_when_it_carries_authored_wiki_lines():
+    item = Item(id="X", plugin="slimefun", addon_name="Slimefun", name="X",
+                wiki_lines=["Right-click gravel to sift."])
+    assert item.is_documented
+
+
+def test_item_is_documented_when_it_carries_absorbed_prose_html():
+    item = Item(id="X", plugin="slimefun", addon_name="Slimefun", name="X",
+                prose_html="<p>All about X.</p>")
+    assert item.is_documented
+
+
+def test_item_is_documented_when_its_prose_was_claimed_by_a_topic():
+    item = Item(id="X", plugin="slimefun", addon_name="Slimefun", name="X",
+                prose_link="/wiki/topic/smeltery/")
+    assert item.is_documented
+
+
+def test_item_is_auto_generated_when_built_solely_from_its_own_fields():
+    item = Item(id="X", plugin="slimefun", addon_name="Slimefun", name="X",
+                type_lines=["Gadget"], description=["Does a thing."], stats=["+ Luck"],
+                usage=["Right-click."])
+    assert not item.is_documented
+
+
 def test_parse_items_yaml_reads_every_block():
     items = parse_items_yaml(ITEMS_YAML, "slimefun", "Slimefun")
 

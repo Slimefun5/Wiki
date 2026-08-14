@@ -20,6 +20,8 @@ WIKI_CSS = """\
 .sf-lede{color:var(--sf-muted,#6b7280);margin:-.4rem 0 0}
 .sf-badge{display:inline-block;padding:.15rem .5rem;border-radius:.35rem;background:var(--sf-code,#f4f4f5);
 font-size:.8rem;color:var(--sf-muted,#6b7280);vertical-align:middle;margin-left:.5rem}
+.sf-badge-documented{border:1px solid var(--sf-border,#e8e8ea)}
+.sf-badge-auto{background:transparent;border:1px dashed var(--sf-border,#e8e8ea)}
 .sf-block{margin:1.1rem 0}
 .sf-block li{list-style:none}
 .sf-block ul{margin:0;padding:0}
@@ -124,12 +126,18 @@ def _paragraphs(lines: List[str]) -> str:
     return "".join("<p>{}</p>\n".format(p) for p in paragraphs)
 
 
+def _doc_status_badge(item) -> str:
+    if item.is_documented:
+        return '<span class="sf-badge sf-badge-documented">Documented</span>'
+    return '<span class="sf-badge sf-badge-auto">Auto-generated</span>'
+
+
 def render_item_page(item, base: str, header: str = None, footer: str = None) -> str:
     parts = [
         '<a class="sf-back" href="{}/addon/{}/">\u2190 {}</a>\n'.format(
             _attr(base), _attr(item.plugin), html.escape(item.addon_name)),
-        "<h1>{}<span class=\"sf-badge\">{}</span></h1>\n".format(
-            html.escape(item.name), html.escape(item.addon_name)),
+        "<h1>{}<span class=\"sf-badge\">{}</span>{}</h1>\n".format(
+            html.escape(item.name), html.escape(item.addon_name), _doc_status_badge(item)),
         _block(item.type_lines),
         _block(item.description),
         _block(item.stats),
@@ -241,13 +249,25 @@ def render_prose_page(prose, base: str, header: str = None, footer: str = None) 
     return page_shell(prose.title, base, inner, header=header, footer=footer)
 
 
+def _documented_summary(total: int, documented: int) -> str:
+    if total == 0:
+        return ""
+    if documented == 0:
+        return " - none documented"
+    if documented == total:
+        return " - all documented"
+    return " - {} documented".format(documented)
+
+
 def render_addon_index(addon, base: str, families=None, header: str = None, footer: str = None) -> str:
     links = "".join('<a href="{}">{}</a>'.format(_attr(i.url), html.escape(i.name))
                     for i in sorted(addon.items, key=lambda i: i.name))
+    documented = sum(1 for i in addon.items if i.is_documented)
     inner = (
         '<a class="sf-back" href="{}/">\u2190 Back to index</a>\n'.format(_attr(base)) +
         "<h1>{}</h1>\n".format(html.escape(addon.name)) +
-        '<p class="sf-lede">{} items</p>\n'.format(len(addon.items)) +
+        '<p class="sf-lede">{} items{}</p>\n'.format(
+            len(addon.items), _documented_summary(len(addon.items), documented)) +
         '<div class="sf-list">{}</div>\n'.format(links)
     )
 

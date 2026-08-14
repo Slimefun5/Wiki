@@ -26,6 +26,27 @@ def test_item_page_renders_every_block_in_order():
     assert "Slimefun" in html
 
 
+def test_item_page_shows_the_documented_badge_when_wiki_lines_are_present():
+    html = render_item_page(_item(wiki_lines=["Right-click gravel to sift."]), "/wiki")
+    assert '<span class="sf-badge sf-badge-documented">Documented</span>' in html
+
+
+def test_item_page_shows_the_documented_badge_via_prose_html():
+    html = render_item_page(_item(wiki_lines=[], prose_html="<p>All about X.</p>"), "/wiki")
+    assert '<span class="sf-badge sf-badge-documented">Documented</span>' in html
+
+
+def test_item_page_shows_the_documented_badge_via_prose_link():
+    html = render_item_page(_item(wiki_lines=[], prose_link="/wiki/topic/smeltery/"), "/wiki")
+    assert '<span class="sf-badge sf-badge-documented">Documented</span>' in html
+
+
+def test_item_page_shows_the_auto_generated_badge_with_nothing_authored():
+    html = render_item_page(_item(wiki_lines=[]), "/wiki")
+    assert '<span class="sf-badge sf-badge-auto">Auto-generated</span>' in html
+    assert "Documented" not in html
+
+
 def test_item_page_links_to_a_topic_that_claimed_its_prose():
     html = render_item_page(_item(prose_link="/wiki/topic/smeltery/"), "/wiki")
     assert 'href="/wiki/topic/smeltery/"' in html
@@ -82,6 +103,38 @@ def test_addon_index_shows_the_item_count():
 
     assert "2 items" in html
     assert "Networks" in html
+
+
+def test_addon_index_shows_the_documented_count_for_a_mix():
+    addon = Addon(plugin="networks", name="Networks",
+                  items=[_item(id="A", name="A", wiki_lines=["Authored."]),
+                         _item(id="B", name="B", wiki_lines=[])],
+                  url="/wiki/addon/networks/")
+    html = render_addon_index(addon, "/wiki")
+
+    assert "2 items - 1 documented" in html
+
+
+def test_addon_index_reads_none_documented_when_zero_of_its_items_are():
+    addon = Addon(plugin="networks", name="Networks",
+                  items=[_item(id="A", name="A", wiki_lines=[]),
+                         _item(id="B", name="B", wiki_lines=[])],
+                  url="/wiki/addon/networks/")
+    html = render_addon_index(addon, "/wiki")
+
+    assert "2 items - none documented" in html
+    assert "0 documented" not in html
+
+
+def test_addon_index_reads_all_documented_when_every_item_is():
+    addon = Addon(plugin="networks", name="Networks",
+                  items=[_item(id="A", name="A", wiki_lines=["Authored."]),
+                         _item(id="B", name="B", wiki_lines=["Also authored."])],
+                  url="/wiki/addon/networks/")
+    html = render_addon_index(addon, "/wiki")
+
+    assert "2 items - all documented" in html
+    assert "2 documented" not in html
 
 
 def _family(**overrides):

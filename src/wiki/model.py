@@ -90,6 +90,14 @@ class Item:
     prose_link: Optional[str] = None
     url: str = ""
 
+    @property
+    def is_documented(self) -> bool:
+        """True when a human wrote something about this item: authored wiki_lines, an absorbed
+        prose page, or a prose page a topic claimed on the item's behalf. False means the page is
+        built solely from the item's own name/type/description/stats/usage, which every item has
+        by construction."""
+        return bool(self.wiki_lines or self.prose_html or self.prose_link)
+
 
 @dataclass
 class ItemFamily:
