@@ -186,16 +186,20 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
 
     mechanics = parse_lines_yaml(sources.core_mechanics or "")
     topic_items = parse_lines_yaml(sources.core_topic_items or "")
-    claimed = {}
+    claimed = {}  # slug -> (url, claimant description) for the message below
 
     for topic in parse_topics_yaml(sources.core_topics or ""):
         topic.url = topic_url(topic.id, base)
         topic.body = mechanics.get(topic.id, [])
         topic.item_ids = topic_items.get(topic.id, [])
 
-        if topic.page and topic.page in prose:
-            topic.prose_html = prose[topic.page]
-            claimed[topic.page] = topic.url
+        if topic.page:
+            if topic.page in prose:
+                topic.prose_html = prose[topic.page]
+                claimed[topic.page] = (topic.url, "topic '{}'".format(topic.id))
+            else:
+                site.collisions.append(
+                    "topic '{}' names prose page '{}' which does not exist".format(topic.id, topic.page))
 
         site.topics.append(topic)
 
@@ -204,16 +208,17 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
         by_slug.setdefault(page_slug(item.name), []).append(item)
 
     for slug, html in sorted(prose.items()):
-        target = claimed.get(slug)
+        target, claimant = claimed.get(slug, (None, None))
 
         for item in by_slug.get(slug, []):
             if target:
                 item.prose_link = target
                 site.collisions.append(
-                    "{} is claimed by a topic; item {} links to it instead".format(slug, item.id))
+                    "{} is claimed by {}; item {} links to it instead".format(slug, claimant, item.id))
             else:
                 item.prose_html = html
                 target = item.url
+                claimant = "item {}".format(item.id)
 
         site.prose.append(Prose(slug=slug, title=slug.replace("-", " "), html=html,
                                 absorbed_by=target, url=prose_url(slug, base)))

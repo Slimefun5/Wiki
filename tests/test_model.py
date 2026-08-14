@@ -152,7 +152,41 @@ def test_topic_wins_a_contested_prose_page_and_the_item_links_to_it():
     assert smeltery_item.prose_html is None
     assert smeltery_item.prose_link == "/wiki/topic/smeltery/"
     assert site.topics[0].prose_html == "<p>Smeltery guide.</p>"
-    assert any("Smeltery" in c for c in site.collisions)
+    assert "Smeltery is claimed by topic 'smeltery'; item SMELTERY links to it instead" in site.collisions
+
+    smeltery_prose = [p for p in site.prose if p.slug == "Smeltery"][0]
+    assert smeltery_prose.absorbed_by == site.topics[0].url
+
+
+def test_two_items_sharing_a_slug_the_first_wins_and_the_message_names_the_item():
+    site = build_site(
+        _sources(
+            repos=[SimpleNamespace(plugin="slimefun", name="Slimefun"),
+                   SimpleNamespace(plugin="networks", name="Networks")],
+            items_yaml={
+                "slimefun": "GOLD_DUST:\n  name: '&6Gold Dust'\n",
+                "networks": "NTW_GOLD_DUST:\n  name: '&6Gold Dust'\n",
+            },
+        ),
+        prose={"Gold-Dust": "<p>All about Gold Dust.</p>"},
+        base="/wiki")
+
+    core_item = site.items_by_id()["GOLD_DUST"]
+    addon_item = site.items_by_id()["NTW_GOLD_DUST"]
+
+    assert core_item.prose_html == "<p>All about Gold Dust.</p>"
+    assert addon_item.prose_html is None
+    assert addon_item.prose_link == core_item.url
+    assert ("Gold-Dust is claimed by item GOLD_DUST; item NTW_GOLD_DUST links to it instead"
+            in site.collisions)
+
+
+def test_topic_page_naming_a_missing_prose_slug_is_reported():
+    topics = "smeltery:\n  title: Smeltery\n  icon: FURNACE\n  summary: '&7Alloys'\n  page: Nonexistent-Page\n"
+    site = build_site(_sources(core_topics=topics), prose={}, base="/wiki")
+
+    assert site.topics[0].prose_html is None
+    assert "topic 'smeltery' names prose page 'Nonexistent-Page' which does not exist" in site.collisions
 
 
 def test_topics_carry_body_and_item_tiles():
