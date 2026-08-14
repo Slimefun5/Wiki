@@ -5,13 +5,15 @@ No network and no HTML live here, so every rule below is testable against fixtur
 
 import re
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, NamedTuple, Optional
+
+import yaml
 
 COLOR_CODE = re.compile(r"[&§][0-9a-fk-orA-FK-OR]")
 
 
 def strip_color(text: str) -> str:
-    return COLOR_CODE.sub("", text).strip().strip("'\"")
+    return COLOR_CODE.sub("", text).strip()
 
 
 def page_slug(display_name: str) -> str:
@@ -94,6 +96,7 @@ class ItemFamily:
     plugin: str
     addon_name: str
     template_id: str
+    token: str
     name: str
     type_lines: List[str] = field(default_factory=list)
     description: List[str] = field(default_factory=list)
@@ -146,7 +149,9 @@ class Site:
         return {item.id: item for item in self.items}
 
 
-import yaml
+class Claim(NamedTuple):
+    url: str
+    by: str
 
 
 def _lines(block: dict, key: str) -> List[str]:
@@ -230,6 +235,7 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
             if is_family_template(entry.id):
                 site.families.append(ItemFamily(
                     plugin=entry.plugin, addon_name=entry.addon_name, template_id=entry.id,
+                    token=FAMILY_TOKEN.search(entry.id).group(0),
                     name=entry.name, type_lines=entry.type_lines, description=entry.description,
                     stats=entry.stats, usage=entry.usage,
                     regex=family_regex_source(entry.id),
@@ -251,7 +257,7 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
 
     mechanics = parse_lines_yaml(sources.core_mechanics or "")
     topic_items = parse_lines_yaml(sources.core_topic_items or "")
-    claimed = {}  # slug -> (url, claimant description) for the message below
+    claimed: Dict[str, Claim] = {}
 
     for topic in parse_topics_yaml(sources.core_topics or ""):
         topic.url = topic_url(topic.id, base)
@@ -261,7 +267,7 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
         if topic.page:
             if topic.page in prose:
                 topic.prose_html = prose[topic.page]
-                claimed[topic.page] = (topic.url, "topic '{}'".format(topic.id))
+                claimed[topic.page] = Claim(url=topic.url, by="topic '{}'".format(topic.id))
             else:
                 site.collisions.append(
                     "topic '{}' names prose page '{}' which does not exist".format(topic.id, topic.page))
@@ -273,7 +279,9 @@ def build_site(sources, prose: Dict[str, str], base: str) -> Site:
         by_slug.setdefault(page_slug(item.name), []).append(item)
 
     for slug, html in sorted(prose.items()):
-        target, claimant = claimed.get(slug, (None, None))
+        claim = claimed.get(slug)
+        target = claim.url if claim else None
+        claimant = claim.by if claim else None
 
         for item in by_slug.get(slug, []):
             if target:

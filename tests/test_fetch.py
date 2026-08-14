@@ -45,6 +45,57 @@ def test_fetch_sources_skips_a_failing_addon_but_keeps_building():
     assert any("Networks" in s for s in sources.skipped)
 
 
+def test_skip_message_states_what_was_observed_not_a_cause():
+    def fetcher(url):
+        return None if "Networks" in url else "X:\n  name: '&7X'\n"
+
+    sources = fetch_sources(MANIFEST, fetcher=fetcher)
+
+    assert len(sources.skipped) == 1
+    assert "returned nothing" in sources.skipped[0]
+    assert "has no" not in sources.skipped[0]
+
+
+def _manifest_with_addons(count):
+    return json.dumps({
+        "core": {"repo": "Slimefun5/Slimefun5", "name": "Slimefun",
+                 "pluginName": "Slimefun", "defaultBranch": "stable"},
+        "addons": [{"repo": "Slimefun5/Addon{}".format(i), "name": "Addon{}".format(i),
+                    "pluginName": "Addon{}".format(i), "defaultBranch": "stable"}
+                   for i in range(count)],
+    })
+
+
+def _core_only_fetcher(url):
+    return "X:\n  name: '&7X'\n" if "Slimefun5/Slimefun5" in url else None
+
+
+def test_fetch_sources_tolerates_skips_at_the_max_skipped_floor():
+    sources = fetch_sources(_manifest_with_addons(3), fetcher=_core_only_fetcher)
+    assert len(sources.skipped) == 3
+
+
+def test_fetch_sources_raises_when_skipped_count_exceeds_the_floor():
+    with pytest.raises(MissingRequiredSource):
+        fetch_sources(_manifest_with_addons(4), fetcher=_core_only_fetcher)
+
+
+def test_fetch_sources_respects_a_custom_max_skipped():
+    sources = fetch_sources(_manifest_with_addons(4), fetcher=_core_only_fetcher, max_skipped=4)
+    assert len(sources.skipped) == 4
+
+
+def test_missing_required_source_message_names_the_count_and_the_skipped_repos():
+    with pytest.raises(MissingRequiredSource) as error:
+        fetch_sources(_manifest_with_addons(4), fetcher=_core_only_fetcher)
+
+    message = str(error.value)
+    assert "4" in message
+
+    for i in range(4):
+        assert "Slimefun5/Addon{}".format(i) in message
+
+
 def test_fetch_sources_fails_hard_without_core_items():
     def fetcher(url):
         return None if "Slimefun5/Slimefun5" in url else "X:\n  name: '&7X'\n"

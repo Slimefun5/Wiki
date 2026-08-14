@@ -1,9 +1,10 @@
 import json
 
 from wiki.model import Addon, Item, ItemFamily, Prose, Site, Topic
-from wiki.render import (_block, _paragraphs, render_addon_index, render_item_page, render_landing,
-                         render_redirect, render_topic_page, search_index, render_family_page,
-                         render_404_page, families_json)
+from wiki.render import (ESCAPE_HTML_JS, FAMILY_SCRIPT, SEARCH_SCRIPT, _block, _paragraphs,
+                         render_addon_index, render_item_page, render_landing, render_redirect,
+                         render_topic_page, search_index, render_family_page, render_404_page,
+                         families_json)
 
 
 def _item(**overrides):
@@ -85,8 +86,8 @@ def test_addon_index_shows_the_item_count():
 
 def _family(**overrides):
     base = dict(plugin="souljars", addon_name="SoulJars", template_id="%MOB%_SOUL_JAR",
-                name="%mob% Soul Jar", type_lines=["Gadget"], description=["Traps a %mob%."],
-                stats=["+ Soul"], usage=["Right-click a %mob%."],
+                token="%MOB%", name="%mob% Soul Jar", type_lines=["Gadget"],
+                description=["Traps a %mob%."], stats=["+ Soul"], usage=["Right-click a %mob%."],
                 regex="^(.+)_soul_jar$", url="/wiki/souljars/soul_jar-family/")
     base.update(overrides)
     return ItemFamily(**base)
@@ -112,9 +113,24 @@ def test_families_json_keeps_the_mob_placeholder_intact():
 
     assert entries == [{
         "plugin": "souljars", "regex": "^(.+)_soul_jar$", "url": "/wiki/souljars/soul_jar-family/",
-        "addon": "SoulJars", "name": "%mob% Soul Jar", "type": ["Gadget"],
+        "addon": "SoulJars", "name": "%mob% Soul Jar", "token": "%MOB%", "type": ["Gadget"],
         "description": ["Traps a %mob%."], "stats": ["+ Soul"], "usage": ["Right-click a %mob%."],
     }]
+
+
+def test_family_page_substitutes_the_families_own_token_not_a_hardcoded_mob():
+    family = _family(token="%ORE%", template_id="%ORE%_CHUNK", name="%ore% Chunk",
+                     description=["Contains %ORE%."])
+    html = render_family_page(family, "/wiki")
+
+    assert "any ore Chunk" in html
+    assert "Contains any ore." in html
+    assert "%ore%" not in html.lower()
+
+
+def test_families_json_carries_the_token_field():
+    entries = json.loads(families_json(Site(families=[_family()])))
+    assert entries[0]["token"] == "%MOB%"
 
 
 def test_search_index_includes_families_with_a_distinct_kind():
@@ -146,8 +162,23 @@ def test_404_page_falls_back_to_a_not_found_message_with_an_index_link():
 
 def test_404_page_has_no_em_dash_or_en_dash():
     html = render_404_page("/wiki")
-    assert "—" not in html
-    assert "–" not in html
+    assert "\u2014" not in html
+    assert "\u2013" not in html
+
+
+def test_404_page_json_encodes_a_quote_in_base():
+    html = render_404_page('/wiki"')
+    assert "var BASE={};".format(json.dumps('/wiki"')) in html
+
+
+def test_search_and_family_scripts_share_one_escape_helper():
+    assert SEARCH_SCRIPT.count(ESCAPE_HTML_JS) == 1
+    assert FAMILY_SCRIPT.count(ESCAPE_HTML_JS) == 1
+
+
+def test_search_script_escapes_the_item_name_and_badge():
+    assert "escapeHtml(e.n)" in SEARCH_SCRIPT
+    assert "escapeHtml(e.a||e.k)" in SEARCH_SCRIPT
 
 
 def test_redirect_targets_the_canonical_url():
@@ -191,6 +222,26 @@ def test_landing_reports_the_real_counts():
 
     assert "1 item" in html
     assert 'href="/wiki/addon/slimefun/"' in html
+
+
+def test_landing_omits_the_topics_heading_when_there_are_no_topics():
+    html = render_landing(Site(), "/wiki")
+    assert "Topics" not in html
+
+
+def test_landing_shows_the_topics_heading_and_list_when_topics_exist():
+    site = Site(topics=[Topic(id="cargo", title="Cargo Networks", icon="HOPPER", summary="",
+                              url="/wiki/topic/cargo/")])
+    html = render_landing(site, "/wiki")
+
+    assert "<h2>Topics</h2>" in html
+    assert 'href="/wiki/topic/cargo/"' in html
+    assert "Cargo Networks" in html
+
+
+def test_landing_json_encodes_a_quote_in_base():
+    html = render_landing(Site(), '/wiki"')
+    assert "var BASE={};".format(json.dumps('/wiki"')) in html
 
 
 def test_block_handles_an_empty_list_and_an_all_blank_list():

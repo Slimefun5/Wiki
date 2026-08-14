@@ -2,12 +2,12 @@
 
 This repository is both the **content source** and the **published website** for the Slimefun5 fork's wiki.
 
-* **Web wiki:** https://slimefun5.github.io/Wiki/ - generated from the pages below and served via GitHub Pages.
+* **Web wiki:** https://slimefun5.github.io/wiki/ - generated from the pages below and served via GitHub Pages.
 * **Content:** one Markdown file per topic in [`pages/`](pages), kept in sync with the GitHub wiki at
   https://github.com/Slimefun5/Slimefun5/wiki
 
-The in-game guide's "View in Wiki" button links to `https://slimefun5.github.io/Wiki/<plugin>/<id>`, which
-redirects to the matching page.
+The in-game guide's "View in Wiki" button links to `https://slimefun5.github.io/wiki/<plugin>/<id>`, which
+resolves directly to the matching page.
 
 ## How it is built
 
@@ -32,13 +32,15 @@ PYTHONPATH=src python3 -m wiki.build --pages pages --out _site --base /wiki
 
 Flags: `--pages` (the `pages/` directory), `--out` (the output directory), `--base` (default `/wiki`),
 `--manifest` (default the live `Slimefun5/manifest` addon list), `--core-ref` (override core's ref),
-`--strict-links` (fail the build on any dangling internal link).
+`--strict-links` (fail the build on any dangling internal link), `--max-skipped` (default `3`; fail the
+build if more addons than this were unreachable, rather than silently publishing a degraded site).
 
 ## Deployment
 
 [`.github/workflows/pages.yml`](.github/workflows/pages.yml) runs on every push to `stable` (and on demand):
-it fetches the core `items.yml`, runs the generator, and publishes the static site to the `gh-pages` branch.
-GitHub Pages serves that branch at https://slimefun5.github.io/Wiki/.
+it fetches the manifest plus every addon's `items.yml` and core's `wiki/*.yml`, runs the generator, and
+publishes the static site to the `gh-pages` branch. GitHub Pages serves that branch at
+https://slimefun5.github.io/wiki/.
 
 > One-time setup (org admin): enable GitHub Pages for this repository with **Source: Deploy from a branch →
 > `gh-pages` / `/ (root)`**.

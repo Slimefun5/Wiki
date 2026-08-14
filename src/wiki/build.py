@@ -135,6 +135,8 @@ def main(argv=None) -> int:
     parser.add_argument("--core-ref", default=None)
     parser.add_argument("--strict-links", action="store_true",
                         help="Fail the build on any dangling internal link")
+    parser.add_argument("--max-skipped", type=int, default=3,
+                        help="Fail the build if more than this many addons are skipped")
     args = parser.parse_args(argv)
 
     base = args.base.rstrip("/")
@@ -145,7 +147,7 @@ def main(argv=None) -> int:
         return 1
 
     try:
-        sources = fetch_sources(manifest_text, core_ref=args.core_ref)
+        sources = fetch_sources(manifest_text, core_ref=args.core_ref, max_skipped=args.max_skipped)
     except MissingRequiredSource as error:
         print("error: " + str(error), file=sys.stderr)
         return 1

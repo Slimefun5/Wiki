@@ -5,7 +5,16 @@ import json
 import re
 from typing import Dict, List
 
-FAMILY_PLACEHOLDER = re.compile(r"%mob%", re.IGNORECASE)
+ESCAPE_HTML_JS = "function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}"
+
+
+def _family_token_pattern(token: str):
+    return re.compile(re.escape(token), re.IGNORECASE)
+
+
+def _family_generic_wording(token: str) -> str:
+    return "any {}".format(token.strip("%").lower())
+
 
 WIKI_CSS = """\
 .sf-lede{color:var(--sf-muted,#6b7280);margin:-.4rem 0 0}
@@ -30,12 +39,13 @@ SEARCH_SCRIPT = """\
 <script>
 (function(){var q=document.getElementById('q'),g=document.getElementById('results'),
 n=document.getElementById('none'),data=[];
+""" + ESCAPE_HTML_JS + """
 fetch(BASE+'/assets/search-index.json').then(function(r){return r.json()}).then(function(j){data=j});
 q.addEventListener('input',function(){var v=q.value.toLowerCase().trim();
 if(!v){g.innerHTML='';n.style.display='none';return}
 var hits=data.filter(function(e){return e.n.toLowerCase().indexOf(v)>-1}).slice(0,200);
-g.innerHTML=hits.map(function(e){return '<a href="'+e.u+'">'+e.n+'<span class="sf-badge">'+
-(e.a||e.k)+'</span></a>'}).join('');
+g.innerHTML=hits.map(function(e){return '<a href="'+e.u+'">'+escapeHtml(e.n)+'<span class="sf-badge">'+
+escapeHtml(e.a||e.k)+'</span></a>'}).join('');
 n.style.display=hits.length?'none':'block';});})();
 </script>
 """
@@ -117,14 +127,16 @@ def render_item_page(item, base: str) -> str:
 
 
 def render_family_page(family, base: str) -> str:
-    """The one real page emitted for an item-family template; %mob% renders as the literal
-    words 'any mob' here (a concrete variation's own text is filled in dynamically by 404.html)."""
-    replacement = "any mob"
+    """The one real page emitted for an item-family template; the family's own token (e.g. %MOB%)
+    renders as a generic phrase here (a concrete variation's own text is filled in dynamically by
+    404.html)."""
+    pattern = _family_token_pattern(family.token)
+    replacement = _family_generic_wording(family.token)
 
     def sub(lines):
-        return [FAMILY_PLACEHOLDER.sub(replacement, line) for line in lines]
+        return [pattern.sub(replacement, line) for line in lines]
 
-    name = FAMILY_PLACEHOLDER.sub(replacement, family.name)
+    name = pattern.sub(replacement, family.name)
     parts = [
         '<a class="sf-back" href="{}/addon/{}/">\u2190 {}</a>\n'.format(
             _attr(base), _attr(family.plugin), html.escape(family.addon_name)),
@@ -141,9 +153,9 @@ def render_family_page(family, base: str) -> str:
 FAMILY_SCRIPT = """\
 <script>
 (function(){
-function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
-function block(lines,human){var items=(lines||[]).filter(Boolean).map(function(l){
-return '<li>'+escapeHtml(l.replace(/%mob%/gi,human))+'</li>'}).join('');
+""" + ESCAPE_HTML_JS + """
+function block(lines,human,re){var items=(lines||[]).filter(Boolean).map(function(l){
+return '<li>'+escapeHtml(l.replace(re,human))+'</li>'}).join('');
 return items?'<div class="sf-block"><ul>'+items+'</ul></div>':''}
 var path=location.pathname,rest=path.indexOf(BASE)===0?path.slice(BASE.length):path,
 segments=rest.replace(/^\\/+|\\/+$/g,'').split('/').filter(Boolean);
@@ -156,11 +168,12 @@ var match=id.match(new RegExp(fam.regex));
 if(!match){continue}
 var human=match[1].split('_').map(function(w){
 return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ');
+var re=new RegExp(fam.token,'gi');
 document.getElementById('sf-404-main').innerHTML=
 '<a class="sf-back" href="'+BASE+'/addon/'+fam.plugin+'/">\u2190 '+escapeHtml(fam.addon)+'</a>'+
-'<h1>'+escapeHtml(fam.name.replace(/%mob%/gi,human))+
+'<h1>'+escapeHtml(fam.name.replace(re,human))+
 '<span class="sf-badge">'+escapeHtml(fam.addon)+'</span></h1>'+
-block(fam.type,human)+block(fam.description,human)+block(fam.stats,human)+block(fam.usage,human);
+block(fam.type,human,re)+block(fam.description,human,re)+block(fam.stats,human,re)+block(fam.usage,human,re);
 return}
 });})();
 </script>
@@ -176,8 +189,8 @@ def render_404_page(base: str) -> str:
         '<p class="sf-lede">That page does not exist.</p>\n'
         '<p><a href="{base}">Back to the index</a></p>\n'
         "</div>\n"
-        '<script>var BASE="{raw_base}";</script>\n{script}'
-    ).format(base=_attr(base + "/"), raw_base=base, script=FAMILY_SCRIPT)
+        '<script>var BASE={base_json};</script>\n{script}'
+    ).format(base=_attr(base + "/"), base_json=json.dumps(base), script=FAMILY_SCRIPT)
     return page_shell("Page not found", base, inner)
 
 
@@ -220,7 +233,8 @@ def render_addon_index(addon, base: str, families=None) -> str:
 
     if families:
         family_links = "".join(
-            '<a href="{}">{}</a>'.format(_attr(f.url), html.escape(FAMILY_PLACEHOLDER.sub("any mob", f.name)))
+            '<a href="{}">{}</a>'.format(_attr(f.url), html.escape(
+                _family_token_pattern(f.token).sub(_family_generic_wording(f.token), f.name)))
             for f in sorted(families, key=lambda f: f.name))
         inner += "<h2>Item families</h2>\n<div class=\"sf-list\">{}</div>\n".format(family_links)
 
@@ -241,12 +255,16 @@ def render_guides_index(prose_pages, base: str) -> str:
 
 def render_landing(site, base: str) -> str:
     guides = [p for p in site.prose if p.absorbed_by is None]
-    topics = "".join('<a href="{}">{}</a>'.format(_attr(t.url), html.escape(t.title)) for t in site.topics)
     cards = "".join(
         '<a class="sf-card" href="{}"><strong>{}</strong><br>'
         '<span class="sf-count">{} items</span></a>'.format(
             _attr(a.url), html.escape(a.name), len(a.items))
         for a in site.addons)
+
+    topics_section = ""
+    if site.topics:
+        topics = "".join('<a href="{}">{}</a>'.format(_attr(t.url), html.escape(t.title)) for t in site.topics)
+        topics_section = "<h2>Topics</h2>\n<div class=\"sf-list\">{}</div>\n".format(topics)
 
     inner = (
         "<h1>Slimefun Wiki</h1>\n"
@@ -255,12 +273,12 @@ def render_landing(site, base: str) -> str:
         'placeholder="Search items and guides..." aria-label="Search items and guides">\n'
         '<div id="results" class="sf-list"></div>\n'
         '<p id="none" class="sf-none">Nothing matches your search.</p>\n'
-        "<h2>Topics</h2>\n<div class=\"sf-list\">{topics}</div>\n"
+        "{topics_section}"
         '<p><a href="{base}/guides/">All {guides} guides</a></p>\n'
         "<h2>Browse by addon</h2>\n<div class=\"sf-cards\">{cards}</div>\n"
-        '<script>var BASE="{raw_base}";</script>\n{script}'
-    ).format(items=len(site.items), guides=len(guides), topics=topics, cards=cards,
-             base=_attr(base), raw_base=base, script=SEARCH_SCRIPT)
+        '<script>var BASE={base_json};</script>\n{script}'
+    ).format(items=len(site.items), guides=len(guides), topics_section=topics_section, cards=cards,
+             base=_attr(base), base_json=json.dumps(base), script=SEARCH_SCRIPT)
 
     return page_shell("Slimefun Wiki", base, inner)
 
@@ -282,8 +300,8 @@ def search_index(site) -> List[dict]:
     entries += [{"n": t.title, "u": t.url, "k": "topic", "a": ""} for t in site.topics]
     entries += [{"n": p.title, "u": p.url, "k": "guide", "a": ""}
                 for p in site.prose if p.absorbed_by is None]
-    entries += [{"n": FAMILY_PLACEHOLDER.sub("any mob", f.name), "u": f.url, "k": "family",
-                "a": f.addon_name} for f in site.families]
+    entries += [{"n": _family_token_pattern(f.token).sub(_family_generic_wording(f.token), f.name),
+                "u": f.url, "k": "family", "a": f.addon_name} for f in site.families]
     return entries
 
 
@@ -294,7 +312,7 @@ def search_index_json(site) -> str:
 def families_json(site) -> str:
     entries = [{
         "plugin": f.plugin, "regex": f.regex, "url": f.url, "addon": f.addon_name,
-        "name": f.name, "type": f.type_lines, "description": f.description,
+        "name": f.name, "token": f.token, "type": f.type_lines, "description": f.description,
         "stats": f.stats, "usage": f.usage,
     } for f in site.families]
     return json.dumps(entries, separators=(",", ":"))

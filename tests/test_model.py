@@ -20,8 +20,10 @@ ALUMINUM_DUST:
 """
 
 
-def test_strip_color_removes_codes_and_quotes():
-    assert strip_color("'&bAluminum Ingot'") == "Aluminum Ingot"
+def test_strip_color_removes_codes():
+    """PyYAML already strips a scalar's surrounding quotes during parsing, so strip_color never
+    sees one."""
+    assert strip_color("&bAluminum Ingot") == "Aluminum Ingot"
     assert strip_color("&cAdvanced &fGeoMiner") == "Advanced GeoMiner"
 
 
@@ -62,6 +64,27 @@ def _core_wikilinks_slug(name: str) -> str:
 def test_plugin_slug_matches_core_rule_for_every_real_plugin_name():
     for name in REAL_PLUGIN_NAMES:
         assert plugin_slug(name) == _core_wikilinks_slug(name)
+
+
+# A sample of real ids from SlimeTinker's items.yml, chosen for the reserved/punctuation
+# characters (`?`, `,`, `!`, `+`, `'`) that make the id-sanitization rule worth pinning too.
+REAL_ITEM_IDS = [
+    "ANCIENT_ALTAR", "ADVANCED_CHARGER", "GOLD_PAN",
+    "WHO_NEEDS_PRESSURE_PLATES?_TRAIT", "MOB?S,GREAT!ITEM+NAME'S",
+]
+
+
+def test_plugin_slug_matches_core_rule_for_real_item_ids_too():
+    for item_id in REAL_ITEM_IDS:
+        assert plugin_slug(item_id) == _core_wikilinks_slug(item_id)
+
+
+def test_item_url_matches_core_wikilinks_default_template():
+    """Pins the full public URL shape against core's Java WikiLinks.DEFAULT_TEMPLATE
+    ("https://slimefun5.github.io/wiki/%plugin%/%id%"); the two must be kept in sync by hand,
+    since this test cannot import the Java source."""
+    url = item_url("slimefun", "GOLD_PAN", "https://slimefun5.github.io/wiki")
+    assert url == "https://slimefun5.github.io/wiki/slimefun/gold_pan/"
 
 
 def test_item_url_matches_wikilinks():

@@ -71,7 +71,8 @@ def _warn(message: str) -> None:
     print("warning: " + message, file=sys.stderr)
 
 
-def fetch_sources(manifest_text: str, core_ref: Optional[str] = None, fetcher=fetch_text) -> Sources:
+def fetch_sources(manifest_text: str, core_ref: Optional[str] = None, fetcher=fetch_text,
+                   max_skipped: int = 3) -> Sources:
     repos = parse_manifest(manifest_text)
     core = repos[0]
 
@@ -102,7 +103,8 @@ def fetch_sources(manifest_text: str, core_ref: Optional[str] = None, fetcher=fe
         text = fetcher(raw_url(repo.repo, repo.ref, ITEMS_PATH))
 
         if text is None:
-            sources.skipped.append("{} has no {} at {}".format(repo.repo, ITEMS_PATH, repo.ref))
+            sources.skipped.append(
+                "fetching {} from {}@{} returned nothing".format(ITEMS_PATH, repo.repo, repo.ref))
             continue
 
         sources.repos.append(repo)
@@ -112,5 +114,10 @@ def fetch_sources(manifest_text: str, core_ref: Optional[str] = None, fetcher=fe
 
     for skip in sources.skipped:
         _warn("skipped " + skip)
+
+    if len(sources.skipped) > max_skipped:
+        raise MissingRequiredSource(
+            "{} addons skipped, more than the max-skipped floor of {}: {}".format(
+                len(sources.skipped), max_skipped, "; ".join(sources.skipped)))
 
     return sources

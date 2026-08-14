@@ -5,7 +5,9 @@ import pytest
 
 from types import SimpleNamespace
 
-from wiki.build import check_links, load_prose, write_site
+import wiki.build as build_module
+from wiki.build import check_links, load_prose, main, write_site
+from wiki.fetch import MissingRequiredSource
 from wiki.model import build_site
 
 
@@ -159,3 +161,42 @@ def test_write_site_emits_a_family_page_families_json_and_a_404_page(tmp_path):
     addon_page = open(os.path.join(out, "addon", "souljars", "index.html"),
                       encoding="utf-8").read()
     assert "/wiki/souljars/soul_jar-family/" in addon_page
+
+
+def _fake_sources():
+    return SimpleNamespace(
+        repos=[SimpleNamespace(plugin="slimefun", name="Slimefun")],
+        items_yaml={"slimefun": "GOLD_PAN:\n  name: '&6Gold Pan'\n"},
+        core_wiki_items=None, core_mechanics=None, core_topics=None, core_topic_items=None)
+
+
+def test_main_returns_nonzero_with_strict_links_on_a_dangling_link(tmp_path, monkeypatch):
+    monkeypatch.setattr(build_module, "fetch_text", lambda url: "{}")
+    monkeypatch.setattr(build_module, "fetch_sources", lambda *args, **kwargs: _fake_sources())
+
+    pages = tmp_path / "pages"
+    pages.mkdir()
+    (pages / "Broken-Link.md").write_text("[bad link](/wiki/nope/)\n", encoding="utf-8")
+
+    exit_code = main(["--pages", str(pages), "--out", str(tmp_path / "out"), "--base", "/wiki",
+                      "--strict-links"])
+
+    assert exit_code == 1
+
+
+def test_main_exits_cleanly_on_missing_required_source_instead_of_a_traceback(
+        tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(build_module, "fetch_text", lambda url: "{}")
+
+    def _raise(*args, **kwargs):
+        raise MissingRequiredSource("4 addons skipped, more than the max-skipped floor of 3: a; b; c; d")
+
+    monkeypatch.setattr(build_module, "fetch_sources", _raise)
+
+    pages = tmp_path / "pages"
+    pages.mkdir()
+
+    exit_code = main(["--pages", str(pages), "--out", str(tmp_path / "out"), "--base", "/wiki"])
+
+    assert exit_code == 1
+    assert "more than the max-skipped floor" in capsys.readouterr().err
