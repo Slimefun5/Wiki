@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - stable
+  schedule:
+    - cron: '0 4 * * *'
+  repository_dispatch:
+    types: [content-changed]
   workflow_dispatch:
 
-# Needs to push the built site to the gh-pages branch.
 permissions:
   contents: write
 
@@ -26,18 +29,19 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          python3 -m pip install --quiet markdown
+          python3 -m pip install --quiet markdown pyyaml
 
           git clone --depth 1 -b stable \
             "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" repo
           cd repo
 
-          curl -sfL \
-            https://raw.githubusercontent.com/Slimefun5/Slimefun5/stable/core/src/main/resources/languages/en/items.yml \
-            -o items.yml || echo "items.yml unavailable - building without item redirects"
+          PYTHONPATH=src python3 -m wiki.build \
+            --pages pages --base /wiki --out _site
 
-          python3 src/generate-wiki.py \
-            --pages pages --items items.yml --plugin slimefun --base /Wiki --out _site
+          for sheet in tokens.css site.css; do
+            curl -sfL "https://raw.githubusercontent.com/Slimefun5/web/main/${sheet}" \
+              -o "_site/assets/${sheet}"
+          done
 
           cd _site
           git init -q -b gh-pages
