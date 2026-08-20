@@ -1,5 +1,6 @@
 name: Table of Contents
 on: 
+  workflow_dispatch:
   push:
     branches:
     - master
