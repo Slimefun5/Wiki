@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-    - master
+    - stable
     paths:
     - 'pages/Common-Issues.md'
     - 'pages/FAQ.md'
