@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (1 Project Setup) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (1 Project Setup)</h1>
+<p>This is the <strong>first Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.</p>
+<h2>1. The necessary tools</h2>
+<p>In order to start developing, you will need to make sure that the following software is installed correctly on your system.
+1. Java JDK 1.8+
+2. Any Java IDE (Eclipse IDE or IntelliJ IDEA are recommended)
+3. Apache Maven (IntelliJ has it pre-installed, for Eclipse you need to install the <code>m2e</code> addon)
+4. Git (recommended, for version control)</p>
+<p>We will not go over the details on how to download or install these, you will find plenty of resources online.<br>
+Once you have installed everything successfully, continue with Step 2.</p>
+<h2>2. Create a new GitHub Repository</h2>
+<p>You will need a GitHub Account for this step.
+We made a nifty Repository-template for Slimefun5 Addons for you.<br>
+Go to the <a href="https://github.com/Slimefun5/Addon-Template">Repository template</a> and click the bright green button on the right side that says "Use this template".
+You will then be prompted to come up with a name and description for your Addon.<br>
+When you are finished just click "Create repository from template".</p>
+<h2>3. Setting up your Project</h2>
+<p>Now that you have a git repository for your project, you can import it into your workspace.<br>
+Look up how to import projects from GitHub for the IDE you chose in Step 1.<br>
+Make sure to set it up correctly, you will likely want to push things to your repository later.</p>
+<h3>Maven</h3>
+<p>Now we need to talk a little bit about Maven.<br>
+Maven is a dependency manager that many Java projects use. Our template already includes a fully configured Maven setup for you.<br>
+But you need to make sure that your project is set up correctly, you can look up how to set up a project as a Maven project for your preferred IDE.
+Your project will be compiled via Maven too, so if you want to test or share your addon, you need to use Maven either way.</p>
+<h3>License</h3>
+<p>You should also choose a License for your project. We recommend you to choose an Open-Source license, so everyone can contribute to your project.<br>
+You can consult <a href="https://choosealicense.com/">ChooseALicense.com</a> to find a suitable open-source license for you.<br>
+If you don't really want to bother with this choice, we recommend you the <a href="https://choosealicense.com/licenses/mit/">MIT License</a>.</p>
+<p>To select a license, simply copy the license text and paste it into a new file called "LICENSE" (no file ending) in your project's root directory.</p>
+<h3>README</h3>
+<p>Your Project also needs a descriptive README.<br>
+Our default README simply contains short instructions on how to set up the template properly (We will also cover that in Step 4).<br>
+But you should write a proper README instead.<br>
+Give your project a proper description, maybe link your discord server, your BukkitDev page, your SpigotMC page, a download link or whatever you want to put there.<br>
+This README will be the landing page of your GitHub project, so make it pretty ;)</p>
+<h2>4. Very important step</h2>
+<p>This step is the most important of all.<br>
+At the moment your repository still contains a lot of placeholders that need to be changed.<br>
+Navigate to the pom.xml file inside your project's root folder, at the top you will see a short block with 4 values.<br></p>
+<h3>Your groupId</h3>
+<p>Every Java project has a group/package id.<br>
+This id is used to identify you as a developer or an organization.<br>
+These ids need to be in all lower case, here are some examples:
+* <code>me.thebusybiscuit</code> (<code>me.****</code> is often used for individuals)
+* <code>com.example</code> (Use your website in reverse if you own one)
+* <code>com.google.example</code> (If you are part of an organization, Google for example, then use this format. Do not impersonate any organizations and only use this id if your project is made in the name of that organization)</p>
+<p>For most developers, we would recommend to just go with <code>me.yourname</code> (remember, all in lower case, use _ to express spaces).<br>
+<strong>Hold onto this id for now, we will need it later</strong></p>
+<h3>Your projectId</h3>
+<p>Every Java project also has a projectId, in Maven terms we call this an artifactId.<br>
+Together with your groupId this forms your package identifier, which should be unique.</p>
+<p>Your projectID is just the name of your project, <code>MyAwesomeAddon</code> for example.<br>
+It does not have to be in lower cases like your groupId.<br>
+<strong>Hold onto this id for now, we will need it later</strong></p>
+<h3>Your pom.xml</h3>
+<p>Your pom.xml is the heart of any Maven project.<br>
+Now you will need both ids from before.<br>
+The beginning of your pom.xml should look like this:</p>
+<pre><code class="language-xml">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;me.CHANGEME&lt;/groupId&gt;
+  &lt;artifactId&gt;Slimefun5Addon&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+</code></pre>
+<p>Change out the groupId and artifactId for your groupId and projectId that we defined earlier.<br>
+The beginning of your pom.xml should now look like this:</p>
+<pre><code class="language-xml">  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;groupId&gt;me.thebusybiscuit&lt;/groupId&gt;
+  &lt;artifactId&gt;MyAwesomeAddon&lt;/artifactId&gt;
+  &lt;version&gt;1.0.0&lt;/version&gt;
+</code></pre>
+<p>Don't forget your groupId and projectId, we still need these a few more times!</p>
+<h3>Your plugin.yml</h3>
+<p>The plugin.yml is the heart of any Bukkit plugin.<br>
+You can find it under <code>src/main/resources/plugin.yml</code>.<br>
+It should look like this:</p>
+<pre><code class="language-yaml">name: Slimefun5Addon
+version: ${project.version}
+author: CHANGEME
+description: A generic Slimefun5-Addon
+website: https://github.com/Slimefun5/Addon-Template
+
+main: me.CHANGEME.Slimefun5addon.Slimefun5Addon
+depend: [Slimefun5]
+
+api-version: 1.14
+</code></pre>
+<ol>
+<li>Replace <code>name</code> with your projectId.</li>
+<li>Replace <code>author</code> with your name.</li>
+<li>Give your plugin a <code>description</code></li>
+<li>Set the <code>website</code> of your plugin, you can remove this line or set the GitHub / BukkitDev page of your project there.</li>
+</ol>
+<p>Now most importantly...<br>
+Change the <code>main</code> attribute to the following:<br>
+main: <code>groupId</code> + . + <code>projectId</code> (all lower case this time) + . + <code>projectId</code>.</p>
+<p>We know this may sound confusing at first, here is an example:<br></p>
+<p>groupId: me.thebusybiscuit
+projectId: MyAwesomeAddon</p>
+<p>main: me.thebusybiscuit.myawesomeaddon.MyAwesomeAddon</p>
+<p>Your plugin.yml should now look like this:</p>
+<pre><code class="language-yaml">name: MyAwesomeAddon
+version: ${project.version}
+author: TheBusyBiscuit
+description: This is a very awesome addon that I made
+website: https://github.com/TheBusyBiscuit/MyAwesomeAddon
+
+main: me.thebusybiscuit.myawesomeaddon.MyAwesomeAddon
+depend: [Slimefun5]
+
+api-version: 1.14
+</code></pre>
+<p>One more step, then you are almost done with this part.</p>
+<h3>Your package</h3>
+<p>Now we will start touching some code files.<br>
+We won't write any actual code yet, but we will still have to configure it to follow what we did earlier.</p>
+<p>Navigate to <code>src/main/java</code>.<br>
+You should see a package there that looks like this: <code>me.CHANGEME.Slimefun5addon</code>.<br>
+Rename this package to your groupId, followed by your projectId (all in lower case again).<br>
+Your package may look like this now: <code>me.thebusybiscuit.myawesomeaddon</code>.</p>
+<p>Now open this package, you should see a file called <code>Slimefun5Addon.java</code>, rename that file to your projectId but keep the file ending.<br>
+The file name should look like this now: 'MyAwesomeAddon.java'.</p>
+<p>If you set up Git correctly, you should now be able to <strong>commit</strong> your changes and <strong>push</strong> them to your repository.<br>
+Look up online guides on how to do that, remember to always <strong>commit</strong> and <strong>push</strong> whenever you change a file, this will keep your workspace and your GitHub repository in-sync, so you can work on your project from anywhere you want. It also allows others to contribute to your project easily.</p>
+<p>And you are done! You now successfully configured and set up your first Slimefun5 Addon.<br>
+We know this was all very complicated, so feel free to ask any questions on discord.</p>
+<h2>5. Locking your dependency versions</h2>
+<p>Our default <code>pom.xml</code> file from the template uses self-updating versions.<br>
+But we <strong>highly recommend</strong> using explicit versions for your dependencies, it simply is good practice as it prevents things from suddenly breaking whenever you open up your IDE.</p>
+<p>Search for the section in your <code>pom.xml</code> file which defines the Slimefun5 version:</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.github.Slimefun5&lt;/groupId&gt;
+  &lt;artifactId&gt;Slimefun5&lt;/artifactId&gt;
+  &lt;version&gt;master-SNAPSHOT&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+  &lt;!-- ... --&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>To build your addon against a specific version of Slimefun5, simply override the <code>&lt;version&gt;</code> tag.<br>
+It is best to build against an <code>RC</code> - version of Slimefun5, simply set the version to <code>RC-</code> followed by the version.<br>
+To build against RC-15 for example, simply replace your version like this:</p>
+<p><code>&lt;version&gt;master-SNAPSHOT&lt;/version&gt;</code> -&gt; <code>&lt;version&gt;RC-15&lt;/version&gt;</code></p>
+<p>You can find a full list of versions to build against in the "Releases" section on Slimefun5's github repository:<br>
+https://github.com/Slimefun5/Slimefun5/releases</p>
+<p>You can also find a "Maven dependency reference" for every released version. Simply copy &amp; paste/replace the version tag into your <code>pom.xml</code> to update your dependency.</p>
+<p>Full example:<br></p>
+<pre><code class="language-xml">&lt;dependency&gt;
+  &lt;groupId&gt;com.github.TheBusyBiscuit&lt;/groupId&gt;
+  &lt;artifactId&gt;Slimefun5&lt;/artifactId&gt;
+  &lt;version&gt;RC-15&lt;/version&gt;
+  &lt;scope&gt;provided&lt;/scope&gt;
+  &lt;!-- ... --&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><strong>Note that your addon should still work on any development version released after the RC version you are building against. API changes are usually only done ater a new RC build has been released, so you can safely build against the RC version while still using the development versions of Slimefun5 for your server.</strong></p>
+<p><a href="/wiki/Developer-Guide-(2-Creating-the-Addon)/"><strong>&gt; Continue with Part 2</strong></a></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

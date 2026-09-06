@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common Issues · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Common Issues</h1>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<details>
+<summary>Table of Contents</summary>
+
+- [Floating tags](#floating-tags)
+- [Unplaceable blocks](#unplaceable-blocks)
+- [Circuit Boards not dropping](#circuit-boards-not-dropping)
+
+</details>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<p>This page contains useful information about common in game issues and how to resolve them.<br>
+Most of the following will require varying degrees of permission only staff members may have: make sure to link people higher up in your staff team here if you don't!</p>
+<p><strong>WARNING: some issues have more than one viable solution, indicated by a division in stages from the least to the most intrusive; it is HIGHLY recommended you try all previous stages before you follow any further approach as lower stages are less risky and will solve most occurencies anyways. If you've tried everything in the list with no success, consider <a href="/wiki/How-to-report-bugs/">filing a bug report!</a></strong></p>
+<h2>Floating tags</h2>
+<p>Some Slimefun5 items automatically create floating tags when placed, in particular the <a href="/wiki/Energy-Regulator/">Energy Regulator</a> and the <a href="/wiki/Cargo-Manager/">Cargo Manager</a>.<br>
+These tags are supposed to disappear when breaking the machine but sometimes things can go wrong and you're left with some text that just doesn't want to go away. How can you solve this?</p>
+<p><em>Note: make sure this isn't due to a ghost block (check "Unplaceable Blocks")!</em></p>
+<h3>How to fix this (Stage 1)</h3>
+<p>Remove any regulators/managers below the floating tag, then stand close to it and run this as operator:</p>
+<blockquote>
+<p>/execute as <your_name> at @s run execute as @e[type=armor_stand,nbt={Invisible:1b},distance=..3] run data merge entity @s {Invisible:0}</p>
+</blockquote>
+<p>You can now punch the armor stand to destroy it. You may need to punch out multiple stands as they may have been spawned and stacked onto each other depending on which plugins you use.</p>
+<p><em>Tip: it is recommended using MyCommands, CommandOverride or similar plugins and setting an alias, easier to remember and teach (an example could be /holokill).</em></p>
+<h3>How to fix this (Stage 2)</h3>
+<p>Switch to spectator mode via</p>
+<blockquote>
+<p>/gamemode spectator</p>
+</blockquote>
+<p>You should see the invisible armor stand and better gauge where the feet are; using this information, place a new regulator just below the tag on the first block not occupied by the armor stand itself (get one via /sf cheat).<br>
+The regulator will try to place its own armor stand which will replace the corrupt ones and behave normally: you should now be able to remove the regulator you've just placed, removing all tags.</p>
+<h3>How to fix this (Stage 3)</h3>
+<p>If the hologram keeps respawning you're very likely to be dealing with a ghost block like the ones dealt with under Unplaceable blocks, with the only difference it's also spawning a hologram because it's one of the items listed up top.
+Simply follow the procedure to get rid of any ghost block and you should be golden.</p>
+<h2>Unplaceable blocks</h2>
+<p>If you encounter a location that seems empty but will cancel your action when you try to place any block there you're probably looking at a ghost Slimefun5 block.<br> This means a Slimefun5 item used to be placed there (usually an <a href="/wiki/Androids/">android</a> or a <a href="/wiki/Cargo-Management/">cargo component</a>) and its data was not correctly removed.</p>
+<h3>How to fix this (Isolated block)</h3>
+<p>Get a debug fish by running the following as operator:</p>
+<blockquote>
+<p>/sf debug_fish</p>
+</blockquote>
+<p><em>(Optional): Use the shift right click function to place a dummy head where the ghost block is and try to punch it out: if a Slimefun5 head drops you're sure to have a ghost block (the opposite is not necessarily true as the ghost Slimefun5 item could've been a full block and not a head, it's less likely though and just good to get a confirmation if possible).</em></p>
+<p>Shift right click to place a dummy head, then shift left click it: an animation of the head being broken and the event being canceled should be seen and you'll get a message in chat; this will remove whatever data is still linked to the location.</p>
+<p>Punch out the dummy head.</p>
+<h3>How to fix this (Cluster of blocks)</h3>
+<p>This is very similar to the procedure for isolated blocks: in this case instead of placing all the dummy heads one by one you can run WorldEdit commands to speed up the placing process.</p>
+<p>Use WorldEdit to select the cluster of blocks and its surroundings and execute:</p>
+<blockquote>
+<p>//set stone</p>
+</blockquote>
+<p>As per the isolated blocks procedure, shift right click all the incriminated spots to remove any data they may retain.</p>
+<p>Remove the stone by executing:</p>
+<blockquote>
+<p>//undo</p>
+</blockquote>
+<h2>Circuit Boards not dropping</h2>
+<p>If you kill Iron Golems and they don't seem to drop any Iron Golems, it may be due to a conflicting plugin.<br>
+Plugins like <strong>MobStacker</strong> or similar are known to have a lot of issues with custom item drops.</p>
+<h3>How to fix this (Stage 1)</h3>
+<p>The best solution to this problem is to enable custom item drops in that plugins config, if such an option exist.<br>
+Or ask the authors of that plugin whether there is a way to toggle this behaviour.</p>
+<h3>How to fix this (Stage 2)</h3>
+<p>A more drastic approach would be to switch over to a Mob-Stacking plugin that supports custom drops.<br>
+<em>At this point we do not have a list of mob-stacking plugins that are confirmed to work with Slimefun5, if you use a plugin that works without any issues, feel free to name it right here. See <a href="/wiki/Expanding-the-Wiki/">Expanding the Wiki</a></em></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

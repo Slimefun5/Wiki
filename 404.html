@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<div id="sf-404-main"><h1>Page not found</h1>
+<p class="sf-lede">That page does not exist.</p>
+<p><a href="/wiki/">Back to the index</a></p>
+</div>
+<script>var BASE="/wiki";</script>
+<script>
+(function(){
+function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function block(lines,human,re){var items=(lines||[]).filter(Boolean).map(function(l){
+return '<li>'+escapeHtml(l.replace(re,human))+'</li>'}).join('');
+return items?'<div class="sf-block"><ul>'+items+'</ul></div>':''}
+var path=location.pathname,rest=path.indexOf(BASE)===0?path.slice(BASE.length):path,
+segments=rest.replace(/^\/+|\/+$/g,'').split('/').filter(Boolean);
+if(segments.length<2){return}
+var plugin=segments[0],id=segments[1];
+fetch(BASE+'/assets/families.json').then(function(r){return r.json()}).then(function(families){
+for(var i=0;i<families.length;i++){var fam=families[i];
+if(fam.plugin!==plugin){continue}
+var match=id.match(new RegExp(fam.regex));
+if(!match){continue}
+var human=match[1].split('_').map(function(w){
+return w.charAt(0).toUpperCase()+w.slice(1)}).join(' ');
+var re=new RegExp(fam.token,'gi');
+document.getElementById('sf-404-main').innerHTML=
+'<a class="sf-back" href="'+BASE+'/addon/'+fam.plugin+'/">← '+escapeHtml(fam.addon)+'</a>'+
+'<h1>'+escapeHtml(fam.name.replace(re,human))+
+'<span class="sf-badge">'+escapeHtml(fam.addon)+'</span></h1>'+
+block(fam.type,human,re)+block(fam.description,human,re)+block(fam.stats,human,re)+block(fam.usage,human,re);
+return}
+});})();
+</script>
+
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

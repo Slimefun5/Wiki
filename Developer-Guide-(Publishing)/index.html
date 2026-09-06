@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (Publishing) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (Publishing)</h1>
+<p>This is the <strong>last part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.</p>
+<h2>Prerequisites</h2>
+<p>To start publishing and distributing your addon, you don't really need much.<br>
+In fact, you really only need your addon. But there are some tips and best practices of course.<br>
+Once you feel confident enough to release your addon (better too early than too late), try to keep the following in mind:</p>
+<h3>1. Your project has a <code>LICENSE</code> file</h3>
+<p>If you don't provide a license, the default of "All Rights Reserved" is assumed.<br>
+Even if you do wanna reserve all the rights to the project to yourself, it is a good idea to state this explicitly.</p>
+<p>If you need help on choosing a license, check out <a href="https://choosealicense.com/">ChooseALicense.com</a></p>
+<h3>2. You know how to compile your project</h3>
+<p>In order to upload your project anywhere, you need to distribute the compiled <code>.jar</code> file of your addon.<br>
+If you chose to use Maven for your project (as we suggested in <a href="https://github.com/Slimefun5/Wiki/blob/master/pages/Developer-Guide-(1-Project-Setup).md">Part 1</a>), you can simply run the following command:</p>
+<pre><code>$ mvn clean package
+</code></pre>
+<p>Your compiled <code>.jar</code> file can then be found inside your <code>/target/</code> directory.</p>
+<h3>3. Writing a good description</h3>
+<p>Every project should have a good description.<br>
+Tell users what to expect from installing your addon.<br>
+Make sure to provide a list of commands, permissions and features!</p>
+<p>You can either provide this description via a <code>README.md</code> file on your GitHub repository or by providing it on your project page, or both!</p>
+<h2>Uploading the project</h2>
+<p>To upload your project you first need to choose a platform on where to distribute it.<br>
+You are in full control of where your project should be uploaded.</p>
+<p>Popular platforms for distributing your project include:
+* <a href="https://www.spigotmc.org/resources/">SpigotMC</a>
+* <a href="https://dev.bukkit.org/bukkit-plugins">BukkitDev</a>
+* <a href="https://papermc.io/forums/c/plugin-releases/15">PaperMC Forums</a>
+* <a href="https://polymart.org/resources">Polymart</a>
+* <a href="https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/managing-releases-in-a-repository#creating-a-release">GitHub Releases</a></p>
+<p>Alternatively you can also use our <a href="https://github.com/TheBusyBiscuit/builds#how-to-add-your-own-repository">main service for releasing automatic development builds</a>.</p>
+<h2>Spreading the word</h2>
+<p>Once your project has been uploaded, tell others about it!</p>
+<p>We recommend all addon developers to feature their addon on our public <a href="/wiki/Addons/">Addons page</a>.<br>
+Simply make a new pull request on our wiki repository, you can find a tutorial here:<br>
+/wiki/Expanding-the-Wiki/</p>
+<p>You can also share your project by posting about it on our <a href="https://discord.gg/CbBYZBEWdR">Discord server</a>.<br>
+Upload videos or screenshots to get people excited! But please don't tag anyone.</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

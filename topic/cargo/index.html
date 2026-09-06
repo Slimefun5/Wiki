@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cargo Networks · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/">← Back to index</a>
+<h1>Cargo Networks</h1>
+<p class="sf-lede">Move items automatically</p>
+<p>Cargo Networks A Cargo Network moves items between chests and machines automatically.</p>
+<p>Building it Place a Cargo Manager - the core, like the Energy Regulator. Attach nodes to the faces of chests and machines, and link everything with Cargo Nodes within 5 blocks.</p>
+<p>The two terminal nodes - Input Node: pulls items OUT of the block it is on. - Output Node: deposits items INTO the block it is on.</p>
+<p>Channels Each node has a channel (0-15). Items pulled on a channel only go to Outputs on the SAME channel. Use channels to keep item streams separate.</p>
+<p>Filtering Input Nodes and the Advanced Output Node have a filter: - Whitelist: only listed items - Blacklist: block listed items (The basic Output Node accepts anything.)</p>
+<p>Example: auto-sorter Input Node on a source chest, channel 0. Add an Advanced Output per item type, channel 0, each whitelisting one item. They sort themselves into chests.</p>
+<p>Cargo Management is Slimefun5's item transportation system.<br>
+With it, you can quickly and automatically move items between containers or <a href="/wiki/Electric-Machines/">machines</a> over virtually any distance.</p>
+<p>A cargo management network requires a <a href="/wiki/Cargo-Manager/">cargo manager</a>. It allows items to be transported and gives you information about your network.</p>
+<p>Placing <a href="/wiki/Input-Node/">input</a> and <a href="/wiki/Output-Node/">output nodes</a> on a container or machine allows the items in it to enter or exit the network, respectively. These nodes have to be in the direct range of a cargo manager, or they can be connected to one with <a href="/wiki/Connector-Node/">connector nodes</a>.</p>
+<p>Items in a cargo network are transported over a maximum of 16 separate channels, each labelled with a different color of wool.</p>
+<p>For more information on the specific items in this category, see the table of contents below.</p>
+<h2>Table of contents</h2>
+<ul>
+<li><a href="/wiki/Cargo-Motor/">Cargo Motor</a></li>
+<li><a href="/wiki/Cargo-Manager/">Cargo Manager</a></li>
+<li><a href="/wiki/Connector-Node/">Cargo Node (Connector)</a></li>
+<li><a href="/wiki/Input-Node/">Cargo Node (Input)</a></li>
+<li><a href="/wiki/Output-Node/">Cargo Node (Output)</a></li>
+<li><a href="/wiki/Advanced-Output-Node/">Advanced Cargo Node (Output)</a></li>
+<li><a href="/wiki/Trash-Can/">Trash Can</a></li>
+</ul><h2>Items in this topic</h2>
+<div class="sf-list"><a href="/wiki/slimefun/cargo_manager/">Cargo Manager</a></div>
+
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

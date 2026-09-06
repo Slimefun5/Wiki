@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (3 Your first Item) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (3 Your first Item)</h1>
+<p>This is the <strong>third Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.<br>
+If you haven't checked out the <a href="/wiki/Developer-Guide-(2-Creating-the-Addon)/">second Part of this Guide</a>, then please do that.</p>
+<h2>1. A little recap</h2>
+<p>In the last part we went over the main class of your plugin.<br>
+Open up this class again, it should still look a little bit like this:</p>
+<pre><code class="language-java">package ...;
+
+import ...;
+
+public class Slimefun5Addon extends JavaPlugin implements Slimefun5Addon {
+
+    @Override
+    public void onEnable() {
+        Config cfg = new Config(this);
+        // ...
+    }
+
+    @Override
+    public void onDisable() {
+        // Logic for disabling the plugin...
+    }
+
+    @Override
+    public JavaPlugin getJavaPlugin() {
+        return this;
+    }
+
+    @Override
+    public String getBugTrackerURL() {
+        return null;
+    }
+
+}
+</code></pre>
+<p>The entirety of this part will happen inside your <code>onEnable()</code> method, right after you created your <code>Config</code>.<br>
+So start there.</p>
+<h2>2. Creating an ItemGroup</h2>
+<p>As you probably know, the Slimefun5 Guide is divided into various item groups, such as "Tools", "Weapons" and many more.<br>
+You should create your own item group for your addons.<br>
+So we will start with that.</p>
+<p>The constructor for your ItemGroup takes in two parameters:
+* <code>id</code> represents the identifier of your ItemGroup, a unique name, we use a <code>NamespacedKey</code> for this
+* <code>item</code> represents the item of your ItemGroup, this item will be used to display your ItemGroup inside the Slimefun5 Guide.</p>
+<h3>Our id</h3>
+<p>Let's start with the <code>id</code>.<br>
+For this we will create a new <code>NamespacedKey</code>. A NamespacedKey is an identifier that takes in a lower-case id and your Plugin to produce a unique identifier.<br>
+You need to come up with a unique id for your item group for this.<br>
+We will just go with <code>cool_category</code> for this.<br>
+In your <code>onEnable()</code> method, create a NamespacedKey like this:</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+</code></pre>
+<p><code>this</code> simply refers to our Plugin.</p>
+<h3>Our item</h3>
+<p>Now onto the <code>item</code> of our new ItemGroup.<br>
+We will use the class CustomItemStack for this. (import <code>io.github.thebusybiscuit.Slimefun5.libraries.dough.items.CustomItemStack</code> for this)<br>
+You can create a new named Item like this:</p>
+<pre><code class="language-java">CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+</code></pre>
+<p>You can even use Color Codes in your item's name.<br>
+For a complete list of Materials, consult <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html">Spigot's Javadocs</a>.</p>
+<h3>Full assembly</h3>
+<p>Finally, create a new ItemGroup (<code>io.github.thebusybiscuit.Slimefun5.api.items.ItemGroup</code>) like this (inside your <code>onEnable()</code> method):</p>
+<pre><code class="language-java">ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+</code></pre>
+<p>Now our ItemGroup is complete, the full code should look like this now:</p>
+<pre><code class="language-java">@Override
+public void onEnable() {
+    Config cfg = new Config(this);
+
+    NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+    CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+
+    ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+    // ...
+}
+</code></pre>
+<p>The ItemGroup will not be visible in our Slimefun5 Guide at this point though.<br>
+We first need to add an actual Slimefun5Item.</p>
+<h2>3. Creating an Item</h2>
+<p>Now that we have an ItemGroup set up, we can start to create our actual item.<br>
+In this part we will only create a very simple item that has no actual logic behind it, we will add mechanics in Part 4.<br>
+But let's focus on items itself for now.</p>
+<p>Creating items in Slimefun5 isn't rocket science but you should still pay attention. We will need to create a new <code>Slimefun5Item</code> (<code>io.github.thebusybiscuit.Slimefun5.api.items.Slimefun5Item</code>).<br></p>
+<p>The constructor takes in 4 parameters:
+* <code>itemGroup</code> is the ItemGroup this Item is in, for this we will simply use the ItemGroup we created earlier.
+* <code>itemStack</code> is the Slimefun5ItemStack this Slimefun5Item represents, we will explain what that means in a second.
+* <code>recipeType</code> describes the Type of our Recipe, in other words this determines the machine this item is crafted in.
+* <code>recipe</code> is an ItemStack Array of the length 9 that describes the Recipe for this Item.</p>
+<h3>The ItemStack</h3>
+<p>Since we have already created an ItemGroup, let's start with our <code>Slimefun5ItemStack</code>.<br>
+The <code>Slimefun5ItemStack</code> tells our Slimefun5Item how it looks and also holds the id of our item.<br>
+The class <code>Slimefun5ItemStack</code> has a lot of constructors. Take a look at them and choose the one that best suits your needs.</p>
+<p>In this tutorial we will choose the following constructor:<br>
+<code>new Slimefun5ItemStack(id, material, name, lore...);</code></p>
+<p>So first we will need an <code>id</code> for our Slimefun5ItemStack.<br>
+This <code>id</code> is a simple String but needs to be unique and in upper case letters. Example: <code>"MY_ADDON_ITEM"</code>.<br>
+Please choose a unique id that best suits your item.</p>
+<p>Our <code>material</code> is the type of item this Item is rendered as.<br>
+For a complete list of Materials, consult <a href="https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html">Spigot's Javadocs</a>.</p>
+<p>For the <code>name</code>, we can choose a name and even use color codes.<br>
+The <code>name</code> is then followed by zero or more lines of lore. (Color codes also supported!)</p>
+<p>So the full result of our <code>Slimefun5ItemStack</code> may look like this:</p>
+<pre><code class="language-java">Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;MY_ADDON_ITEM&quot;, Material.EMERALD, &quot;&amp;aPretty cool Emerald&quot;, &quot;&quot;, &quot;&amp;7This is awesome&quot;);
+</code></pre>
+<p>For the lore I left the first line empty, this is not required but consistent with other items from Slimefun5.<br></p>
+<h3>The recipe</h3>
+<p>For the <code>RecipeType</code>, we will simply go with the standard: <code>RecipeType.ENHANCED_CRAFTING_TABLE</code>. This means that our item is crafted in an Enhanced Crafting Table.
+We may go into more details on how Recipe Types work, but that may be in a later tutorial.</p>
+<p>Now for the actual Recipe, for the Recipe we will use an ItemStack Array of the length 9:</p>
+<pre><code class="language-java">ItemStack[] recipe = {...};
+</code></pre>
+<p>The length of 9 represents the 3x3 slots found in the dispenser of an Enhanced Crafting Table.<br>
+We will simply use an X made out of diamonds for the recipe in this tutorial.
+You are of course free to come up with any recipe you can imagine.</p>
+<pre><code class="language-java">ItemStack[] recipe = {
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
+    null,                               new ItemStack(Material.DIAMOND),    null,
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
+};
+</code></pre>
+<p><strong>PRO TIP</strong> You can use <code>Slimefun5Items.ITEM_ID</code> to use items from Slimefun5 in your Recipe.<br>
+Let's swap out the middle diamond for a Carbonado.</p>
+<pre><code class="language-java">ItemStack[] recipe = {
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
+    null,                               Slimefun5Items.CARBONADO,            null,
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
+};
+</code></pre>
+<h2>4. Adding your item</h2>
+<p>To create the item you we will use the following code:</p>
+<pre><code class="language-java">Slimefun5Item sfItem = new Slimefun5Item(itemGroup, itemStack, recipeType, recipe);
+</code></pre>
+<p>Finally, to make our item and item group appear in the Slimefun5 guide, we will call <code>sfItem.register(this)</code> to register it.<br>
+The item will already be craftable too.<br>
+<code>this</code> refers to your Slimefun5Addon in this case.</p>
+<p>Let's recap what we got so far:
+1. We created a new ItemGroup<br>
+    a. that uses a customItemStack<br>
+2. We created a new Slimefun5Item<br>
+    a. that has a custom Recipe<br>
+    b. that uses a custom Slimefun5ItemStack<br></p>
+<p>Here is all of our code again (this should still all be inside your <code>onEnable()</code> method):</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+
+// Our custom Category
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;MY_ADDON_ITEM&quot;, Material.EMERALD, &quot;&amp;aPretty cool Emerald&quot;, &quot;&quot;, &quot;&amp;7This is awesome&quot;);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
+    null,                               Slimefun5Items.CARBONADO,            null,
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
+};
+
+Slimefun5Item sfItem = new Slimefun5Item(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+sfItem.register(this);
+// Our item is now registered
+</code></pre>
+<h3>Seasonal and Locked categories</h3>
+<p>You can also create a <code>SeasonalItemGroup</code> or a <code>LockedItemGroup</code> instead of a generic <code>ItemGroup</code>.<br>
+These types of item groups require a specified item group tier. This integer roughly determines the position
+of the item group inside Slimefun5 guide. The guide starts populating with tier 1 and onwards. The other criteria
+is the order of registering (creation of <code>ItemGroup</code> object).<br>
+* Seasonal item groups are hidden throughout the whole year except for 1 specific month.<br>
+* Locked item groups require all researches on parent categories to be unlocked.</p>
+<pre><code class="language-java">Month month = Month.JAN; // This is any enum from java.time.Month.
+
+SeasonalItemGroup group = new SeasonalItemGroup(categoryId, categoryItem, tier, month);
+</code></pre>
+<pre><code class="language-java">// This item group will require `parentItemGroupA` and `parentItemGroupB` to be fully unlocked.
+LockedItemGroup category = new LockedItemGroup(categoryId, categoryItem, tier, parentItemGroupA.getKey(), parentItemGroupB.getKey());
+</code></pre>
+<p><a href="/wiki/Developer-Guide-(4a-Right-Clicks)/"><strong>&gt; Continue with Part 4a</strong></a></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Translating Slimefun · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Translating Slimefun</h1>
+<p>Translating Slimefun5 has always been a tough point because of some wrong design choices in the code made years ago.<br>
+But as of February 2020 all builds feature translations.</p>
+<p><strong>Important note: At the moment you can only translate chat messages and certain inventories but not items. 
+Item translations are very difficult to do and will likely still take over a year or even more until this will become a thing. 
+Please do not ask us for translations for items and be patient! Thank you.</strong></p>
+<h2>Changing your server language</h2>
+<p>You can change your server's default language by modifying your config.yml:</p>
+<pre><code class="language-yaml">options:
+  language: en
+</code></pre>
+<p>Swap <code>en</code> out for the language code of your desired language. You can find a list of all supported languages further down on this page.<br>
+Note that this will override your <code>messages.yml</code> file.
+If you wish to customize your messages despite the selected language, simply edit your <code>messages.yml</code> <strong>after</strong> changing your language and restarting the Server.
+Your <code>messages.yml</code> will only ever be touched if you decide to change the default language of your server again.
+New additions to the messages.yml will be appended to that file without issues.</p>
+<h2>Changing your personal language</h2>
+<p>Every player can choose their preferred language. By default everyone will simply use the server's default language.<br>
+But if you have a lot of international players, they can simply override it and use their personally preferred language instead.</p>
+<p>To do this, just go to the "Settings" section of your Slimefun5 Guide (Shift - Right Click the Slimefun5 Guide while holding it in your hand).
+There you should see a globe or a flag which allows you to select a language.</p>
+<h2>Available languages</h2>
+<p>Note that only languages that are marked as <strong>Released</strong> can safely be selected on your server.<br>
+Unreleased languages are still pending for review or are not fully translated yet.<br>
+Development builds of Slimefun5 may allow a few unreleased languages already.<br>
+<strong>Do not select unreleased languages as your server's default language.</strong></p>
+<p>Contributions are very much welcome!</p>
+<table>
+<thead>
+<tr>
+<th>Released</th>
+<th>Language</th>
+<th>language code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>:heavy_check_mark:</td>
+<td>English</td>
+<td><code>en</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/de">German</a></td>
+<td><code>de</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/fr">French</a></td>
+<td><code>fr</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/it">Italian</a></td>
+<td><code>it</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/es">Spanish</a></td>
+<td><code>es</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/pl">Polish</a></td>
+<td><code>pl</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/sv">Swedish</a></td>
+<td><code>sv</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/nl">Dutch</a></td>
+<td><code>nl</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ru">Russian</a></td>
+<td><code>ru</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/hu">Hungarian</a></td>
+<td><code>hu</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/el">Greek</a></td>
+<td><code>el</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/cs">Czech</a></td>
+<td><code>cs</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/lv">Latvian</a></td>
+<td><code>lv</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/sk">Slovak</a></td>
+<td><code>sk</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/zh-CN">Chinese (China)</a></td>
+<td><code>zh-CN</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/zh-TW">Chinese (Taiwan)</a></td>
+<td><code>zh-TW</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/pt">Portugese (Portugal)</a></td>
+<td><code>pt</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/pt-BR">Portugese (Brazil)</a></td>
+<td><code>pt-BR</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/vi">Vietnamese</a></td>
+<td><code>vi</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/id">Indonesian</a></td>
+<td><code>id</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/he">Hebrew</a></td>
+<td><code>he</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ar">Arabic</a></td>
+<td><code>ar</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/da">Danish</a></td>
+<td><code>da</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/fi">Finnish</a></td>
+<td><code>fi</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/no">Norwegian</a></td>
+<td><code>no</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/uk">Ukrainian</a></td>
+<td><code>uk</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/af">Afrikaans</a></td>
+<td><code>af</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ms">Malay</a></td>
+<td><code>ms</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ja">Japanese</a></td>
+<td><code>ja</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/fa">Persian</a></td>
+<td><code>fa</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/th">Thai</a></td>
+<td><code>th</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/tl">Tagalog</a></td>
+<td><code>tl</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ro">Romanian</a></td>
+<td><code>ro</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/bg">Bulgarian</a></td>
+<td><code>bg</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/tr">Turkish</a></td>
+<td><code>tr</code></td>
+</tr>
+<tr>
+<td>:heavy_check_mark:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/ko">Korean</a></td>
+<td><code>ko</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/mk">Macedonian</a></td>
+<td><code>mk</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/hr">Croatian</a></td>
+<td><code>hr</code></td>
+</tr>
+<tr>
+<td>:x:</td>
+<td><a href="https://crowdin.com/project/Slimefun5/be">Belarusian</a></td>
+<td><code>be</code></td>
+</tr>
+</tbody>
+</table>
+<h3>You want to help us translate?</h3>
+<p>Just click on the language you want to help translate.
+It will bring you to <a href="https://crowdin.com/project/Slimefun5/">Crowdin</a> where the different translations of this repository are hosted.</p>
+<p>Once you are there, just swap out all the messages for your translations and hit "Create review request" once you are done.<br>
+We will then start reviewing your changes and add them to this plugin.</p>
+<h3>You don't see your language?</h3>
+<p>If we currently do not support your language, then please go on our discord server (you can find a link on the sidebar or footer of this page).<br>
+Just post it in <code>#translations</code> and let us know that you want to help translate this plugin into your language but please don't tag any of our admins, we will see your message nonetheless. But please be patient as it can take some time to handle your request.</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

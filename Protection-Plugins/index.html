@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protection Plugins · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Protection Plugins</h1>
+<p>Slimefun5 supports a lot of protection plugins out of the box.<br>
+This is done in order to prevent players from abusing Slimefun5 Items to grief other people.<br>
+This article contains a list of all supported protection plugins as well as instructions on how to add support for your plugin.</p>
+<h2>Supported Protection Plugins</h2>
+<p>The following plugins are supported by default.<br>
+Plugins that support offline players will even provide support for Programmable Androids if the owner of that android is offline.<br>
+If a plugin does not support offline players, then your android will always require you to be online in order to function properly</p>
+<p>:heavy_check_mark: = Full Support<br>
+:heavy_minus_sign: = Partial Support (e.g. only in unprotected regions)<br>
+:x: = No Support<br>
+N/A = Not applicable</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th style="text-align: center;">Support for Players</th>
+<th style="text-align: center;">Support for Offline Players</th>
+<th style="text-align: center;">Support for PvP</th>
+<th style="text-align: center;">Support for Entities</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASkyBlock</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+</tr>
+<tr>
+<td>BentoBox</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>BlockLocker</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td>ChestProtect</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td>FactionsUUID</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>FunnyGuilds</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:x:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+</tr>
+<tr>
+<td>GriefPrevention</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>HuskTowns</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>LandLord</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Lands</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Lockette</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td>LWC</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">N/A</td>
+<td style="text-align: center;">N/A</td>
+</tr>
+<tr>
+<td>PlotSquared</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>PreciousStones</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:x:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>RedProtect</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>Towny</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:x:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+<td style="text-align: center;">:heavy_minus_sign:</td>
+</tr>
+<tr>
+<td>WorldGuard</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+</tbody>
+</table>
+<h3>You cannot see your protection plugin?</h3>
+<p>Either the plugin offers no integration, support for it hasn't been added by the author of that plugin or it is actually supported.<br>
+A lot of plugins actually require WorldGuard or other plugins from the above list and use that plugin in the background.<br>
+If a plugin does not show up in this list, then please ask the author of that plugin if it uses another protection plugin in the background.</p>
+<p>If it does not, then feel free to link them this article as we will walk over how to add support later.</p>
+<h2>Supported Protection Loggers</h2>
+<p>Slimefun5 also supports a few protection loggers.<br>
+These loggers can for example allow you to rollback certain actions, such as blocks destroyed in an unusual manner by Slimefun5 Items.<br>
+Here is a list of all plugins we support by default.</p>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th style="text-align: center;">Support for broken Blocks</th>
+<th style="text-align: center;">Support for placed Blocks</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CoreProtect</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+</tr>
+<tr>
+<td>LogBlock</td>
+<td style="text-align: center;">:heavy_check_mark:</td>
+<td style="text-align: center;">:x:</td>
+</tr>
+</tbody>
+</table>
+<h2>Adding Support for your protection plugin</h2>
+<p>Protection Integration is handled in dough (https://github.com/baked-libs/dough).<br>
+To add support for your own plugin, all you have to do is make a Pull Request to that repository.<br>
+Here is what you need to do:
+1. Add your plugin as a dependency to the pom.xml (in <a href="https://github.com/baked-libs/dough/blob/main/dough-protection/pom.xml">dough-api</a> and <a href="https://github.com/baked-libs/dough/blob/main/dough-protection/pom.xml">dough-protection</a>)
+2. Create a new class that extends <a href="https://github.com/baked-libs/dough/blob/main/dough-protection/src/main/java/io/github/bakedlibs/dough/protection/ProtectionModule.java">ProtectionModule.java</a> and add it to the <a href="https://github.com/baked-libs/dough/tree/main/dough-protection/src/main/java/io/github/bakedlibs/dough/protection/modules">modules - package</a>
+3. Override the required methods; make sure to distinguish between the different types of <a href="https://github.com/baked-libs/dough/blob/main/dough-protection/src/main/java/io/github/bakedlibs/dough/protection/Interaction.java">Interaction.java</a>; also consider to add support for offline players or make an instanceof-check if not.
+4. Load an instance of your class when your plugin loads in <a href="https://github.com/baked-libs/dough/blob/main/dough-protection/src/main/java/io/github/bakedlibs/dough/protection/ProtectionManager.java">ProtectionManager.java</a>
+5. Submit a <a href="https://github.com/baked-libs/dough/pulls">Pull Request</a> to dough</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<h1>Slimefun Wiki</h1>
+<p class="sf-lede">4799 item pages and 94 guides.</p>
+<input id="q" class="sf-search" type="search" autocomplete="off" placeholder="Search items and guides..." aria-label="Search items and guides">
+<div id="results" class="sf-list"></div>
+<p id="none" class="sf-none">Nothing matches your search.</p>
+<h2>Topics</h2>
+<div class="sf-list"><a href="/wiki/topic/getting_started/">Getting Started</a><a href="/wiki/topic/research/">Research &amp; Unlocking</a><a href="/wiki/topic/multiblocks/">Multiblock Machines</a><a href="/wiki/topic/ore_processing/">Ore Processing</a><a href="/wiki/topic/smeltery/">Smeltery &amp; Alloys</a><a href="/wiki/topic/energy/">Energy Networks</a><a href="/wiki/topic/power_generation/">Power Generation</a><a href="/wiki/topic/electric_machines/">Electric Machines</a><a href="/wiki/topic/cargo/">Cargo Networks</a><a href="/wiki/topic/androids/">Programmable Androids</a><a href="/wiki/topic/geo_mining/">GEO Mining &amp; Oil</a><a href="/wiki/topic/gps/">GPS &amp; Teleportation</a><a href="/wiki/topic/talismans/">Talismans</a><a href="/wiki/topic/magic/">Magic &amp; the Altar</a><a href="/wiki/topic/armor_gadgets/">Armor &amp; Gadgets</a><a href="/wiki/topic/backpacks/">Backpacks &amp; Storage</a><a href="/wiki/topic/food_farming/">Food &amp; Farming</a><a href="/wiki/topic/soulbound/">Soulbound Items</a></div>
+<p><a href="/wiki/guides/">All 94 guides</a></p>
+<h2>Browse by addon</h2>
+<div class="sf-cards"><a class="sf-card" href="/wiki/addon/slimefun/"><strong>Slimefun</strong><br><span class="sf-count">552 items</span></a><a class="sf-card" href="/wiki/addon/galactifun/"><strong>Galactifun</strong><br><span class="sf-count">103 items</span></a><a class="sf-card" href="/wiki/addon/slimefunluckyblocks/"><strong>Lucky Blocks</strong><br><span class="sf-count">5 items</span></a><a class="sf-card" href="/wiki/addon/exoticgarden/"><strong>Exotic Garden</strong><br><span class="sf-count">264 items</span></a><a class="sf-card" href="/wiki/addon/extragear/"><strong>Extra Gear</strong><br><span class="sf-count">59 items</span></a><a class="sf-card" href="/wiki/addon/litexpansion/"><strong>Lite Xpansion</strong><br><span class="sf-count">76 items</span></a><a class="sf-card" href="/wiki/addon/sensibletoolbox/"><strong>Sensible Toolbox</strong><br><span class="sf-count">90 items</span></a><a class="sf-card" href="/wiki/addon/infinityexpansion/"><strong>Infinity Expansion</strong><br><span class="sf-count">146 items</span></a><a class="sf-card" href="/wiki/addon/slimetinker/"><strong>Slime Tinker</strong><br><span class="sf-count">1331 items</span></a><a class="sf-card" href="/wiki/addon/fluffymachines/"><strong>Fluffy Machines</strong><br><span class="sf-count">51 items</span></a><a class="sf-card" href="/wiki/addon/dynatech/"><strong>Dyna Tech</strong><br><span class="sf-count">124 items</span></a><a class="sf-card" href="/wiki/addon/chestterminal/"><strong>Chest Terminal</strong><br><span class="sf-count">9 items</span></a><a class="sf-card" href="/wiki/addon/missilewarfare/"><strong>Missile Warfare</strong><br><span class="sf-count">51 items</span></a><a class="sf-card" href="/wiki/addon/networks/"><strong>Networks</strong><br><span class="sf-count">64 items</span></a><a class="sf-card" href="/wiki/addon/souljars/"><strong>Soul Jars</strong><br><span class="sf-count">1 items</span></a><a class="sf-card" href="/wiki/addon/fastmachines/"><strong>Fast Machines</strong><br><span class="sf-count">21 items</span></a><a class="sf-card" href="/wiki/addon/geneticchickengineering/"><strong>Genetic Chickengineering</strong><br><span class="sf-count">11 items</span></a><a class="sf-card" href="/wiki/addon/supreme/"><strong>Supreme</strong><br><span class="sf-count">347 items</span></a><a class="sf-card" href="/wiki/addon/foxymachines/"><strong>Foxy Machines</strong><br><span class="sf-count">76 items</span></a><a class="sf-card" href="/wiki/addon/simplematerialgenerators/"><strong>SMG</strong><br><span class="sf-count">13 items</span></a><a class="sf-card" href="/wiki/addon/simpleutils/"><strong>Simple Utils</strong><br><span class="sf-count">4 items</span></a><a class="sf-card" href="/wiki/addon/extratools/"><strong>Extra Tools</strong><br><span class="sf-count">8 items</span></a><a class="sf-card" href="/wiki/addon/cultivation/"><strong>Cultivation</strong><br><span class="sf-count">1393 items</span></a></div>
+<script>var BASE="/wiki";</script>
+<script>
+(function(){var q=document.getElementById('q'),g=document.getElementById('results'),
+n=document.getElementById('none'),data=[];
+function escapeHtml(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+fetch(BASE+'/assets/search-index.json').then(function(r){return r.json()}).then(function(j){data=j});
+q.addEventListener('input',function(){var v=q.value.toLowerCase().trim();
+if(!v){g.innerHTML='';n.style.display='none';return}
+var hits=data.filter(function(e){return e.n.toLowerCase().indexOf(v)>-1}).slice(0,200);
+g.innerHTML=hits.map(function(e){return '<a href="'+e.u+'">'+escapeHtml(e.n)+'<span class="sf-badge">'+
+escapeHtml(e.a||e.k)+'</span></a>'}).join('');
+n.style.display=hits.length?'none':'block';});})();
+</script>
+
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

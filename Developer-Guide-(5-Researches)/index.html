@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (5 Researches) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (5 Researches)</h1>
+<p>This is the <strong>fifth Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.<br>
+If you haven't checked out the previous parts, then please do that now.</p>
+<h2>1. A little recap</h2>
+<p>The last three parts were all about creating our Slimefun5 items.<br>
+We covered a lot of concept that can be quite overwhelming at first. So let's step down a bit again.<br>
+Today we cover Researches.</p>
+<p>For this we will head back to your main class, inside your <code>onEnable()</code> method.<br>
+After adding all your items, it should look a little bit like this:</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;FIRE_CAKE&quot;, Material.CAKE, &quot;&amp;4Fire Cake&quot;, &quot;&quot;, LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER),
+    null,                                    new ItemStack(Material.CAKE),       null,
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER)
+};
+
+// We are now using our own custom class for this
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+</code></pre>
+<p>Maybe you will even have multiple items like that.</p>
+<h2>2. Creating a Research</h2>
+<p>Creating the Research itself is easy as creating any object in Java.<br>
+We will start by creating a new Research object.</p>
+<pre><code class="language-java">Research research = new Research(...);
+</code></pre>
+<p>The constructor for a Research takes in 4 arguments, a <code>NamespacedKey</code> as the id, an integer id, a name and a default cost value.<br>
+The <code>NamespacedKey</code> should be quite familiar to you at this point, so we start by creating that. We will use a reference to our plugin using "this" and a lowercase id.</p>
+<pre><code class="language-java">NamespacedKey researchKey = new NamespacedKey(this, &quot;our_custom_research&quot;);
+Research research = new Research(researchKey, ?, ?, ?);
+</code></pre>
+<p>Next up is the integer id.<br>
+This id is a bit of a... complicated matter. It was replaced by the NamespacedKey, however we still require it at the moment.<br>
+Just keep in mind that this will be removed at some point, as it is a really bad way of identifying researches.</p>
+<p>That being said, your integer id <strong>must be unique</strong>. And it must be unique across all addons.<br>
+Try to come up with a random number that noone else has picked yet. This is really not a good way of doing this and stems from a time before Addons existed.<br>
+We are working hard on removing this but for the time being... You will need that id. And it is important that you do not change it at anytime.<br>
+For this example we will simply choose 123 as our id. (Note that 123 is already taken by Slimefun5, so don't use that. Pick a very large number instead.)</p>
+<pre><code class="language-java">NamespacedKey researchKey = new NamespacedKey(this, &quot;our_custom_research&quot;);
+Research research = new Research(researchKey, 123, ?, ?);
+</code></pre>
+<p>Now onto the name. The name of your research is the text that is displayed to the Player when they unlock it.<br>
+It should reflect the items it represents but it does not have to be a literal correlation.<br>
+Feel free to come up with puns or funny splash texts that convey a message about your items.</p>
+<pre><code class="language-java">NamespacedKey researchKey = new NamespacedKey(this, &quot;our_custom_research&quot;);
+Research research = new Research(researchKey, 123, &quot;This is an example message&quot;, ?);
+</code></pre>
+<p>Now lastly we need to define a default cost for this Research.<br>
+Note that this is only the "default", Server Owners can always adjust this cost in their config files.<br>
+We will simply specify a cost of 10 xp levels for this example.</p>
+<pre><code class="language-java">NamespacedKey researchKey = new NamespacedKey(this, &quot;our_custom_research&quot;);
+Research research = new Research(researchKey, 123, &quot;This is an example message&quot;, 10);
+</code></pre>
+<p>Our Research is almost done now.<br>
+All that is left to do is to add our items to that Research.</p>
+<h2>3. Adding items to our Research</h2>
+<p>Now we still need to add our items to this Research.<br>
+We can do that by calling <code>Research#addItems(...)</code>.<br>
+This method has a variable amount of parameters, you can add as many Slimefun5 items as you want.</p>
+<pre><code class="language-java">NamespacedKey researchKey = new NamespacedKey(this, &quot;our_custom_research&quot;);
+Research research = new Research(researchKey, 123, &quot;This is an example message&quot;, 10);
+
+// Slimefun5 items are seperated via a comma
+research.addItems(item1, item2, item3, ...);
+</code></pre>
+<p>In our example above, we only got our fire cake.<br>
+So let's add that to the Research.</p>
+<pre><code class="language-java">// ...
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+
+NamespacedKey researchKey = new NamespacedKey(this, &quot;fire_cake&quot;);
+Research research = new Research(researchKey, 123, &quot;You don't wanna eat this&quot;, 10);
+research.addItems(cake);
+</code></pre>
+<p>Now the only thing left: Registering the Research.<br>
+For this we simply call .register() on our Research object.</p>
+<pre><code class="language-java">// ...
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+
+NamespacedKey researchKey = new NamespacedKey(this, &quot;fire_cake&quot;);
+Research research = new Research(researchKey, 123, &quot;You don't wanna eat this&quot;, 10);
+research.addItems(cake);
+
+research.register();
+</code></pre>
+<p>And we are done!</p>
+<h2>4. We added a Research</h2>
+<p>Now that we are finished, here is our code so far:</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;FIRE_CAKE&quot;, Material.CAKE, &quot;&amp;4Fire Cake&quot;, &quot;&quot;, LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER),
+    null,                                    new ItemStack(Material.CAKE),       null,
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER)
+};
+
+// We are now using our own custom class for this
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+
+NamespacedKey researchKey = new NamespacedKey(this, &quot;fire_cake&quot;);
+Research research = new Research(researchKey, 123, &quot;You don't wanna eat this&quot;, 10);
+research.addItems(cake);
+
+research.register();
+</code></pre>
+<p>We now have an awesome fire cake and a Research to go with it.<br>
+Players will now be required to unlock this cake before they can access it.<br>
+If you have any questions, feel free to hop on discord and ask them in <code>#programming-help</code>.</p>
+<p><a href="/wiki/Developer-Guide-(6-Custom-Heads)/"><strong>&gt; Continue with Part 6</strong></a></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

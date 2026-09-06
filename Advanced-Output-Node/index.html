@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Output Node · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Advanced Output Node</h1>
+<p>An Advanced Output Node is a component of a <a href="/wiki/Cargo-Management/">cargo network</a> which can receive items sent by <a href="/wiki/Input-Node/">input nodes</a>.<br>
+It is a more complex type of <a href="/wiki/Output-Node/">output node</a>, with additional settings to filter items.</p>
+<h2>Obtaining</h2>
+<p>Advanced output nodes can be crafted in an <a href="/wiki/Enhanced-Crafting-Table/">Enhanced Crafting Table</a>.</p>
+<h2>Usage</h2>
+<p>Advanced output nodes move the items in the network matching their settings into the container on which they are placed.</p>
+<h3>Placement</h3>
+<p>An advanced output node must be placed (shift-right click) onto a container or <a href="/wiki/Electric-Machines/">machine</a>, and aligned within 6 blocks of a <a href="/wiki/Cargo-Manager/">cargo manager</a> or a <a href="/wiki/Connector-Node/">connector</a> in range of one (no diagonals).</p>
+<h3>Configuration</h3>
+<p>Right-clicking an advanced output node displays an interface to configure the following settings, from left to right:
+* <strong>3x3 grid</strong> - Items placed there are included/excluded from being received by the node.
+* <strong>Type: Whitelist/Blacklist</strong> - Controls whether the items in the grid are whitelisted (included) or blacklisted (excluded).
+* <strong>Include Sub-IDs/Durability</strong> - If enabled, only the items with the same durability as the ones in the grid will be whitelisted/blacklisted.
+* <strong>Include Lore</strong> - If enabled, only the items with the same lore as the ones in the grid will be whitelisted/blacklisted.
+* <strong>Channel</strong> - The channel from which items are taken.</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

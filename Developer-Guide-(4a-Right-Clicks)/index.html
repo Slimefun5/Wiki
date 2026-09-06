@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (4a Right Clicks) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (4a Right Clicks)</h1>
+<p>This is the <strong>fourth Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.<br>
+If you haven't checked out the <a href="/wiki/Developer-Guide-(3-Your-first-Item)/">third Part of this Guide</a>, then please do that.</p>
+<p><em>The fourth part is divided into two sections, this is Section a</em>.</p>
+<h2>1. What we did last time</h2>
+<p>On the last part we covered how to create our own Slimefun5 items, item groups, and recipes.<br>
+If you missed it, then please head back now. You will need this info to progress any further.</p>
+<p>Still/Back here? Good. Now this is the code from last time (it should be inside your 'onEnable' method).</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+
+// Our custom Category
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;MY_ADDON_ITEM&quot;, Material.EMERALD, &quot;&amp;aPretty cool Emerald&quot;, &quot;&quot;, &quot;&amp;7This is awesome&quot;);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
+    null,                               Slimefun5Items.CARBONADO,            null,
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
+};
+
+Slimefun5Item sfItem = new Slimefun5Item(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+sfItem.register(this);
+</code></pre>
+<p>Now, you can compile your addon and test it ingame. See <a href="/wiki/Developer-Guide-(9-Compiling)/">Compiling</a> for details.<br> 
+As you can see our Slimefun5item can already be seen and crafted ingame.<br>
+But there is not much value to this item yet, it doesn't do anything.<br>
+Let's change that.</p>
+<h2>2. Extending Slimefun5Item</h2>
+<p>For our previous item we simply used the class <code>Slimefun5Item</code>, this is fine and good. But it doesn't do anything by default.<br>
+So we will need to create our own class instead.<br>
+This should be very straightforward and you will need to create classes all the time.</p>
+<p>Anyway, for this tutorial we will make a Cake that sets you on fire when you try to eat it.<br>
+Let's call it <code>FireCake</code>, now create the class <code>FireCake</code>.<br>
+Your class will be a blank canvas at first, it will probably look empty like this:</p>
+<pre><code class="language-java">public class FireCake {
+
+}
+</code></pre>
+<p>In Java or any other object-oriented programming language, classes can inherit from each other.<br>
+You can think of a class as a template for objects. The <code>Slimefun5Item</code> class is basically a template for any item we will create.<br>
+Now we created our own class which makes this a completely new template for objects. However we can extend the <code>Slimefun5Item</code> template which will
+make sure items that use our class have all the same functionality as an item created from the <code>Slimefun5Item</code> class.</p>
+<p>Likewise, your plugin's main class is just an <em>extension</em> of Bukkit's JavaPlugin class, the template for all plugins.<br>
+Your main class extends that plugin and your Server then creates a Plugin object based on the template you defined.</p>
+<p>I hope this didn't confuse you too much, what we need to do now is the following:<br>
+We want our <code>FireCake</code> class to extend the <code>Slimefun5Item</code> class, to make it inherit from that.<br>
+For this we use the <code>extends</code> keyword followed by the parent class (<code>Slimefun5Item</code>). Note that any class can only have one parent and one parent only.</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+}
+</code></pre>
+<p>Now your IDE will probably start nagging you with errors at this point.<br>
+We will need a constructor. A constructor defines <strong>how</strong> objects are created from this "template".<br>
+And the <code>Slimefun5Item</code> constructor requires a few parameters which all child classes need to provide too.</p>
+<p>If we think back of our previous code, the constructor looked like this:</p>
+<pre><code class="language-java">new Slimefun5Item(itemGroup, itemStack, recipeType, recipe);
+</code></pre>
+<p>With our new class we can simply copy this constructor and pass all arguments onto the constructor of our parent class.<br>
+<em>Tip: Parent classes are usually referred to as "super classes" and their constructors as "super constructors"</em></p>
+<p>We simply use the <code>super</code> keyword for this and pass on the arguments, the constructor will look like this now:</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
+    }
+
+}
+</code></pre>
+<p>Now our class is basically fully set up.<br>
+We can even go back to our main class and use our class instead, try it out.</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(Material.DIAMOND, &quot;&amp;4Our very cool Category&quot;);
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;MY_ADDON_ITEM&quot;, Material.CAKE, &quot;&amp;aA Fire Cake&quot;, &quot;&quot;, &quot;&amp;7This is awesome&quot;);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND),
+    null,                               Slimefun5Items.CARBONADO,            null,
+    new ItemStack(Material.DIAMOND),    null,                               new ItemStack(Material.DIAMOND)
+};
+
+// We are now using our own custom class for this
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+</code></pre>
+<p><strong>IMPORTANT: Remember to change the Slimefun5ItemStack to be a cake, otherwise you won't be able to eat it.</strong></p>
+<h2>3. Adding an Item Handler (BlockUseHandler)</h2>
+<p>Now that we swapped our the class, the addon should still work as expected. However nothing has changed.<br>
+All we have done so far is basically add a new class which acts exactly like a Slimefun5Item.<br>
+We need to add actual features to the class now.</p>
+<p>In Slimefun5 one way we can add functionality is through an <code>ItemHandler</code> (<a href="https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/api/items/ItemHandler.html">Javadocs</a>).<br>
+There are several Item Handler types available to choose from.<br>
+You can find a full list on our JavaDocs - that are linked above - under the point "All Known Subinterfaces".</p>
+<p>To add our ItemHandler, we go back to our custom item class.</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
+    }
+
+}
+</code></pre>
+<p>Here we will <strong>override</strong> a method from Slimefun5Item called <code>preRegister()</code>.<br>
+This method is called right before the item is registered, this ensures that our handlers get added properly.<br>
+Note that overridden methods should have an <code>@Override</code> annotation as seen here:</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
+    }
+
+    @Override
+    public void preRegister() {
+        // We will add our Item Handlers right here.
+    }
+
+}
+</code></pre>
+<p>You can add as many Item Handlers as you want but be careful, some handlers have very strict requirements.<br>
+You can for example only add a BowShootingHandler to a bow, not to any other item.</p>
+<p>The ItemHandler we are going to choose is the following: <code>BlockUseHandler</code>, the BlockUseHandler is called when a Player right-clicks our block.
+Similarly the <code>ItemUseHandler</code> is called when a Player right-clicks with this item in his hand.</p>
+<p>Now we will jump into the <code>preRegister()</code> method.<br>
+We start by declaring a new <code>BlockUseHandler</code>.<br>
+But don't write anything on the right side yet.</p>
+<p>We can then add our handler by calling <code>addItemHandler(...)</code></p>
+<pre><code class="language-java">@Override
+public void preRegister() {
+    BlockUseHandler blockUseHandler = ???;
+    addItemHandler(blockUseHandler);
+}
+</code></pre>
+<p>Great, we have now successfully added a <code>BlockUseHandler</code> to our item.<br>
+Except... that we haven't created our BlockUseHandler yet.</p>
+<p>The BlockUseHandler is an interface with one method only. Interfaces are basically templates for our templates.<br>
+They are templates for classes, kinda. They only define methods but do not implement them. Think of them as a kind of skeleton.<br>
+Interfaces with only a single method are called "Functional Interfaces", since they only have one method they can be treated similar to a method.<br>
+"similar" but not "equal". Since Java 8 we can reference a method however and simply use that as our interface implementation.</p>
+<p>If you need a proper explanation on all of this, try searching on the internet for "Java 8 Lambdas" and "Java 8 method references" and "Java 8 functional interfaces".<br>
+For the purpose of this guide you only need to know that your Item handlers can be implemented by one single method and we can reference this method.</p>
+<p>The BlockUseHandler's method takes a <code>PlayerRightClickEvent</code> as an argument.<br>
+So we can simply create a new method with this argument.</p>
+<pre><code class="language-java">@Override
+public void preRegister() {
+    BlockUseHandler blockUseHandler = ???;
+    addItemHandler(blockUseHandler);
+}
+
+// Note that the method name does not matter here
+private void onBlockRightClick(PlayerRightClickEvent event) {
+    // This method will now be called whenever this Block is right-clicked.
+}
+</code></pre>
+<p>Now back to this part:</p>
+<pre><code class="language-java">BlockUseHandler blockUseHandler = ???;
+</code></pre>
+<p>We will now need to reference our method here, telling our Plugin to call this method when the block is used.<br>
+To reference a method within the same class, we can do <code>this::methodname</code>. Note that this will <strong>not</strong> execute the method.<br>
+The method will only be referenced and passed as a BlockUseHandler in our case.<br>
+So we can simply reference our <code>onBlockRightClick</code> method here.</p>
+<pre><code class="language-java">BlockUseHandler blockUseHandler = this::onBlockRightClick;
+</code></pre>
+<p>The full code now looks like this.</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
+    }
+
+    @Override
+    public void preRegister() {
+        BlockUseHandler blockUseHandler = this::onBlockRightClick;
+        addItemHandler(blockUseHandler);
+    }
+
+    private void onBlockRightClick(PlayerRightClickEvent event) {
+
+    }
+
+}
+</code></pre>
+<p>Now we can start to do stuff in our <code>onBlockRightClick</code> method.<br>
+Let's prevent the Player from eating this cake. We can use <code>event.cancel()</code> for this.</p>
+<pre><code class="language-java">private void onBlockRightClick(PlayerRightClickEvent event) {
+    // This will prevent the Player from eating this cake.
+    event.cancel();
+}
+</code></pre>
+<p>And now we can set the Player on fire.<br>
+Bukkit uses ticks to determine how long the player should burn. One tick is equal to 1/20th of a second.<br>
+So 20 ticks will mean 1 second. If we just multiply x by 20 we can set them on fire for x seconds.</p>
+<pre><code class="language-java">private void onBlockRightClick(PlayerRightClickEvent event) {
+    // This will prevent the Player from eating this cake.
+    event.cancel();
+    // Now set the Player on fire for 5 seconds
+    event.getPlayer().setFireTicks(5 * 20);
+}
+</code></pre>
+<p>Now our Fire Cake is done.<br>
+Test it out ingame, craft the cake and see if you are set on fire.<br>
+<strong>Make sure that you didn't forget to change your item type to <code>Material.CAKE</code></strong></p>
+<h2>4. Adding multiple Item handlers (ItemUseHandler)</h2>
+<p>You can add as many Item handlers as you want, the ItemUseHandler for example is triggered when a Player right-clicks with the cake in their hand.<br>
+Now when they right-click the placed cake.</p>
+<p>We can simply add a new method (also with a PlayerRightClickEvent parameter) and add it as an <code>ItemUseHandler</code>.<br>
+Let's be nice and give the Player 1 XP level when he right clicks with the cake in his hand.</p>
+<pre><code class="language-java">public class FireCake extends Slimefun5Item {
+
+    public FireCake(ItemGroup itemGroup, Slimefun5ItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+        super(itemGroup, item, recipeType, recipe);
+    }
+
+    @Override
+    public void preRegister() {
+        BlockUseHandler blockUseHandler = this::onBlockRightClick;
+        addItemHandler(blockUseHandler);
+
+        ItemUseHandler itemUseHandler = this::onItemUseRightClick;
+        addItemHandler(itemUseHandler);
+    }
+
+    private void onBlockRightClick(PlayerRightClickEvent event) {
+        // This will prevent the Player from eating this cake.
+        event.cancel();
+        // Now set the Player on fire for 5 seconds
+        event.getPlayer().setFireTicks(5 * 20);
+    }
+
+    private void onItemUseRightClick(PlayerRightClickEvent event) {
+        // Calling event.cancel() in here would prevent the cake
+        // from being placed down.
+        event.getPlayer().giveExpLevels(1);
+    }
+
+}
+</code></pre>
+<p>Phew, now we have shown you how to make your custom Slimefun5 item perform actions on right-click.<br>
+If you have any questions, feel free to hop on discord and ask them in <code>#programming-help</code>.<br>
+I hope this was helpful to you and I expect to see lots of awesome addons very soon!</p>
+<p><a href="/wiki/Developer-Guide-(4b-Radioactive-and-WitherProof)/"><strong>&gt; Continue with Part 4b</strong></a></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (7 GEO Resources) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (7 GEO Resources)</h1>
+<p>This is the <strong>seventh Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.<br>
+If you haven't checked out the <a href="/wiki/Developer-Guide-(6-Custom-Heads)/">sixth Part of this Guide</a>, then please do that.</p>
+<h2>1. A recap</h2>
+<p>In the last part we discussed how to create custom heads and use these heads in items and categories.<br>
+Today we will expand upon that knowledge and create a new ore that is obtainable through the <a href="/wiki/GEO-Miner/">GEO - Miner</a>.<br>
+But before we dive into that, here is our code from the last part:</p>
+<pre><code class="language-java">NamespacedKey categoryId = new NamespacedKey(this, &quot;cool_category&quot;);
+CustomItemStack categoryItem = new CustomItemStack(SkullItem.fromBase64(&quot;eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=&quot;), &quot;&amp;4Our very cool Category&quot;);
+ItemGroup itemGroup = new ItemGroup(categoryId, categoryItem);
+
+// The custom item for our Slimefun5Item
+Slimefun5ItemStack itemStack = new Slimefun5ItemStack(&quot;FIRE_CAKE&quot;, &quot;eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTk1MmQyYjNmMzUxYTZiMDQ4N2NjNTlkYjMxYmY1ZjI2NDExMzNlNWJhMDAwNmIxODU3NmU5OTZhMDI5M2U1MiJ9fX0=&quot;, &quot;&amp;4Fire Cake&quot;, &quot;&quot;, LoreBuilder.radioactive(Radioactivity.HIGH), LoreBuilder.HAZMAT_SUIT_REQUIRED);
+
+// A 3x3 shape representing our recipe
+ItemStack[] recipe = {
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER),
+    null,                                    new ItemStack(Material.CAKE),       null,
+    new ItemStack(Material.BLAZE_POWDER),    null,                               new ItemStack(Material.BLAZE_POWDER)
+};
+
+// We are now using our own custom class for this
+FireCake cake = new FireCake(itemGroup, itemStack, RecipeType.ENHANCED_CRAFTING_TABLE, recipe);
+cake.register(this);
+
+NamespacedKey researchKey = new NamespacedKey(this, &quot;fire_cake&quot;);
+Research research = new Research(researchKey, 123, &quot;You don't wanna eat this&quot;, 10);
+research.addItems(cake);
+
+research.register();
+</code></pre>
+<h2>2. Creating a new Item</h2>
+<p>GEO Resources obviously need an Item form too, so we will start with that.<br>
+Right below our previous code we will start to create a new Slimefun5Item. As usual we are gonna start with the ItemStack.</p>
+<p>But wait... first we will need to come up with a resource.<br>
+How about an ore that is exclusive to the End dimension? An Ender Ore? Yeah let's go with that.<br>
+We are still inside our <code>onEnable()</code> method and right below the code from earlier:</p>
+<pre><code class="language-java">// ...
+
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack(&quot;ENDER_ORE&quot;, &quot;eyJ0ZXh...&quot;, &quot;&amp;5Ender Ore&quot;, &quot;&quot;, &quot;&amp;rThis is a cool Ore&quot;, &quot;&amp;rGEO-Mine me in the End&quot;);
+</code></pre>
+<p>We will also use a custom head texture for this but I am gonna shorten the long String for the texture to make it more readable.<br>
+Now that we have our ItemStack we can also create the Item, we will use the ItemGroup we created earlier.</p>
+<pre><code class="language-java">// ...
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack(&quot;ENDER_ORE&quot;, &quot;eyJ0ZXh...&quot;, &quot;&amp;5Ender Ore&quot;, &quot;&quot;, &quot;&amp;rThis is a cool Ore&quot;, &quot;&amp;rGEO-Mine me in the End&quot;);
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, ..., ...);
+enderOre.register();
+</code></pre>
+<p>Now you might notice that the last two parameters are still missing.<br>
+We don't want our item to be crafted, we want it to be obtained using the GEO Miner and also show that in the guide.<br>
+For this we can use the recipe type <code>RecipeType.GEO_MINER</code>.
+However... having this RecipeType will <strong>not</strong> add our item to the GEO Miner automatically, we still have to do that in the next step.<br>
+This Recipe Type only functions as a "display item", to inform users on how to obtain it. Therefore we don't really need a recipe either.<br>
+But we will still need to pass a Recipe Array with the length 9, so we will just create an empty 9 slot array.</p>
+<pre><code class="language-java">// ...
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack(&quot;ENDER_ORE&quot;, &quot;eyJ0ZXh...&quot;, &quot;&amp;5Ender Ore&quot;, &quot;&quot;, &quot;&amp;rThis is a cool Ore&quot;, &quot;&amp;rGEO-Mine me in the End&quot;);
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+enderOre.register();
+</code></pre>
+<p>Now our item is pretty much done and registered.<br>
+We still need to create the resource for the GEO Miner though, so that's what we will do next.</p>
+<h2>3. Creating a GEOResource</h2>
+<p>For this we will need to create a new class again.<br>
+So create a new class/file and name it something meaningful, we will just call it "EnderOreResource".</p>
+<pre><code class="language-java">public class EnderOreResource {
+
+}
+</code></pre>
+<p>Now we need to implement the behaviour of a GEO Resource, the GEO Miner uses an interface for this called <code>GEOResource</code>.<br>
+Simply implement that interface into your class and remember to import the interface.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+}
+</code></pre>
+<p>Your IDE will probably start warning you about missing methods at this point.<br>
+Whenever you implement an interface you will also have to implement its methods. You can see all methods from GEOResource on our <a href="https://Slimefun5.github.io/javadocs/Slimefun5/docs/io/github/thebusybiscuit/Slimefun5/api/geo/GEOResource.html">Javadocs</a>.
+We are gonna start simple, the first method we need to implement is <code>getName()</code>, so we implement that method and return the name of our resource.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  @Override
+  public String getName() {
+    return &quot;Ender Ore&quot;;
+  }
+
+}
+</code></pre>
+<p>Next up is the method <code>isObtainableFromGEOMiner()</code> which determines whether this resource should be added to the GEO Miner.<br>
+For us it is a definite yes, so we return true.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  @Override
+  public String getName() {
+    return &quot;Ender Ore&quot;;
+  }
+
+  @Override
+  public boolean isObtainableFromGEOMiner() {
+    return true;
+  }
+
+}
+</code></pre>
+<p>Now we come to the generator settings. We got two methods which handle that: <code>getDefaultSupply(...)</code> determines the default amount for a given Environment and Biome.<br>
+And we also have the method <code>getMaxDeviation()</code> which determines the maximum amount this resource is allowed to deviate from the default amount.<br>
+Note here that it will only deviate if the amount is greater than zero.</p>
+<p>To give you an example of what exactly this means: If our default supply for "The End" is 20 Ender Ores per Chunk and our max-deviation is set to 2,<br>
+then the actual amount in a chunk will vary between 20 and 22 Ender Ores, if the deviation is set to 4 it will be 20 - 24 Ender Ores instead. Think of it as the maximum of bonus items.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  @Override
+  public String getName() {
+    return &quot;Ender Ore&quot;;
+  }
+
+  @Override
+  public boolean isObtainableFromGEOMiner() {
+    return true;
+  }
+
+  @Override
+  public int getDefaultSupply(Environment environment, Biome biome) {
+    // Environment is actually the same as the World Type (NORMAL / NETHER / THE_END)
+
+    if (environment == Environment.THE_END) {
+      return 20;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  @Override
+  public int getMaxDeviation() {
+    return 8;
+  }
+
+}
+</code></pre>
+<p>This will now spawn between 20 and 28 Ender Ores in "The End" and 0 Ender Ores in any other dimension.<br>
+Now all that's left to do is to implement the methods <code>getKey()</code> and <code>getItem()</code>. For this we will need a <code>NamespacedKey</code> which requires our Plugin instance.<br>
+But we will also need our ItemStack from earlier...</p>
+<p>We will just make our life easier by creating a constructor.<br>
+A constructor is a special form of method that is called when a new instance of that class is created. You can use it to control what parameters are needed when doing <code>new SomeClass(...);</code>.<br>
+Let's create a new constructor for this class at the top of the file:</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  public EnderOreResource() {
+
+  }
+
+// ... All our other methods come after this
+</code></pre>
+<p>Now we can give the constructor some arguments, remember we need our Plugin instance and our ItemStack.<br>
+So we just create two parameters, one being a Plugin, one an ItemStack.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  public EnderOreResource(Plugin plugin, ItemStack item) {
+
+  }
+
+// ... All our other methods come after this
+</code></pre>
+<p>Now we just need to turn our Plugin into a NamespacedKey, we will simply store it as a "class member" which means that anything inside our class can access this variable.<br>
+The keyword <code>final</code> means that is a constant, it cannot be changed afterwards. We can set this constant right at the top or initialize it in the constructor.<br>
+You just need to remember that you cannot re-assign a final variable after it was intiialized.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  private final NamespacedKey key;
+
+  public EnderOreResource(Plugin plugin, ItemStack item) {
+    this.key = new NamespacedKey(plugin, &quot;ender_ore&quot;);
+  }
+
+// ... All our other methods come after this
+</code></pre>
+<p>While we are at it, we will also store the item as a constant variable.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  private final NamespacedKey key;
+  private final ItemStack item;
+
+  public EnderOreResource(Plugin plugin, ItemStack item) {
+    this.key = new NamespacedKey(plugin, &quot;ender_ore&quot;);
+    this.item = item;
+  }
+
+// ... All our other methods come after this
+</code></pre>
+<p>Now we can implement the remaining two methods.</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  private final NamespacedKey key;
+  private final ItemStack item;
+
+  public EnderOreResource(Plugin plugin, ItemStack item) {
+    this.key = new NamespacedKey(plugin, &quot;ender_ore&quot;);
+    this.item = item;
+  }
+
+  @Override
+  public NamespacedKey getKey() {
+    return key;
+  }
+
+  @Override
+  public ItemStack getItem() {
+    // It is important to add a .clone() here since we do not want
+    // to return the original item.
+    return item.clone();
+  }
+
+// ... All our other methods come after this
+</code></pre>
+<h2>4. Final registration</h2>
+<p>Now we created a new Slimefun5Item and a new GEOResource. We only need to register the resource now, so we head back to our main class and into our <code>onEnable()</code> method.</p>
+<pre><code class="language-java">// ...
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack(&quot;ENDER_ORE&quot;, &quot;eyJ0ZXh...&quot;, &quot;&amp;5Ender Ore&quot;, &quot;&quot;, &quot;&amp;rThis is a cool Ore&quot;, &quot;&amp;rGEO-Mine me in the End&quot;);
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+enderOre.register();
+</code></pre>
+<p>We will now create a new instance of our <code>EnderOreResource</code> class and register it.</p>
+<pre><code class="language-java">// ...
+Slimefun5ItemStack enderOreItem = new Slimefun5ItemStack(&quot;ENDER_ORE&quot;, &quot;eyJ0ZXh...&quot;, &quot;&amp;5Ender Ore&quot;, &quot;&quot;, &quot;&amp;rThis is a cool Ore&quot;, &quot;&amp;rGEO-Mine me in the End&quot;);
+Slimefun5Item enderOre = new Slimefun5Item(itemGroup, enderOreItem, RecipeType.GEO_MINER, new ItemStack[9]);
+enderOre.register();
+
+EnderOreResource enderOreResource = new EnderOreResource(this, enderOreItem);
+enderOreResource.register();
+</code></pre>
+<p>As defined earlier, we pass two arguments to the constructor, <code>this</code> which refers to our Plugin in this context and the ItemStack / Slimefun5ItemStack.<br>
+And we are done! Our resource is now generated and can be mined inside "The End" using a GEO-Miner.<br>
+Here is the full <code>EnderOreResource</code> class:</p>
+<pre><code class="language-java">public class EnderOreResource implements GEOResource {
+
+  private final NamespacedKey key;
+  private final ItemStack item;
+
+  public EnderOreResource(Plugin plugin, ItemStack item) {
+    this.key = new NamespacedKey(plugin, &quot;ender_ore&quot;);
+    this.item = item;
+  }
+
+  @Override
+  public NamespacedKey getKey() {
+    return key;
+  }
+
+  @Override
+  public ItemStack getItem() {
+    // It is important to add a .clone() here since we do not want
+    // to return the original item.
+    return item.clone();
+  }
+
+  @Override
+  public String getName() {
+    return &quot;Ender Ore&quot;;
+  }
+
+  @Override
+  public boolean isObtainableFromGEOMiner() {
+    return true;
+  }
+
+  @Override
+  public int getDefaultSupply(Environment environment, Biome biome) {
+    // Environment is actually the same as the World Type (NORMAL / NETHER / THE_END)
+
+    if (environment == Environment.THE_END) {
+      return 20;
+    }
+    else {
+      return 0;
+    }
+  }
+
+  @Override
+  public int getMaxDeviation() {
+    return 8;
+  }
+
+}
+</code></pre>
+<p>If you have any questions, feel free to hop on discord and ask them in <code>#programming-help</code>.</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

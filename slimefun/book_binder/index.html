@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book Binder · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/addon/slimefun/">← Slimefun</a>
+<h1>Book Binder<span class="sf-badge">Slimefun</span><span class="sf-badge sf-badge-documented">Documented</span></h1>
+<div class="sf-block"><ul><li>Machine</li></ul></div>
+<div class="sf-block"><ul><li>Binds multiple enchanted books into one.</li></ul></div>
+<div class="sf-block"><ul><li>⇨ ⚡ 16 J/s</li></ul></div>
+<p>Combines several enchanted books into a single book, powered by energy.</p>
+<p>The Book Binder is an <a href="/wiki/Electric-Machines/">Electric Machine</a> which can be used to combine different books together (much like an anvil would).  </p>
+<h2>Book Binder Tiers</h2>
+<p>The Book Binder currently only has one tier.<br />
+The duration of the action depends on how many enchants and what level they are.</p>
+<p><strong>Power Usage:</strong> 16 J/Sf Tick</p>
+<h2>Book Binder Settings</h2>
+<p>By default, you cannot use this machine to get books above the vanilla limit.<br />
+However for server owners it is possible to adjust this and either add a custom limit, or no limit at all.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+<th>Type</th>
+<th>Default Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bypass-vanilla-max-level</td>
+<td>If enabled, you will be able to create books higher than vanilla allows.</td>
+<td>boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>has-custom-max-level</td>
+<td>If enabled, the new limit will be the integer provided in <code>custom-max-level</code>.</td>
+<td>boolean</td>
+<td>false</td>
+</tr>
+<tr>
+<td>custom-max-level</td>
+<td>The highest enchantment level allowed on books produced in the Book Binder.</td>
+<td>int</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tip:</strong> Updating machine specific settings can be done in Items.yml</p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>

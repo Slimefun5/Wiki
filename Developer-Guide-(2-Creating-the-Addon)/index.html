@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide (2 Creating the Addon) · Slimefun Wiki</title>
+<link rel="icon" href="/wiki/assets/logo.png">
+<link rel="stylesheet" href="/wiki/assets/tokens.css">
+<link rel="stylesheet" href="/wiki/assets/site.css">
+<link rel="stylesheet" href="/wiki/assets/wiki.css">
+</head>
+<body>
+<header class="sf-header">
+  <a class="sf-brand" href="https://slimefun5.github.io/">
+    <img src="https://github.com/Slimefun5.png" alt="Slimefun5" width="36" height="36">
+    <span>Slimefun<strong>5</strong></span>
+  </a>
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</header>
+<main class="sf-main">
+<a class="sf-back" href="/wiki/guides/">← All guides</a>
+<h1>Developer Guide (2 Creating the Addon)</h1>
+<p>This is the <strong>second Part</strong> of our Developer Guide, you can find a full overview on our <a href="/wiki/Developer-Guide/">main page</a>.<br>
+If you haven't checked out the <a href="/wiki/Developer-Guide-(1-Project-Setup)/">first Part of this Guide</a>, then please do that.</p>
+<h2>1. Your main class</h2>
+<p>Alright, now that your workspace and project is set up properly, we can start to dive into some code.<br>
+Open up the class file of your project that you can find under your renamed package in <code>src/main/java/</code>.</p>
+<p>It should look a little bit like this:</p>
+<pre><code class="language-java">package ...;
+
+import ...;
+
+public class Slimefun5Addon extends JavaPlugin implements Slimefun5Addon {
+
+    @Override
+    public void onEnable() {
+        // ...
+    }
+
+    @Override
+    public void onDisable() {
+        // Logic for disabling the plugin...
+    }
+
+    @Override
+    public JavaPlugin getJavaPlugin() {
+        // This is a method that links your Slimefun5Addon to your Plugin.
+        // Just return &quot;this&quot; in this case, so they are linked
+        return this;
+    }
+
+    @Override
+    public String getBugTrackerURL() {
+        // Here you can return a link to your Bug Tracker.
+        // This link will be displayed to Server Owners if there is an issue
+        // with this Addon. Return null if you have no bug tracker.
+        // Normally you can just use GitHub's Issues tab:
+        // https://github.com/YOURNAME/YOURPROJECT/issues
+        return null;
+    }
+
+}
+</code></pre>
+<p>The <code>package</code> token at the top simply describes the package this file is in.<br>
+The <code>import</code> token tells Java to import classes from other projects, you will probably see a lot of those importing from <code>io.github.thebusybiscuit.Slimefun5...</code> or <code>org.bukkit...</code>.<br>
+This is because you are referencing those classes, as you will work with them.</p>
+<p>After that your own class will start it should have the same name as its file (without the file ending) and is followed by <code>extends JavaPlugin</code>.<br>
+This basically tells Java to treat it like a Bukkit Plugin (in Java).<br>
+<code>implements Slimefun5Addon</code> tells Slimefun5 to treat your Plugin like an Addon.</p>
+<p>This class also contains two <code>methods</code>.<br>
+<code>onEnable()</code> is called whenever the plugin is enabled. This is where you would do any initializations.<br>
+<code>onDisable()</code> is called when the plugin is disabled, due to a server shutdown for example. You can ignore this one for now.</p>
+<h2>2. The <code>onEnable</code> method - Config</h2>
+<p>The <code>onEnable</code> method is already filled with a bunch of stuff in our template.<br>
+We will go over each thing individually, but let's start with something basic.</p>
+<pre><code class="language-java">@Override
+public void onEnable() {
+    // Read something from your config.yml
+    Config cfg = new Config(this);
+}
+</code></pre>
+<p>You can use a <code>Config</code> class and <code>new Config(this)</code> to reference your plugin's config.<br>
+You can find your default config under <code>src/main/resources/config.yml</code>.</p>
+<p>This <code>Config</code> class comes from Slimefun5 / dough. So you won't see this in any non-Slimefun5 Projects.<br>
+You can read values directly from this class using the appropriate getters:</p>
+<pre><code class="language-java">cfg.getBoolean(&quot;path.to.your.boolean&quot;);
+cfg.getString(&quot;path.to.your.string&quot;);
+</code></pre>
+<p>You can use your Config to set up values that Server Owners should be able to configure.</p>
+<p><strong>Important hint: If your IDE nags about not being able to find <code>Config</code>, then make sure to import the Config class from the <code>io.github.thebusybiscuit.Slimefun5.libraries.dough.config</code> package.</strong><br>
+You will need to import each external class you will use.</p>
+<p><a href="/wiki/Developer-Guide-(3-Your-first-Item)/"><strong>&gt; Continue with Part 3</strong></a></p>
+</main>
+<footer class="sf-footer">
+  Slimefun5 is a community fork of Slimefun. Licensed
+  <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL-3.0</a>.
+  <nav class="sf-links">
+    <a href="https://slimefun5.github.io/wiki/">Wiki</a>
+    <a href="https://slimefun5.github.io/builds/">Builds</a>
+    <a href="https://slimefun5.github.io/javadoc/">Javadocs</a>
+    <a href="https://github.com/Slimefun5">GitHub</a>
+  </nav>
+</footer>
+</body>
+</html>
